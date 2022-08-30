@@ -8,11 +8,13 @@ import {AdminGuard} from "./admin/admin.guard";
 import {EnterpriseGuard} from "./enterprise/enterprise.guard";
 import {AppUserModule} from "./user/AppUser.module";
 import {UserGuard} from "./user/user.guard";
+import {UserRegisterComponent} from "./LoginAndRegister/Register/user-register/user-register.component";
 
 
 const routes: Routes = [
   {path: '', component: LoginComponent},
-  {path: 'register', component:EnterpriseRegisterComponent},
+  {path: 'registerEnterprise', component:EnterpriseRegisterComponent},
+  {path: 'registerUser', component:UserRegisterComponent},
   {path: 'admin', loadChildren: () => import('../app/admin/admin.module').then(module => module.AdminModule),
   canActivate: [AdminGuard]
 },
