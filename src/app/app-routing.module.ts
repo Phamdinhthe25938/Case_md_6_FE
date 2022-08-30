@@ -6,6 +6,8 @@ import {
 } from "./LoginAndRegister/Register/enterprise-register/enterprise-register.component";
 import {AdminGuard} from "./admin/admin.guard";
 import {EnterpriseGuard} from "./enterprise/enterprise.guard";
+import {AppUserModule} from "./user/AppUser.module";
+import {UserGuard} from "./user/user.guard";
 
 
 const routes: Routes = [
@@ -17,6 +19,9 @@ const routes: Routes = [
 },
   {path: 'enterprise', loadChildren: () => import('../app/enterprise/enterprise.module').then(module => module.EnterpriseModule),
     canActivate: [EnterpriseGuard]
+  },
+  {path: 'user', loadChildren: () => import('./user/AppUser.module').then(module => module.AppUserModule),
+    canActivate: [UserGuard]
   },
 ];
 
