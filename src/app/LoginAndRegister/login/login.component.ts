@@ -29,6 +29,11 @@ export class LoginComponent implements OnInit {
       this.loginService.setToken(data.token);
       if(data.roles.name==="ROLE_ADMIN"){
           this.router.navigate(["/admin"]);
+      }else if(data.roles.name==="ROLE_ENTERPRISE"){
+        this.router.navigate(["/enterprise"]);
+      }
+      else if(data.roles.name==="ROLE_USER"){
+        this.router.navigate(["/user"]);
       }
     })
   }

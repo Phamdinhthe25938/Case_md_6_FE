@@ -4,6 +4,7 @@ import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {AdminService} from "../../../services/admin/admin.service";
 import {Enterprise} from "../../../model/Enterprise";
 import {Field} from "../../../model/Field";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-enterprise-register',
@@ -15,7 +16,7 @@ export class EnterpriseRegisterComponent implements OnInit {
 
   fields!: Field[];
 
-  constructor(private loginService: LoginService,) {
+  constructor(private loginService: LoginService,private router :Router) {
   }
 
   ngOnInit(): void {
@@ -49,6 +50,7 @@ export class EnterpriseRegisterComponent implements OnInit {
     }
     this.loginService.register(filedNew).subscribe(() => {
       alert("Đăng ký thành công !");
+      this.router.navigate([""])
     })
   }
 
