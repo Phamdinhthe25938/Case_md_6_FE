@@ -24,6 +24,5 @@ export class AdminService {
   }
   refuseConfirmEnterprise(id:number,string:string):Observable<any>{
     return this.http.post<any>(`http://localhost:8080/admin/refuseConfirm/${id}/${string}`,"");
-
   }
 }
