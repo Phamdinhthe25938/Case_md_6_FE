@@ -28,6 +28,9 @@ export class LoginService {
   register(enterprise: any): Observable<any>{
     return this.http.post<any>("http://localhost:8080/register/enterprise",enterprise);
   }
+  registerUser(user:any){
+    return this.http.post<any>("http://localhost:8080/register/user",user);
+  }
   findAll():Observable<Field[]>{
     return this.http.get<any>("http://localhost:8080/register/findAllField");
   }

@@ -20,13 +20,12 @@
               <input type="text" name="password" id="password" class="form-control" formControlName="password">
             </div>
             <p *ngIf="!loginForm.get('password')?.valid && loginForm.get('password')?.touched" style="color: red">Không được để trống</p>
-
             <div class="form-group">
               <label for="remember-me" class="text-info"><span>Remember me</span> <span><input id="remember-me" name="remember-me" type="checkbox"></span></label><br>
               <input type="submit" name="submit" class="btn btn-info btn-md" value="submit">
             </div>
             <div id="register-link" class="text-right">
-              <a href="" routerLink="register" class="text-info">Register here</a>
+              <a  routerLink="" class="text-info">Register here</a>
             </div>
           </form>
         </div>

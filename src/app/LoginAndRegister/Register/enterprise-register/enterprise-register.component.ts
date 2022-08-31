@@ -4,9 +4,13 @@ import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {AdminService} from "../../../services/admin/admin.service";
 import {Enterprise} from "../../../model/Enterprise";
 import {Field} from "../../../model/Field";
+<<<<<<< HEAD
 import {finalize, Observable} from "rxjs";
 import {AngularFireStorage} from "@angular/fire/compat/storage";
 
+=======
+import {Router} from "@angular/router";
+>>>>>>> 119ad7f5fa86aeead53eff8defe1aa0cd3f4c480
 
 @Component({
   selector: 'app-enterprise-register',
@@ -19,7 +23,11 @@ export class EnterpriseRegisterComponent implements OnInit {
   downloadURL: Observable<string> | undefined;
   fields!: Field[];
 
+<<<<<<< HEAD
   constructor(private loginService: LoginService,private storage: AngularFireStorage) {
+=======
+  constructor(private loginService: LoginService,private router :Router) {
+>>>>>>> 119ad7f5fa86aeead53eff8defe1aa0cd3f4c480
   }
 
   ngOnInit(): void {
@@ -54,6 +62,7 @@ export class EnterpriseRegisterComponent implements OnInit {
     }
     this.loginService.register(filedNew).subscribe(() => {
       alert("Đăng ký thành công !");
+      this.router.navigate([""])
     })
   }
   onFileSelected(event:any) {
