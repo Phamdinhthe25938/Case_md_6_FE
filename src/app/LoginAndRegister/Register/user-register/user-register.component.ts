@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {LoginService} from "../../../services/login/login.service";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-user-register',
@@ -9,7 +10,7 @@ import {FormControl, FormGroup, Validators} from "@angular/forms";
 })
 export class UserRegisterComponent implements OnInit {
 
-  constructor(private loginService:LoginService ) { }
+  constructor(private loginService:LoginService,private router:Router) { }
 
   ngOnInit(): void {
   }
@@ -21,6 +22,7 @@ export class UserRegisterComponent implements OnInit {
   registerUser(){
       this.loginService.registerUser(this.registerUserForm.value).subscribe(()=>{
           alert("Đăng ký thành công !");
+        this.router.navigate([""])
       })
   }
 }
