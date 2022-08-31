@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {AdminService} from "../../services/admin/admin.service";
 import {Enterprise} from "../../model/Enterprise";
 import {Router} from "@angular/router";
+import {FormControl, FormGroup, Validators} from "@angular/forms";
 
 @Component({
   selector: 'app-mainEnterprise',
@@ -26,6 +27,9 @@ export class MainComponent implements OnInit {
       this.enterprisesConfirm=data;
     })
   }
+  reasonForm= new FormGroup({
+    reasonRefusal: new FormControl("", Validators.required),
+  })
   getAllNotConfirm(){
     this.adminService.getAllEnterPriseNotConfirm().subscribe((data)=>{
       this.enterprisesNotConfirm=data;
@@ -45,11 +49,35 @@ export class MainComponent implements OnInit {
       })
   }
   refuseInput(){
+    // console.log(this.reasonRefusal);
       // @ts-ignore
     document.getElementById("refuseInput").style.display="block";
+    // @ts-ignore
+    document.getElementById("btnConfirmRefusal").style.display="block";
+    // @ts-ignore
+    document.getElementById("btnRefusal").style.display="none";
+    // @ts-ignore
+    document.getElementById("confirm").style.display="none";
   }
-  refuseConfirm(id:number,string :string){
-    this.adminService.refuseConfirmEnterprise(id,string).subscribe(()=>{
+  reset(){
+     this.reasonForm.value.reasonRefusal="";
+    // @ts-ignore
+    document.getElementById("refuseInput").style.display="none";
+    // @ts-ignore
+    document.getElementById("btnConfirmRefusal").style.display="none";
+    // @ts-ignore
+    document.getElementById("btnRefusal").style.display="block";
+    // @ts-ignore
+    document.getElementById("confirm").style.display="block";
+  }
+  refuseConfirm(id:number){
+    let string = this.reasonForm.value.reasonRefusal;
+   let string1 = String(string);
+    this.adminService.refuseConfirmEnterprise(id,string1).subscribe(()=>{
+      alert("ok ban oi")
+      this.reset();
+      this.getAllNotConfirm();
+      this.getAllConfirm();
     })
   }
   findById(id:number){

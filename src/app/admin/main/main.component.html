@@ -251,7 +251,7 @@
                     </div>
                   </td>
                   <td>
-                    <p class="text-xs font-weight-bold mb-0">{{a.describeEnterprise}}</p>
+                    <p class="text-xs font-weight-bold mb-0">{{a.fieldEnterprise?.nameField}}</p>
                     <p class="text-xs text-secondary mb-0">Organization</p>
                   </td>
                   <td class="align-middle text-center text-sm">
@@ -416,57 +416,70 @@
                            <div class="form-group" style="padding-left: 20px">
                              <label class="col-sm-4 control-label" for="inputContact1">Tên doanh nghiệp</label>
                              <div class="col-sm-10">
-                               <input class="form-control" id="inputContact1" type="text" placeholder="" value="{{enterpriseDeltail?.nameEnterprise}}">
+                               <input class="form-control" id="inputContact1" type="text" placeholder="" value="{{enterpriseDeltail?.nameEnterprise}}" readonly>
                              </div>
                            </div>
                            <div style="padding-left: 20px" class="form-group">
                              <label class="col-sm-4 control-label" for="inputContact2">Mã doanh nghiệp</label>
                              <div class="col-sm-10">
-                               <input class="form-control" id="inputContact2" type="email" value="{{enterpriseDeltail?.codeConfirmEnterprise}}">
+                               <input class="form-control" id="inputContact2" type="email" value="{{enterpriseDeltail?.codeConfirmEnterprise}}"readonly>
                              </div>
                            </div>
                            <div style="padding-left: 20px" class="form-group">
                              <label class="col-sm-6 control-label" for="inputContact3">Email doanh nghiệp</label>
                              <div class="col-sm-10">
-                               <input class="form-control" id="inputContact3" type="text" value="{{enterpriseDeltail?.gmailEnterprise}}">
+                               <input class="form-control" id="inputContact3" type="text" value="{{enterpriseDeltail?.gmailEnterprise}}"readonly>
                              </div>
                            </div>
                            <div style="padding-left: 20px" class="form-group">
                              <label class="col-sm-4 control-label" for="inputContact4">Trụ sở chính</label>
                              <div class="col-sm-10">
-                               <input class="form-control" id="inputContact4" type="text" value="{{enterpriseDeltail?.addressMainEnterprise}}">
+                               <input class="form-control" id="inputContact4" type="text" value="{{enterpriseDeltail?.addressMainEnterprise}}"readonly>
+                             </div>
+                           </div>
+                           <div style="padding-left: 20px" class="form-group">
+                             <label class="col-sm-4 control-label" for="inputContact5">Lĩnh vực</label>
+                             <div class="col-sm-10">
+                               <input class="form-control" id="inputContact5" type="text" value="{{enterpriseDeltail?.fieldEnterprise?.nameField}}"readonly>
                              </div>
                            </div>
                          </div>
                          <div style="flex: 1;">
                            <div style="padding-left: 20px" class="form-group">
-                             <label class="col-sm-4 control-label" for="inputContact5">Lĩnh vực</label>
+                             <label class="col-sm-4 control-label" for="inputContact52">Mô tả</label>
                              <div class="col-sm-10">
-                               <input class="form-control" id="inputContact5" type="text" value="{{enterpriseDeltail?.describeEnterprise}}">
+                               <textarea class="form-control" id="inputContact52" type="text" value="{{enterpriseDeltail?.describeEnterprise}}" readonly ></textarea>
                              </div>
                            </div>
                            <div style="padding-left: 20px" class="form-group">
                              <label class="col-sm-4 control-label" for="inputContact7">Thời gian đăng ký</label>
                              <div class="col-sm-10">
-                               <input class="form-control" id="inputContact7" type="text" value="{{enterpriseDeltail?.timeRegisterEnterprise}}">
+                               <input class="form-control" id="inputContact7" type="text" value="{{enterpriseDeltail?.timeRegisterEnterprise}}"readonly>
                              </div>
                            </div>
                            <div style="padding-left: 20px" class="form-group">
                              <label class="col-sm-4 control-label" for="inputContact8">Ngày đăng ký</label>
                              <div class="col-sm-10">
-                               <input class="form-control" id="inputContact8" type="text" value="{{enterpriseDeltail?.dateRegisterEnterprise}}">
+                               <input class="form-control" id="inputContact8" type="text" value="{{enterpriseDeltail?.dateRegisterEnterprise}}" readonly>
                              </div>
                            </div>
                            <div style="padding-left: 20px; display: none" id="refuseInput" class="form-group">
-                             <label class="col-sm-4 control-label" for="inputContact84">Ngày đăng ký</label>
-                             <div class="col-sm-10">
-                               <input class="form-control" id="inputContact84" type="text" value="{{enterpriseDeltail?.dateRegisterEnterprise}}">
+                             <label class="col-sm-4 control-label" for="inputContact84">Nhập lý do từ chối</label>
+                             <div class="col-sm-10" >
+                               <form [formGroup]="reasonForm" (ngSubmit)="refuseConfirm(enterpriseDeltail.idEnterprise)">
+                                 <input class="form-control" id="inputContact84" type="text"  value="" formControlName="reasonRefusal">
+                                 <p *ngIf="!reasonForm.get('reasonRefusal')?.valid && reasonForm.get('reasonRefusal')?.touched" style="color: red">Không được để trống</p>
+                                 <button  id="btnConfirmRefusal" class="btn btn-error" style="margin-right: 10px;margin-top: 10px;background:#e52d27;color: white;display: none" type="submit"  >Xác thực từ chối</button>
+                               </form>
+                               <button id="reset" (click)="reset()" class="btn btn-info" >
+                                 <span style="margin-right: 4px">Reset</span><i class="fa-solid fa-arrow-rotate-left"></i>
+                               </button>
                              </div>
                            </div>
                            <div  style="padding-left: 20px" class="form-group">
-                             <div class="col-sm-offset-2 col-sm-10">
-                               <button class="btn btn-error" style="margin-right: 10px;background:#e52d27;color: white" type="button" (click)="refuseInput()" >Từ chối</button>
-                               <button class="btn btn-info" type="button" (click)="confirm(enterpriseDeltail.idEnterprise)" >Xác thực</button>
+                             <div class="col-sm-offset-2 col-sm-10" style="display:flex;">
+                               <button id="btnRefusal" class="btn btn-error" style="margin-right: 10px;background:#e52d27;color: white" type="button" (click)="refuseInput()" >Từ chối</button>
+                               <button class="btn btn-info" id="confirm" type="button" (click)="confirm(enterpriseDeltail.idEnterprise)" >Xác thực</button>
                              </div>
                            </div>
                          </div>
@@ -512,6 +525,7 @@
 <script src="/assets/admin/plugins/perfect-scrollbar.min.js"></script>
 <script src="/assets/admin/js/plugins/smooth-scrollbar.min.js"></script>
 <script>
+
   var win = navigator.platform.indexOf('Win') > -1;
   if (win && document.querySelector('#sidenav-scrollbar')) {
     var options = {
