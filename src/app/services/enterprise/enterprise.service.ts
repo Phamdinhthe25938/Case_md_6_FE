@@ -22,4 +22,13 @@ export class EnterpriseService {
   rechargeWallet(id:number,numberMoney:number):Observable<Enterprise>{
     return this.http.post<any>(`http://localhost:8080/enterprise/rechargeWallet/${id}/${numberMoney}`,"");
   }
+  changeCodeVi(id:number,codeVi:string):Observable<any>{
+    return this.http.post<any>(`http://localhost:8080/enterprise/changeCodeVi/${id}/${codeVi}`,"");
+  }
+  setStatusEnterpriseTo1(id:number):Observable<any>{
+    return this.http.get<any>(`http://localhost:8080/enterprise/setStatusEnterpriseTo1/${id}`,);
+  }
+  setStatusEnterpriseTo0(id:number):Observable<any>{
+    return this.http.get<any>(`http://localhost:8080/enterprise/setStatusEnterpriseTo0/${id}`,);
+  }
 }
