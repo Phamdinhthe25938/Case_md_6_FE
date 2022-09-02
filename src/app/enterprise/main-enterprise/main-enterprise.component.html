@@ -43,18 +43,18 @@
         </tr>
         </thead>
         <tbody>
-        <tr>
+        <tr *ngFor="let a of listPostByIdEnterprise">
           <td>1</td>
-          <td>Thomas Hardy</td>
-          <td>89 Chiaroscuro Rd.</td>
-          <td>Portland</td>
-          <td>97219</td>
-          <td>USA</td>
-          <td></td>
+          <td>{{a.namePostEnterprise}}</td>
+          <td>{{a.timePostEnterprise}} {{a.datePostEnterprise}}</td>
+          <td>{{a.salarySmallPostEnterprise}} - {{a.salaryBigPostEnterprise}} triệu</td>
+          <td>{{a.quantityApplyPost}}</td>
+          <td>{{a.field.nameField}}</td>
+          <td>{{a.regime.nameRegime}}</td>
           <td>
-            <a href="#" class="view" title="View" data-toggle="tooltip"><i class="material-icons"></i></a>
-            <a href="#" class="edit" title="Edit" data-toggle="tooltip"><i class="material-icons"></i></a>
-            <a href="#" class="delete" title="Delete" data-toggle="tooltip"><i class="material-icons"></i></a>e
+            <a href="" class="view" title="View" data-toggle="tooltip"><i class="material-icons"></i></a>
+            <a href="" class="edit" title="Edit" data-toggle="tooltip"><i class="material-icons"></i></a>
+            <a href="" class="delete" title="Delete" data-toggle="tooltip"><i class="material-icons"></i></a>
           </td>
         </tr>
         </tbody>
@@ -156,6 +156,7 @@
   </div>
 
 </div>
+<!--Create bài đăng-->
 <div class="container" >
   <!-- Trigger the modal with a button --><!-- Modal -->
   <div  class="modal" id="create">
