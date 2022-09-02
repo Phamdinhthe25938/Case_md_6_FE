@@ -169,55 +169,97 @@
             <div class="col-lg-10 mx-auto">
               <div class="card mt-2 mx-auto p-4 bg-light">
                 <div class="card-body bg-light">
-
                   <div class = "container">
-                    <form id="contact-form" role="form">
+                    <form id="contact-form" role="form" [formGroup]="createPostForm" (ngSubmit)="confirmCreatePost()">
                       <div class="controls">
                         <div class="row">
-                          <div class="col-md-6">
+                          <div class="col-md-4">
                             <div class="form-group">
                               <label for="form_name">Tên bài đăng</label>
-                              <input id="form_name" type="text" name="name" class="form-control" placeholder="Nhập tên bài đăng" required="required" data-error="Firstname is required.">
+                              <input id="form_name" type="text" formControlName="namePostEnterprise" name="name" class="form-control" placeholder="Nhập tên bài đăng" required="required" data-error="Firstname is required.">
                             </div>
+                            <p *ngIf="!createPostForm.get('namePostEnterprise')?.valid && createPostForm.get('namePostEnterprise')?.touched" style="color: red;margin: 0">Không được để trống</p>
                           </div>
-                          <div class="col-md-6">
+                          <div class="col-md-4">
                             <div class="form-group">
                               <label for="form_need">Thuộc loại lĩnh vực</label>
-                              <select id="form_need" name="need" class="form-control" required="required" data-error="Please specify your need.">
-                                <option value="" selected disabled>--Select Your Issue--</option>
-                                <option >Request Invoice for order</option>
-                                <option >Request order status</option>
-                                <option >Haven't received cashback yet</option>
-                                <option >Other</option>
+                              <select id="form_need" name="need" formControlName="idField" class="form-control" required="required" data-error="Chọn lĩnh vục">
+                                <option *ngFor="let a of listField" value="{{a.idField}}">{{a.nameField}}</option>
                               </select>
                             </div>
+                            <p *ngIf="!createPostForm.get('idField')?.valid && createPostForm.get('idField')?.touched" style="color: red;margin: 0">Không được để trống</p>
+
+                          </div>
+                          <div class="col-md-4">
+                            <div class="form-group">
+                              <label for="form_name1">Vị trí ứng tuyển </label>
+                              <input id="form_name1" type="text" formControlName="vacanciesPostEnterprise" name="name" class="form-control" placeholder="Nhập tên bài đăng" required="required" data-error="Firstname is required.">
+                            </div>
+                            <p *ngIf="!createPostForm.get('vacanciesPostEnterprise')?.valid && createPostForm.get('vacanciesPostEnterprise')?.touched"style="color: red;margin: 0">Không được để trống</p>
                           </div>
                         </div>
                         <div class="row">
-                          <div class="col-md-6">
+                          <div class="col-md-4">
                             <div class="form-group">
                               <label for="form_email">Khu vực</label>
-                              <input id="form_email" type="email" name="email" class="form-control" placeholder="Please enter your email *" required="required" data-error="Valid email is required.">
+                              <input id="form_email" type="email" formControlName="addressMainEnterprise" name="email" class="form-control" placeholder="Please enter your email *" required="required" data-error="Ứng tuyển tại khu vực">
                             </div>
+                            <p *ngIf="!createPostForm.get('addressMainEnterprise')?.valid && createPostForm.get('addressMainEnterprise')?.touched" style="color: red;margin: 0">Không được để trống</p>
                           </div>
-                          <div class="col-md-6">
+                          <div class="col-md-4">
                             <div class="form-group">
-                              <label for="form_lastname">Lastname *</label>
-                              <input id="form_lastname" type="text" name="surname" class="form-control" placeholder="Please enter your lastname *" required="required" data-error="Lastname is required.">
+                              <label for="form_lastname">Ngày hết hạn</label>
+                              <input id="form_lastname" type="date" formControlName="expirationDatePostEnterprise" name="surname" class="form-control" placeholder="Please enter your lastname *" required="required" data-error="Lastname is required.">
                             </div>
+                            <p *ngIf="!createPostForm.get('expirationDatePostEnterprise')?.valid && createPostForm.get('expirationDatePostEnterprise')?.touched" style="color: red;margin: 0">Không được để trống</p>
+                          </div>
+                          <div class="col-md-4">
+                            <div class="form-group">
+                              <label for="form_lastname1">Hình thức job</label>
+                              <select  id="form_lastname1" name="need" formControlName="idFormJob" class="form-control" required="required" data-error="Vip-thường">
+                                <option *ngFor="let a of listFormJob" value="{{a.idFormJob}}">{{a.nameFormJob}}</option>
+                              </select>
+                            </div>
+                            <p *ngIf="!createPostForm.get('idFormJob')?.valid && createPostForm.get('idFormJob')?.touched" style="color: red;margin: 0">Không được để trống</p>
+
                           </div>
                         </div>
                         <div class="row">
+                          <div class="col-md-4">
+                            <div class="form-group">
+                              <label for="form_need1">Chọn gói</label>
+                              <select id="form_need1" name="need" formControlName="idRegime" class="form-control" required="required" data-error="Vip-thường">
+                                <option *ngFor="let a of listRegime" value="{{a.idRegime}}">{{a.nameRegime}}</option>
+                              </select>
+                            </div>
+                            <p *ngIf="!createPostForm.get('idRegime')?.valid && createPostForm.get('idRegime')?.touched" style="color: red;margin: 0">Không được để trống</p>
+
+                          </div>
+                          <div class="col-md-4">
+                            <div class="form-group">
+                              <label for="form_lastname12">Mức lương thấp nhất(-triệu vnd)</label>
+                              <input id="form_lastname12" type="number" formControlName="salarySmallPostEnterprise" name="surname" class="form-control" placeholder="Mức lương thấp nhất " required="required" data-error="Lastname is required.">
+                            </div>
+                            <p *ngIf="!createPostForm.get('salarySmallPostEnterprise')?.valid && createPostForm.get('salarySmallPostEnterprise')?.touched" style="color: red;margin: 0">Dữ liệu nhập không hợp lệ!</p>
+                          </div>
+                          <div class="col-md-4">
+                            <div class="form-group">
+                              <label for="form_lastname2">Mức lương cao nhất(-triệu vnd)</label>
+                              <input id="form_lastname2" type="number" formControlName="salaryBigPostEnterprise" name="surname" class="form-control" placeholder="Mức lương cao nhất" required="required" data-error="Lastname is required.">
+                            </div>
+                            <p *ngIf="!createPostForm.get('salaryBigPostEnterprise')?.valid && createPostForm.get('salaryBigPostEnterprise')?.touched" style="color: red;margin: 0">Dữ liệu nhập không hợp lệ</p>
+                          </div>
                           <div class="col-md-12">
                             <div class="form-group">
-                              <label for="form_message">Message *</label>
-                              <textarea id="form_message" name="message" class="form-control" placeholder="Write your message here." rows="4" required="required" data-error="Please, leave us a message."></textarea
+                              <label for="form_message">Mô tả bài đăng</label>
+                              <textarea id="form_message" name="message" formControlName="describePostEnterprise" class="form-control" placeholder="Write your message here." rows="4" required="required" data-error="Thêm mô tả bài viết"></textarea
                               >
                             </div>
+                            <p *ngIf="!createPostForm.get('describePostEnterprise')?.valid && createPostForm.get('describePostEnterprise')?.touched" style="color: red;">Không được để trống!</p>
                           </div>
                           <div class="col-md-12">
                             <input type="submit" class="btn btn-success btn-send  pt-2 btn-block
-                            " value="Send Message" >
+                            " value="Tạo ngay" >
                           </div>
                         </div>
                       </div>
@@ -232,5 +274,5 @@
           </div>
     </div>
   </div>
-
+ </div>
 </div>

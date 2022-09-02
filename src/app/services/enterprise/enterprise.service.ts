@@ -2,6 +2,9 @@ import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {Enterprise} from "../../model/Enterprise";
+import {FormJob} from "../../model/FormJob";
+import {Regime} from "../../model/Regime";
+import {PostEnterprise} from "../../model/PostEnterprise";
 
 @Injectable({
   providedIn: 'root'
@@ -30,5 +33,14 @@ export class EnterpriseService {
   }
   setStatusEnterpriseTo0(id:number):Observable<any>{
     return this.http.get<any>(`http://localhost:8080/enterprise/setStatusEnterpriseTo0/${id}`,);
+  }
+  findAllFormJob():Observable<FormJob[]>{
+    return this.http.get<any>(`http://localhost:8080/enterprise/findAllFormJob`,);
+  }
+  findAllRegime():Observable<Regime[]>{
+    return this.http.get<any>(`http://localhost:8080/enterprise/findAllRegime`,);
+  }
+  savePost(post:any):Observable<any>{
+    return this.http.post<any>(`http://localhost:8080/enterprise/savePost`,post);
   }
 }
