@@ -43,4 +43,7 @@ export class EnterpriseService {
   savePost(post:any):Observable<any>{
     return this.http.post<any>(`http://localhost:8080/enterprise/savePost`,post);
   }
+  findAllByIdEnterprise(id:number):Observable<any>{
+    return this.http.get<any>(`http://localhost:8080/enterprise/findAllByIdEnterprise/${id}`,);
+  }
 }

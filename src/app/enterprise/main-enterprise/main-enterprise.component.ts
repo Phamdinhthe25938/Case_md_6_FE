@@ -7,6 +7,7 @@ import {min} from "rxjs";
 import {FormJob} from "../../model/FormJob";
 import {Regime} from "../../model/Regime";
 import {Field} from "../../model/Field";
+import {PostEnterprise} from "../../model/PostEnterprise";
 
 @Component({
   selector: 'app-main-enterprise',
@@ -19,7 +20,7 @@ export class MainEnterpriseComponent implements OnInit {
   listFormJob!: FormJob[];
   listRegime!: Regime[];
   listField!: Field[];
-
+  listPostByIdEnterprise!:PostEnterprise[];
   constructor(private enterpriseService: EnterpriseService, private loginService: LoginService) {
   }
 
@@ -29,10 +30,15 @@ export class MainEnterpriseComponent implements OnInit {
       console.log(data);
       this.enterpriseLogin = data;
       console.log(this.enterpriseLogin.statusEnterprise);
+      this.getAllPostByEnterprise();
     })
 
   }
-
+  getAllPostByEnterprise(){
+    this.enterpriseService.findAllByIdEnterprise(this.enterpriseLogin.idEnterprise).subscribe((data)=>{
+      this.listPostByIdEnterprise=data;
+    })
+  }
   ngOnInit(): void {
     this.enterpriseLoginFunction();
     this.enterpriseService.findAllFormJob().subscribe((data) => {
