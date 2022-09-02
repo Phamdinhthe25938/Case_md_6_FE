@@ -120,12 +120,13 @@ export class MainEnterpriseComponent implements OnInit {
     if (!this.enterpriseLogin.statusEnterprise) {
       alert("Tài khoản của bạn không đủ tiền để đăng bài mới vui lòng nạp thêm !")
     } else {
-      let date = new Date();
-
-
+        if(this.validateExpirationDate() && this.validatesalaryBigPostEnterprise()){
+          this.createPost();
+        }else {
+          alert("Vui lòng kiểm tra lại form");
+        }
     }
   }
-
   rechargeWallet() {
     if (this.walletForm.value.codeVi === this.enterpriseLogin.codeViEnterprise) {
       let id = this.enterpriseLogin.idEnterprise;
@@ -144,37 +145,6 @@ export class MainEnterpriseComponent implements OnInit {
       alert("Mã ví không hợp lệ!")
     }
   }
-
-  inputCodeViChangeCodeViForm() {
-    if (this.changeCodeViForm.value.codeViOld !== this.enterpriseLogin.codeViEnterprise) {
-      // @ts-ignore
-      document.getElementById("codeVi3").style.display = "block";
-      // @ts-ignore
-      document.getElementById('codeVi4').style.display = "none";
-    } else {
-      // @ts-ignore
-      document.getElementById('codeVi3').style.display = "none";
-      // @ts-ignore
-      document.getElementById('codeVi4').style.display = "block";
-    }
-  }
-
-  codeViAgain() {
-    if (this.changeCodeViForm.value.codeViNewAgain === this.changeCodeViForm.value.codeViNew) {
-      // @ts-ignore
-      document.getElementById("codeViNewAgain2").style.display = "block";
-
-      // @ts-ignore
-      document.getElementById("codeViNewAgain1").style.display = "none";
-    } else {
-      // @ts-ignore
-      document.getElementById("codeViNewAgain2").style.display = "none";
-
-      // @ts-ignore
-      document.getElementById("codeViNewAgain1").style.display = "block";
-    }
-  }
-
   changeCodeVi() {
     let id = this.enterpriseLogin.idEnterprise;
     if (this.changeCodeViForm.value.codeViNewAgain === this.changeCodeViForm.value.codeViNew && this.changeCodeViForm.value.codeViOld === this.enterpriseLogin.codeViEnterprise) {
@@ -190,5 +160,63 @@ export class MainEnterpriseComponent implements OnInit {
       alert("Vui lòng kiểm tra lại có gì đó chưa đúng!")
     }
   }
+
+  // Validate các forrm
+
+  validatesalaryBigPostEnterprise():boolean{
+      if(Number(this.createPostForm.value.salarySmallPostEnterprise)>=Number(this.createPostForm.value.salaryBigPostEnterprise)){
+        // @ts-ignore
+        document.getElementById("validateSalary").style.display="block";
+        return false;
+      }
+      else {
+        // @ts-ignore
+        document.getElementById("validateSalary").style.display="none";
+        return true;
+      }
+  }
+  validateInputCodeViChangeCodeViForm() {
+    if (this.changeCodeViForm.value.codeViOld !== this.enterpriseLogin.codeViEnterprise) {
+      // @ts-ignore
+      document.getElementById("codeVi3").style.display = "block";
+      // @ts-ignore
+      document.getElementById('codeVi4').style.display = "none";
+    } else {
+      // @ts-ignore
+      document.getElementById('codeVi3').style.display = "none";
+      // @ts-ignore
+      document.getElementById('codeVi4').style.display = "block";
+    }
+  }
+  validateExpirationDate() {
+    let dateNow = new Date();
+    let date = "'" + this.createPostForm.value.expirationDatePostEnterprise + "'";
+    let dateExpirationDate = new Date(date);
+    if (dateExpirationDate > dateNow) {
+      // @ts-ignore
+      document.getElementById("expirationDate").style.display = "none";
+      return true;
+    } else {
+      // @ts-ignore
+      document.getElementById("expirationDate").style.display = "block";
+      return false;
+    }
+  }
+  validateCodeViAgain() {
+    if (this.changeCodeViForm.value.codeViNewAgain === this.changeCodeViForm.value.codeViNew) {
+      // @ts-ignore
+      document.getElementById("codeViNewAgain2").style.display = "block";
+
+      // @ts-ignore
+      document.getElementById("codeViNewAgain1").style.display = "none";
+    } else {
+      // @ts-ignore
+      document.getElementById("codeViNewAgain2").style.display = "none";
+
+      // @ts-ignore
+      document.getElementById("codeViNewAgain1").style.display = "block";
+    }
+  }
+
 
 }

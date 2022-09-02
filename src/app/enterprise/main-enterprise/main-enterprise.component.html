@@ -129,7 +129,7 @@
           <div class="modal-body">
             <div class="form-group">
               <label for="username12" class="text-info">Nhập mã ví cũ:</label><br>
-              <input type="text" value=""(ngModelChange)="inputCodeViChangeCodeViForm()"formControlName="codeViOld"   id="username12" class="form-control">
+              <input type="text" value="" (ngModelChange)="validateInputCodeViChangeCodeViForm()" formControlName="codeViOld" id="username12" class="form-control">
             </div>
 <!--            2,3-->
             <p id="codeVi3" style="display:none;color: red">Mã ví cũ không hợp lệ!</p>
@@ -141,7 +141,7 @@
             </div>
             <div class="form-group">
               <label for="username23" class="text-info">Nhập lại mã ví mới :</label><br>
-              <input type="text" (ngModelChange)="codeViAgain()" formControlName="codeViNewAgain"  id="username23" class="form-control">
+              <input type="text" (ngModelChange)="validateCodeViAgain()" formControlName="codeViNewAgain" id="username23" class="form-control">
             </div>
             <p id="codeViNewAgain1" style="display:none;color: red">Mã ví mới chưa khớp!</p>
             <p id="codeViNewAgain2" style="display:none;color: forestgreen">Mã ví mới đã khớp</p>
@@ -202,16 +202,17 @@
                           <div class="col-md-4">
                             <div class="form-group">
                               <label for="form_email">Khu vực</label>
-                              <input id="form_email" type="email" formControlName="addressMainEnterprise" name="email" class="form-control" placeholder="Please enter your email *" required="required" data-error="Ứng tuyển tại khu vực">
+                              <input id="form_email" type="email" formControlName="addressMainEnterprise" name="email" class="form-control" placeholder="Ứng tuyển tại khu vực" required="required" data-error="Ứng tuyển tại khu vực">
                             </div>
                             <p *ngIf="!createPostForm.get('addressMainEnterprise')?.valid && createPostForm.get('addressMainEnterprise')?.touched" style="color: red;margin: 0">Không được để trống</p>
                           </div>
                           <div class="col-md-4">
                             <div class="form-group">
                               <label for="form_lastname">Ngày hết hạn</label>
-                              <input id="form_lastname" type="date" formControlName="expirationDatePostEnterprise" name="surname" class="form-control" placeholder="Please enter your lastname *" required="required" data-error="Lastname is required.">
+                              <input id="form_lastname" type="date" (ngModelChange)="validateExpirationDate()" formControlName="expirationDatePostEnterprise" name="surname" class="form-control" placeholder="Khu vực làm việc" required="required" data-error="Lastname is required.">
                             </div>
                             <p *ngIf="!createPostForm.get('expirationDatePostEnterprise')?.valid && createPostForm.get('expirationDatePostEnterprise')?.touched" style="color: red;margin: 0">Không được để trống</p>
+                            <p  id="expirationDate" style="margin: 0;color: red;display: none">Ngày không hợp lệ</p>
                           </div>
                           <div class="col-md-4">
                             <div class="form-group">
@@ -238,16 +239,17 @@
                           <div class="col-md-4">
                             <div class="form-group">
                               <label for="form_lastname12">Mức lương thấp nhất(-triệu vnd)</label>
-                              <input id="form_lastname12" type="number" formControlName="salarySmallPostEnterprise" name="surname" class="form-control" placeholder="Mức lương thấp nhất " required="required" data-error="Lastname is required.">
+                              <input id="form_lastname12" type="number"  (ngModelChange)="validatesalaryBigPostEnterprise()" formControlName="salarySmallPostEnterprise" name="surname" class="form-control" placeholder="Mức lương thấp nhất " required="required" data-error="Lastname is required.">
                             </div>
-                            <p *ngIf="!createPostForm.get('salarySmallPostEnterprise')?.valid && createPostForm.get('salarySmallPostEnterprise')?.touched" style="color: red;margin: 0">Dữ liệu nhập không hợp lệ!</p>
+                            <p *ngIf="!createPostForm.get('salarySmallPostEnterprise')?.valid " style="color: red;margin: 0">Dữ liệu nhập không hợp lệ!</p>
                           </div>
                           <div class="col-md-4">
                             <div class="form-group">
                               <label for="form_lastname2">Mức lương cao nhất(-triệu vnd)</label>
-                              <input id="form_lastname2" type="number" formControlName="salaryBigPostEnterprise" name="surname" class="form-control" placeholder="Mức lương cao nhất" required="required" data-error="Lastname is required.">
+                              <input id="form_lastname2" type="number" (ngModelChange)="validatesalaryBigPostEnterprise()" formControlName="salaryBigPostEnterprise" name="surname" class="form-control" placeholder="Mức lương cao nhất" required="required" data-error="Lastname is required.">
                             </div>
-                            <p *ngIf="!createPostForm.get('salaryBigPostEnterprise')?.valid && createPostForm.get('salaryBigPostEnterprise')?.touched" style="color: red;margin: 0">Dữ liệu nhập không hợp lệ</p>
+                            <p *ngIf="!createPostForm.get('salaryBigPostEnterprise')?.valid " style="color: red;margin: 0">Dữ liệu nhập không hợp lệ</p>
+                            <p style="margin: 0;display: none;color: red" id="validateSalary">Mức lương cao nhất không hợp lệ !<br>( > mức lương thấp nhất )!</p>
                           </div>
                           <div class="col-md-12">
                             <div class="form-group">
