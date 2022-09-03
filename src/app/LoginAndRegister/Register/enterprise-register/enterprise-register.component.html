@@ -22,8 +22,9 @@
                     <div class="col-md-6 mb-4">
                       <div class="form-outline">
                         <label class="form-label" for="form3Example1m">Tên doanh nghiệp</label>
-                        <input type="text" id="form3Example1m" formControlName="nameEnterprise" class="form-control " />
+                        <input type="text" id="form3Example1m" formControlName="nameEnterprise" class="form-control " (change)="checkuser()">
                       </div>
+                      <p *ngIf="checkUsername" style="color: red">Tên doanh nghiệp đã tồn tại</p>
                       <p *ngIf="!registerForm.get('nameEnterprise')?.valid && registerForm.get('nameEnterprise')?.touched" style="color: red">Không được để trống</p>
                     </div>
                     <div class="col-md-6 mb-4">
@@ -38,8 +39,9 @@
                     <div class="col-md-6 mb-4">
                       <div class="form-outline">
                         <label class="form-label"   for="form3Example1m12">Email doanh nghiệp</label>
-                        <input type="text" formControlName="gmailEnterprise"id="form3Example1m12" class="form-control form-control-lg" />
+                        <input type="text" formControlName="gmailEnterprise"id="form3Example1m12" class="form-control form-control-lg" (change)="checkEmailE()" />
                       </div>
+                      <p *ngIf="checkEmail" style="color: red">Email đã tồn tại</p>
                       <p *ngIf="!registerForm.get('gmailEnterprise')?.valid && registerForm.get('gmailEnterprise')?.touched" style="color: red">Không được để trống</p>
 
                     </div>
