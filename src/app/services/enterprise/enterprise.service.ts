@@ -46,4 +46,11 @@ export class EnterpriseService {
   findAllByIdEnterprise(id:number):Observable<any>{
     return this.http.get<any>(`http://localhost:8080/enterprise/findAllByIdEnterprise/${id}`,);
   }
+  listPostVipByEnterprise(id:number):Observable<PostEnterprise[]>{
+    return this.http.get<any>(`http://localhost:8080/enterprise/listPostVipByEnterprise/${id}`,);
+
+  }
+  listPostThuongByEnterprise(id:number):Observable<PostEnterprise[]>{
+    return this.http.get<any>(`http://localhost:8080/enterprise/listPostThuongByEnterprise/${id}`,);
+  }
 }

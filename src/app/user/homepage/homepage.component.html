@@ -203,8 +203,8 @@
               </li>
             </ul>
             <ul class="nav navbar-nav navbar-right float-right">
-              <li class="left"><a href="post-job.html"><i class="ti-pencil-alt"></i> Post A Job</a></li>
-              <li class="right"><a href="my-account.html"><i class="ti-lock"></i>  Log In</a></li>
+              <li style="cursor: pointer" class="left"><a ><i class="ti-pencil-alt"></i>Tạo CV</a></li>
+              <li class="right"><a href="" routerLink="login"><i class="ti-lock"></i>Log In</a></li>
             </ul>
           </div>
         </div>
@@ -275,27 +275,27 @@
         <h3 class="title-menu">All Pages</h3>
         <ul class="nav navmenu-nav">
           <li><a href="index.html">Home</a></li>
-          <li><a href="index-02.html">Home Page 2</a></li>
-          <li><a href="index-03.html">Home Page 3</a></li>
-          <li><a href="index-04.html">Home Page 4</a></li>
-          <li><a href="about.html">About us</a></li>
-          <li><a href="job-page.html">Job Page</a></li>
-          <li><a href="job-details.html">Job Details</a></li>
-          <li><a href="resume.html">Resume Page</a></li>
-          <li><a href="privacy-policy.html">Privacy Policy</a></li>
-          <li><a href="pricing.html">Pricing Tables</a></li>
-          <li><a href="browse-jobs.html">Browse Jobs</a></li>
-          <li><a href="browse-categories.html">Browse Categories</a></li>
-          <li><a href="add-resume.html">Add Resume</a></li>
-          <li><a href="manage-resumes.html">Manage Resumes</a></li>
-          <li><a href="job-alerts.html">Job Alerts</a></li>
-          <li><a href="post-job.html">Add Job</a></li>
-          <li><a href="manage-jobs.html">Manage Jobs</a></li>
-          <li><a href="manage-applications.html">Manage Applications</a></li>
-          <li><a href="browse-resumes.html">Browse Resumes</a></li>
-          <li><a href="contact.html">Contact</a></li>
-          <li><a href="faq.html">Faq</a></li>
-          <li><a href="my-account.html">Login</a></li>
+          <li><a >Home Page 2</a></li>
+          <li><a >Home Page 3</a></li>
+          <li><a >Home Page 4</a></li>
+          <li><a >About us</a></li>
+          <li><a >Job Page</a></li>
+          <li><a>Job Details</a></li>
+          <li><a >Resume Page</a></li>
+          <li><a >Privacy Policy</a></li>
+          <li><a >Pricing Tables</a></li>
+          <li><a >Browse Jobs</a></li>
+          <li><a >Browse Categories</a></li>
+          <li><a>Add Resume</a></li>
+          <li><a >Manage Resumes</a></li>
+          <li><a >Job Alerts</a></li>
+          <li><a >Add Job</a></li>
+          <li><a >Manage Jobs</a></li>
+          <li><a>Manage Applications</a></li>
+          <li><a>Browse Resumes</a></li>
+          <li><a>Contact</a></li>
+          <li><a >Faq</a></li>
+          <li><a routerLink="login">Login</a></li>
         </ul><!--- End Menu -->
       </div> <!--- End Off Canvas Side Menu -->
       <div class="tbtn wow pulse" id="menu" data-wow-iteration="infinite" data-wow-duration="500ms" data-toggle="offcanvas" data-target=".navmenu">
@@ -361,108 +361,37 @@
   <!-- end intro section -->
 </div>
 
-<!-- Find Job Section Start -->
+<!-- Showing 6-10 Of 24 JobFind Job Section Start -->
 <section class="find-job section">
   <div class="container">
     <h2 class="section-title">Hot Jobs</h2>
     <div class="row">
-      <div class="col-md-12">
+      <div class="col-md-12" *ngFor="let a of postEnterpriseOffer">
         <div class="job-list">
           <div class="thumb">
-            <a href="job-details.html"><img src="assets/img/jobs/img-1.jpg" alt=""></a>
+            <a ><img style="width: 100px" src="{{a.enterprise.imgEnterprise}}" alt=""></a>
           </div>
           <div class="job-list-content">
-            <h4><a href="job-details.html">Need a web designer</a><span class="full-time">Full-Time</span></h4>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illum quaerat aut veniam molestiae atque dolorum omnis temporibus consequuntur saepe. Nemo atque consectetur saepe corporis odit in dicta reprehenderit, officiis, praesentium?</p>
+            <h4><a href="">{{a.namePostEnterprise}}</a><span class="full-time">{{a.formJobPostEnterprise.nameFormJob}}</span></h4>
+            <p>{{a.describePostEnterprise}}</p>
             <div class="job-tag">
               <div class="pull-left">
                 <div class="meta-tag">
-                  <span><a href="browse-categories.html"><i class="ti-brush"></i>Art/Design</a></span>
-                  <span><i class="ti-location-pin"></i>Washington, USA</span>
-                  <span><i class="ti-time"></i>60/Hour</span>
+                  <span><a href=""><i class="ti-brush"></i>{{a.vacanciesPostEnterprise}}</a></span>
+                  <span><i class="ti-location-pin"></i>{{a.addressMainEnterprise}}</span>
+                  <span><i class="ti-time"></i>{{a.expirationDatePostEnterprise}}</span>
                 </div>
               </div>
               <div class="pull-right">
                 <div class="icon">
                   <i class="ti-heart"></i>
                 </div>
-                <a href="job-details.html" class="btn btn-common btn-rm">More Detail</a>
+                <a  class="btn btn-common btn-rm">Chi tiết</a>
               </div>
             </div>
           </div>
         </div>
-        <div class="job-list">
-          <div class="thumb">
-            <a href="job-details.html"><img src="assets/img/jobs/img-2.jpg" alt=""></a>
-          </div>
-          <div class="job-list-content">
-            <h4><a href="job-details.html">Front-end developer needed</a><span class="full-time">Full-Time</span></h4>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illum quaerat aut veniam molestiae atque dolorum omnis temporibus consequuntur saepe. Nemo atque consectetur saepe corporis odit in dicta reprehenderit, officiis, praesentium?</p>
-            <div class="job-tag">
-              <div class="pull-left">
-                <div class="meta-tag">
-                  <span><a href="browse-categories.html"><i class="ti-desktop"></i>Technologies</a></span>
-                  <span><i class="ti-location-pin"></i>Cupertino, CA, USA</span>
-                  <span><i class="ti-time"></i>60/Hour</span>
-                </div>
-              </div>
-              <div class="pull-right">
-                <div class="icon">
-                  <i class="ti-heart"></i>
-                </div>
-                <a href="job-details.html" class="btn btn-common btn-rm">More Detail</a>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="job-list">
-          <div class="thumb">
-            <a href="job-details.html"><img src="assets/img/jobs/img-3.jpg" alt=""></a>
-          </div>
-          <div class="job-list-content">
-            <h4><a href="job-details.html">Senior Accountant</a><span class="part-time">Part-Time</span></h4>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illum quaerat aut veniam molestiae atque dolorum omnis temporibus consequuntur saepe. Nemo atque consectetur saepe corporis odit in dicta reprehenderit, officiis, praesentium?</p>
-            <div class="job-tag">
-              <div class="pull-left">
-                <div class="meta-tag">
-                  <span><a href="browse-categories.html"><i class="ti-home"></i>Finance</a></span>
-                  <span><i class="ti-location-pin"></i>Delaware, USA</span>
-                  <span><i class="ti-time"></i>60/Hour</span>
-                </div>
-              </div>
-              <div class="pull-right">
-                <div class="icon">
-                  <i class="ti-heart"></i>
-                </div>
-                <a href="job-details.html" class="btn btn-common btn-rm">More Detail</a>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="job-list">
-          <div class="thumb">
-            <a href="job-details.html"><img src="assets/img/jobs/img-4.jpg" alt=""></a>
-          </div>
-          <div class="job-list-content">
-            <h4><a href="job-details.html">Fullstack web developer needed</a><span class="full-time">Full-Time</span></h4>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illum quaerat aut veniam molestiae atque dolorum omnis temporibus consequuntur saepe. Nemo atque consectetur saepe corporis odit in dicta reprehenderit, officiis, praesentium?</p>
-            <div class="job-tag">
-              <div class="pull-left">
-                <div class="meta-tag">
-                  <span><a href="browse-categories.html"><i class="ti-desktop"></i>Technologies</a></span>
-                  <span><i class="ti-location-pin"></i>New York, USA</span>
-                  <span><i class="ti-time"></i>60/Hour</span>
-                </div>
-              </div>
-              <div class="pull-right">
-                <div class="icon">
-                  <i class="ti-heart"></i>
-                </div>
-                <a href="job-details.html" class="btn btn-common btn-rm">More Detail</a>
-              </div>
-            </div>
-          </div>
-        </div>
+
       </div>
       <div class="col-md-12">
         <div class="showing pull-left">
@@ -482,23 +411,6 @@
   </div>
 </section>
 <!-- Find Job Section End -->
-
-<!-- Category Section Start -->
-<section class="section text-center" >
-  <div class="container">
-    <!-- Start Animations Text -->
-    <h1>
-
-      You are using Free Lite version of Job Board<br> Purchase Full version to Get all Pages and Features
-    </h1>
-    <br>
-    <!-- End Animations Text -->
-
-    <!-- Start Buttons -->
-    <a rel="nofollow" target="_blank" href="https://rebrand.ly/gg-jobboard-purchase" class="btn btn-common btn-large"><i class="fa fa-cart"></i> Purchase Now</a>
-  </div>
-</section>
-<!-- Category Section End -->
 
 <!-- Featured Jobs Section Start -->
 <section class="featured-jobs section">

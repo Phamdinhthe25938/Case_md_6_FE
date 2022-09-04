@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {Enterprise} from "../../model/Enterprise";
+import {TransactionHistory} from "../../model/TransactionHistory";
 
 @Injectable({
   providedIn: 'root'
@@ -24,5 +25,9 @@ export class AdminService {
   }
   refuseConfirmEnterprise(id:number,string:string):Observable<any>{
     return this.http.post<any>(`http://localhost:8080/admin/refuseConfirm/${id}/${string}`,"");
+  }
+  listTransactionHistory():Observable<TransactionHistory[]>{
+    return this.http.get<any>(`http://localhost:8080/admin/listTransactionHistory`);
+
   }
 }

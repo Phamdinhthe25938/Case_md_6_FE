@@ -10,7 +10,7 @@ import {Field} from "../../model/Field";
 import {PostEnterprise} from "../../model/PostEnterprise";
 
 @Component({
-  selector: 'app-main-enterprise',
+  selector: 'app-table-enterprise',
   templateUrl: './main-enterprise.component.html',
   styleUrls: ['./main-enterprise.component.css']
 })
@@ -161,6 +161,7 @@ export class MainEnterpriseComponent implements OnInit {
           codeViNew: new FormControl("", [Validators.required, Validators.minLength(4), Validators.pattern("(?=^.{8,}$)((?=.*\\d)|(?=.*\\W+))(?![.\\n])(?=.*[A-Z])(?=.*[a-z]).*$")]),
           codeViNewAgain: new FormControl("", [Validators.required, Validators.minLength(4), Validators.pattern("(?=^.{8,}$)((?=.*\\d)|(?=.*\\W+))(?![.\\n])(?=.*[A-Z])(?=.*[a-z]).*$")]),
         })
+        this.enterpriseLoginFunction();
       })
     } else {
       alert("Vui lòng kiểm tra lại có gì đó chưa đúng!")
