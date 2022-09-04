@@ -13,6 +13,7 @@ import {UserRegisterComponent} from "./LoginAndRegister/Register/user-register/u
 
 const routes: Routes = [
   {path: '', component: LoginComponent},
+  {path: 'login', component: LoginComponent},
   {path: 'registerEnterprise', component:EnterpriseRegisterComponent},
   {path: 'registerUser', component:UserRegisterComponent},
   {path: 'admin', loadChildren: () => import('../app/admin/admin.module').then(module => module.AdminModule),
@@ -21,7 +22,7 @@ const routes: Routes = [
   {path: 'enterprise', loadChildren: () => import('../app/enterprise/enterprise.module').then(module => module.EnterpriseModule),
     canActivate: [EnterpriseGuard]
   },
-  {path: 'user', loadChildren: () => import('../app/user/AppUser.module').then(module => module.AppUserModule),
+  {path: "user", loadChildren: () => import('../app/user/AppUser.module').then(module => module.AppUserModule),
     canActivate: [UserGuard]
   },
 ];

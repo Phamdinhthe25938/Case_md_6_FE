@@ -3,6 +3,7 @@ import {AdminService} from "../../services/admin/admin.service";
 import {Enterprise} from "../../model/Enterprise";
 import {Router} from "@angular/router";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
+import {EnterpriseService} from "../../services/enterprise/enterprise.service";
 
 @Component({
   selector: 'app-mainEnterprise',
@@ -14,7 +15,7 @@ export class MainComponent implements OnInit {
   enterprisesConfirm!: Enterprise[];
   enterpriseDeltail!: Enterprise;
 
-  constructor(private adminService:AdminService,private router:Router,private adminService1:AdminService) {
+  constructor(private adminService:AdminService,private router:Router,private enterpriseService:EnterpriseService) {
 
   }
 
@@ -26,6 +27,10 @@ export class MainComponent implements OnInit {
     this.adminService.getAllEnterPriseConfirm().subscribe((data)=>{
       this.enterprisesConfirm=data;
     })
+  }
+
+  toTurnoverComponet(){
+    this.router.navigate(["/turnover"]);
   }
   reasonForm= new FormGroup({
     reasonRefusal: new FormControl("", Validators.required),
@@ -81,7 +86,7 @@ export class MainComponent implements OnInit {
     })
   }
   findById(id:number){
-    this.adminService1.findById(id).subscribe((data)=>{
+    this.adminService.findById(id).subscribe((data)=>{
       this.enterpriseDeltail=data;
     })
   }
