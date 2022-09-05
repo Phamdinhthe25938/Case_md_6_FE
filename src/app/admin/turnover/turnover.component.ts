@@ -4,6 +4,7 @@ import {AdminService} from "../../services/admin/admin.service";
 import {TransactionHistory} from "../../model/TransactionHistory";
 import {EnterpriseService} from "../../services/enterprise/enterprise.service";
 import {PostEnterprise} from "../../model/PostEnterprise";
+import {Enterprise} from "../../model/Enterprise";
 
 @Component({
   selector: 'app-turnover',
@@ -18,10 +19,14 @@ export class TurnoverComponent implements OnInit {
 
   postVipByEnterpriseS!:PostEnterprise[];
   postThuongByEnterpriseS!:PostEnterprise[];
+  enterpriseOderByRates!:Enterprise[];
 
+  totalMoneyTransaction!:number;
 
   ngOnInit(): void {
+    this.totalTransaction();
     this.listTransactionHistory();
+    this.listEnterpriseOderByRates();
   }
   toTableComponent(){
       this.router.navigate(["/admin"])
@@ -31,16 +36,26 @@ export class TurnoverComponent implements OnInit {
         this.transactionHistoryS=data;
     })
   }
-  listPostVipByEnterprise(id:number):PostEnterprise[]{
-      this.enterpriseService.listPostVipByEnterprise(id).subscribe((data)=>{
-          this.postVipByEnterpriseS=data;
-      })
-    return this.postVipByEnterpriseS;
-  }
-  listPostThuongEnterprise(id:number):PostEnterprise[]{
-    this.enterpriseService.listPostThuongByEnterprise(id).subscribe((data)=>{
-      this.postThuongByEnterpriseS=data;
+  listEnterpriseOderByRates(){
+    this.adminService.listEnterpriseOderByRates().subscribe((data)=>{
+      this.enterpriseOderByRates=data;
     })
-    return this.postThuongByEnterpriseS;
   }
+  listPostVipByEnterprise(id:number){
+      this.enterpriseService.listPostVipByEnterprise(id).subscribe((data)=>{
+           this.postVipByEnterpriseS =data;
+      })
+
+  }
+  listPostThuongEnterprise(id:number){
+    this.enterpriseService.listPostThuongByEnterprise(id).subscribe((data)=>{
+         this.postThuongByEnterpriseS =data;
+    })
+  }
+  totalTransaction(){
+     this.adminService.totalTransaction().subscribe((data)=>{
+           this.totalMoneyTransaction=data;
+     })
+  }
+
 }
