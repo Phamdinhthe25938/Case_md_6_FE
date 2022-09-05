@@ -20,7 +20,7 @@ export class EnterpriseRegisterComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.loginService.findAll().subscribe((data) => {
+    this.loginService.findAllField().subscribe((data) => {
       this.fields = data;
     })
   }
