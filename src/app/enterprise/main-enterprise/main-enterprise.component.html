@@ -1748,9 +1748,9 @@ License: For each use you must have a valid license purchased only from above li
                           </div>
                           <!--end::Symbol-->
                           <!--begin::Description-->
-                          <div class="d-flex flex-column flex-grow-1">
+                          <div data-toggle="modal" data-target="#wallegt" class="d-flex flex-column flex-grow-1">
                             <!--begin::Title-->
-                            <h5 class="custom-list-title fw-bold text-gray-800 mb-1">Nạp ví</h5>
+                            <h5 style="cursor: pointer" class="custom-list-title fw-bold text-gray-800 mb-1">Nạp ví</h5>
                             <!--end::Title-->
                             <!--begin::Link-->
                             <span class="text-gray-400 fw-bold"></span>
@@ -1760,7 +1760,7 @@ License: For each use you must have a valid license purchased only from above li
                         </a>
                         <!--end::Item-->
                         <!--begin::Item-->
-                        <a href="" class="custom-list d-flex align-items-center px-5 py-4">
+                        <a  class="custom-list d-flex align-items-center px-5 py-4">
                           <!--begin::Symbol-->
                           <div class="symbol symbol-40px me-5">
 																<span class="symbol-label">
@@ -1769,9 +1769,9 @@ License: For each use you must have a valid license purchased only from above li
                           </div>
                           <!--end::Symbol-->
                           <!--begin::Description-->
-                          <div class="d-flex flex-column flex-grow-1">
+                          <div data-toggle="modal" data-target="#changePassVi" class="d-flex flex-column flex-grow-1">
                             <!--begin::Title-->
-                            <h5 class="custom-list-title fw-bold text-gray-800 mb-1">Đổi mã ví</h5>
+                            <h5 style="cursor: pointer" class="custom-list-title fw-bold text-gray-800 mb-1">Đổi mã ví</h5>
                             <!--end::Title-->
                             <!--begin::Link-->
                             <span class="text-gray-400 fw-bold"></span>
@@ -3048,7 +3048,7 @@ License: For each use you must have a valid license purchased only from above li
                     <span class="text-muted mt-1 fw-bold fs-7">Over 500 members</span>
                   </h3>
                   <div class="card-toolbar" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-trigger="hover" title="Click to add a user">
-                    <a href="#" class="btn btn-sm btn-light-primary" data-bs-toggle="modal" data-bs-target="#kt_modal_invite_friends">
+                    <a data-toggle="modal" data-target="#create"class="btn btn-sm btn-light-primary" data-bs-toggle="modal" data-bs-target="#kt_modal_invite_friends">
                       <!--begin::Svg Icon | path: icons/duotune/arrows/arr075.svg-->
                       <span class="svg-icon svg-icon-3">
 													<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -3056,7 +3056,7 @@ License: For each use you must have a valid license purchased only from above li
 														<rect x="4.36396" y="11.364" width="16" height="2" rx="1" fill="black" />
 													</svg>
 												</span>
-                      <!--end::Svg Icon-->New Member</a>
+                      <!--end::Svg Icon-->Tạo bài đăng</a>
                   </div>
                 </div>
                 <!--end::Header-->
@@ -3070,7 +3070,7 @@ License: For each use you must have a valid license purchased only from above li
                       <thead>
                       <tr class="fw-bolder text-muted">
                         <th class="min-w-150px" style="    font-size: 12px;">Tên</th>
-                        <th class="min-w-140px" style="    font-size: 12px;">Ngày đăng</th>
+                        <th class="min-w-150px" style="    font-size: 12px;">Ngày đăng</th>
                         <th class="min-w-100px" style=" font-size: 11px;">Lượng apply</th>
                         <th class="min-w-100px text-end" style="    font-size: 12px;">Lựa chọn</th>
                       </tr>
@@ -3092,7 +3092,7 @@ License: For each use you must have a valid license purchased only from above li
                         </td>
                         <td>
                           <a href="#" class="text-dark fw-bolder text-hover-primary d-block fs-6" style="    font-size: 12px;">{{a.timePostEnterprise}}</a>
-                          <span class="text-muted fw-bold text-muted d-block fs-7" style="    font-size: 12px;">{{a.datePostEnterprise}}</span>
+                          <span class="text-muted fw-bold text-muted d-block fs-7" style="    font-size: 12px !important;">{{a.datePostEnterprise}}</span>
                         </td>
                         <td class="text-end">
                           <div class="d-flex flex-column w-100 me-2">
@@ -6056,7 +6056,7 @@ License: For each use you must have a valid license purchased only from above li
 </div>
 <div class="container">
   <!-- Trigger the modal with a button --><!-- Modal -->
-  <div  class="modal" id="myModalEdit">
+  <div  class="modal" id="wallegt">
     <div class="modal-dialog">
       <!-- Modal content-->
       <form [formGroup]="walletForm" (ngSubmit)="rechargeWallet()">
