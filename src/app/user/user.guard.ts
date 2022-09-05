@@ -16,7 +16,6 @@ export class UserGuard implements CanActivate {
     if(userToken.roles.name == "ROLE_USER") {
       return true;
     }
-
     return false;
   }
 

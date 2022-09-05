@@ -65,7 +65,7 @@
                     <div class="col-md-12 mb-4">
                       <div class="form-outline mb-4">
                         <label class="form-label" for="form3Example971">Lĩnh vực chính</label>
-                        <select   id="form3Example971" formControlName="idField" class="form-control form-control-lg">
+                        <select   id="form3Example971" formControlName="idField" required="required" class="form-control form-control-lg">
                           <option  *ngFor="let b of fields" value="{{b.idField}}">{{b.nameField}}</option>
                         </select>
                       </div>

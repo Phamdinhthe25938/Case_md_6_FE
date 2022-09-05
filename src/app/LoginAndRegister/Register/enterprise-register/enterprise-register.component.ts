@@ -28,7 +28,7 @@ export class EnterpriseRegisterComponent implements OnInit {
   constructor(private loginService: LoginService,private storage: AngularFireStorage,private router :Router) {
   }
   ngOnInit(): void {
-    this.loginService.findAll().subscribe((data) => {
+    this.loginService.findAllField().subscribe((data) => {
       this.fields = data;
     })
     this.appUser=this.loginService.findAllUser();

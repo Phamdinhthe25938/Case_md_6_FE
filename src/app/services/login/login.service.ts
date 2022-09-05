@@ -33,7 +33,7 @@ export class LoginService {
   registerUser(user:any){
     return this.http.post<any>("http://localhost:8080/register/user",user);
   }
-  findAll():Observable<Field[]>{
+  findAllField():Observable<Field[]>{
     return this.http.get<any>("http://localhost:8080/register/findAllField");
   }
   findFieldById(id:number):Observable<Field>{
