@@ -21,18 +21,23 @@ export class EnterpriseRegisterComponent implements OnInit {
   fb:any;
   downloadURL: Observable<string> | undefined;
   fields!: Field[];
-  appUser: any;
-  enterprise: any;
+  appUser!: AppUser[];
+  enterprise!: Enterprise[];
   checkUsername: boolean | undefined;
-  checkEmail: boolean | undefined;
+  checkEmail!: boolean
   constructor(private loginService: LoginService,private storage: AngularFireStorage,private router :Router) {
   }
   ngOnInit(): void {
+    this.checkEmail=true;
     this.loginService.findAllField().subscribe((data) => {
       this.fields = data;
     })
-    this.appUser=this.loginService.findAllUser();
-    this.enterprise=this.loginService.findAllEnterprise();
+    this.loginService.findAllEnterprise().subscribe((data) => {
+      this.enterprise = data;
+    });
+    this.loginService.findAllUser().subscribe((data) => {
+      this.appUser = data;
+    });
 
   }
 
@@ -47,26 +52,13 @@ export class EnterpriseRegisterComponent implements OnInit {
   })
 
 
-checkuser(){
-  this.checkUsername=true;
-   let username= this.registerForm.value.nameEnterprise
-  for (let i = 0; i < this.appUser.length; i++) {
-    if (username==this.appUser[i].username){
-      this.checkUsername=false;
-    }
-  }
-  for (let i = 0; i < this.enterprise.length; i++) {
-    if (username==this.enterprise[i].nameEnterprise){
-      this.checkUsername=false;
-    }
-  }
-  console.log(this.checkUsername)
-}
 
 
 checkEmailE(){
-  this.checkEmail=true;
   let email=this.registerForm.value.gmailEnterprise
+  console.log("email")
+  console.log(email)
+  this.checkEmail=true;
   for (let i = 0; i < this.appUser.length; i++) {
     if (email==this.appUser[i].email){
       this.checkEmail=false
@@ -74,7 +66,7 @@ checkEmailE(){
     }
   }
   for (let i = 0; i < this.enterprise.length; i++) {
-    if (email==this.enterprise[i].gmailEnterprise){
+    if (email===this.enterprise[i].gmailEnterprise){
       this.checkEmail=false
       break;
     }

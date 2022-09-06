@@ -17,8 +17,12 @@ export class UserRegisterComponent implements OnInit {
   constructor(private loginService:LoginService,private router:Router) { }
 
   ngOnInit(): void {
-    this.appUser=this.loginService.findAllUser();
-    this.enterprise=this.loginService.findAllEnterprise();
+    this.loginService.findAllEnterprise().subscribe((data) => {
+      this.enterprise = data;
+    });
+    this.loginService.findAllUser().subscribe((data) => {
+      this.appUser = data;
+    });
   }
   registerUserForm = new FormGroup({
     username: new FormControl("", Validators.required),
@@ -41,11 +45,6 @@ export class UserRegisterComponent implements OnInit {
         break;
       }
     }
-    console.log("checkuser")
-    console.log("checkuser")
-    console.log("checkuser")
-    console.log("checkuser")
-    console.log(this.checkUsername)
   }
 
 
