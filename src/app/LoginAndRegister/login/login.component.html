@@ -17,7 +17,7 @@
             <p *ngIf="!loginForm.get('username')?.valid && loginForm.get('username')?.touched" style="color: red">Không được để trống</p>
             <div class="form-group">
               <label for="password" class="text-info">Password:</label><br>
-              <input type="text" name="password" id="password" class="form-control" formControlName="password">
+              <input type="password" name="password" id="password" class="form-control" formControlName="password">
             </div>
             <p *ngIf="!loginForm.get('password')?.valid && loginForm.get('password')?.touched" style="color: red">Không được để trống</p>
             <div class="form-group">

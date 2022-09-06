@@ -37,6 +37,8 @@ export class MainEnterpriseComponent implements OnInit {
   getAllPostByEnterprise(){
     this.enterpriseService.findAllByIdEnterprise(this.enterpriseLogin.idEnterprise).subscribe((data)=>{
       this.listPostByIdEnterprise=data;
+      console.log("data")
+      console.log(data)
     })
   }
   ngOnInit(): void {
@@ -121,6 +123,11 @@ export class MainEnterpriseComponent implements OnInit {
       this.enterpriseLoginFunction();
     })
   }
+
+  // etStatusPost(memorized: boolean){
+  //   let lockPost = this.
+  // }
+
 
   confirmCreatePost() {
     if (!this.enterpriseLogin.statusEnterprise) {
@@ -225,5 +232,9 @@ export class MainEnterpriseComponent implements OnInit {
     }
   }
 
-
+  editStatus(id: number){
+      this.enterpriseService.statusPost(id).subscribe(()=>{
+         alert("khoa ồi")
+      })
+  }
 }

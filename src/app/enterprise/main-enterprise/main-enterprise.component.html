@@ -3077,8 +3077,8 @@ License: For each use you must have a valid license purchased only from above li
                       </thead>
                       <!--end::Table head-->
                       <!--begin::Table body-->
-                      <tbody *ngFor="let a of listPostByIdEnterprise">
-                      <tr>
+                      <tbody>
+                      <tr  *ngFor="let a of listPostByIdEnterprise">
                         <td>
                           <div class="d-flex align-items-center">
                             <div class="symbol symbol-45px me-5">
@@ -3122,9 +3122,8 @@ License: For each use you must have a valid license purchased only from above li
 																		</span>
                               <!--end::Svg Icon-->
                             </a>
-                            <a href="#" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm">
-                              <!--begin::Svg Icon | path: icons/duotune/general/gen027.svg-->
-                              <span class="svg-icon svg-icon-3">
+                            <a  class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm">
+                              <span (click)="editStatus(a.idPostEnterprise)" class="svg-icon svg-icon-3">
                                    <div style="margin-top: 7px;margin-left: 4px;">
                                    <i class="fa-solid fa-key"></i>
                                    </div>
