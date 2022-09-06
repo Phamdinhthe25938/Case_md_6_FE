@@ -94,34 +94,37 @@ export class MainEnterpriseComponent implements OnInit {
       })
 
   createPost() {
-    let  createPostForm = this.createPostForm.value;
-    let  postEnterprise = {
-      namePostEnterprise: createPostForm.namePostEnterprise,
-      addressMainEnterprise: createPostForm.addressMainEnterprise,
-      field: {
-        idField: createPostForm.idField
-      },
-      regime: {
-        idRegime: createPostForm.idRegime
-      },
-      formJobPostEnterprise: {
-        idFormJob: createPostForm.idFormJob
-      },
-      salarySmallPostEnterprise: createPostForm.salarySmallPostEnterprise,
-      salaryBigPostEnterprise: createPostForm.salaryBigPostEnterprise,
-      vacanciesPostEnterprise: createPostForm.vacanciesPostEnterprise,
-      expirationDatePostEnterprise: createPostForm.expirationDatePostEnterprise,
-      describePostEnterprise: createPostForm.describePostEnterprise,
-      enterprise: {
-        idEnterprise: this.enterpriseLogin.idEnterprise,
+    if (this.createPostForm.valid) {
+      let createPostForm = this.createPostForm.value;
+      let postEnterprise = {
+        namePostEnterprise: createPostForm.namePostEnterprise,
+        addressMainEnterprise: createPostForm.addressMainEnterprise,
+        field: {
+          idField: createPostForm.idField
+        },
+        regime: {
+          idRegime: createPostForm.idRegime
+        },
+        formJobPostEnterprise: {
+          idFormJob: createPostForm.idFormJob
+        },
+        salarySmallPostEnterprise: createPostForm.salarySmallPostEnterprise,
+        salaryBigPostEnterprise: createPostForm.salaryBigPostEnterprise,
+        vacanciesPostEnterprise: createPostForm.vacanciesPostEnterprise,
+        expirationDatePostEnterprise: createPostForm.expirationDatePostEnterprise,
+        describePostEnterprise: createPostForm.describePostEnterprise,
+        enterprise: {
+          idEnterprise: this.enterpriseLogin.idEnterprise,
+        }
       }
+      this.enterpriseService.savePost(postEnterprise).subscribe(() => {
+        alert("create thành công!")
+        this.enterpriseLoginFunction();
+      })
+    } else {
+      alert("Form khong hop le !");
     }
-    this.enterpriseService.savePost(postEnterprise).subscribe(() => {
-      alert("create thành công!")
-      this.enterpriseLoginFunction();
-    })
   }
-
   confirmCreatePost() {
     if (!this.enterpriseLogin.statusEnterprise) {
       alert("Tài khoản của bạn không đủ tiền để đăng bài mới vui lòng nạp thêm !")
