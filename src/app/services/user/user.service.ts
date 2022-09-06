@@ -13,4 +13,7 @@ export class UserService {
   listPostByOderPriority():Observable<PostEnterprise[]>{
     return this.http.get<any>(`http://localhost:8080/user/listPostByOderPriority`,);
   }
+  saveCv(cvUser:any):Observable<any>{
+    return this.http.post<any>(`http://localhost:8080/user/saveCvUser/`,cvUser);
+  }
 }
