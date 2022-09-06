@@ -11,12 +11,14 @@ import {Router} from "@angular/router";
 export class UserRegisterComponent implements OnInit {
   appUser: any;
   enterprise: any;
-  checkUsername: boolean | undefined;
-  checkEmail: boolean | undefined;
+  checkUsername!: boolean ;
+  checkEmail!: boolean ;
 
   constructor(private loginService:LoginService,private router:Router) { }
 
   ngOnInit(): void {
+    this.checkUsername=true;
+    this.checkEmail=true;
     this.loginService.findAllEnterprise().subscribe((data) => {
       this.enterprise = data;
     });
@@ -31,16 +33,16 @@ export class UserRegisterComponent implements OnInit {
   })
   checkuser(){
     this.checkUsername=true;
-    let usernameuser= this.registerUserForm.value.username
+    let username= this.registerUserForm.value.username
     for (let i = 0; i < this.appUser.length; i++) {
-      if (usernameuser==this.appUser[i].username){
+      if (username==this.appUser[i].username){
         this.checkUsername=false;
         break;
       }
     }
     console.log(this.checkUsername)
     for (let i = 0; i < this.enterprise.length; i++) {
-      if (usernameuser==this.enterprise[i].nameEnterprise){
+      if (username==this.enterprise[i].nameEnterprise){
         this.checkUsername=false;
         break;
       }
