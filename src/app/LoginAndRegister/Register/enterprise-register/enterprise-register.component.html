@@ -47,10 +47,7 @@
                     <div class="col-md-6 mb-4">
                       <div class="form-outline">
                         <label class="form-label" >Ảnh đại diện</label>
-                        <input type="file" id="file" name="image"
-                               autocomplete="off"
-                               #userPhoto
-                               (change)="onFileSelected($event)"  class="form-control form-control-lg" />
+                        <input type="file" id="file" #userPhoto (change)="onFileSelected({event : $event})" name="image" autocomplete="off"  class="form-control form-control-lg" />
                       </div>
                       <p *ngIf="!registerForm.get('imgEnterprise')?.valid && registerForm.get('imgEnterprise')?.touched" style="color: red">Không được để trống</p>
                     </div>

@@ -23,33 +23,77 @@ export class EnterpriseRegisterComponent implements OnInit {
   fields!: Field[];
   appUser!: AppUser[];
   enterprise!: Enterprise[];
-  checkUsername: boolean | undefined;
+  checkUsername!: boolean ;
   checkEmail!: boolean
   constructor(private loginService: LoginService,private storage: AngularFireStorage,private router :Router) {
   }
+
+  onFileSelected({event}: { event: any }){
+    var n = Date.now();
+    const file = event.target.files[0];
+    const filePath = `RoomsImages/${n}`;
+    const fileRef = this.storage.ref(filePath);
+    const task = this.storage.upload(`RoomsImages/${n}`, file);
+    task
+      .snapshotChanges()
+      .pipe(
+        finalize(() => {
+          this.downloadURL = fileRef.getDownloadURL();
+          this.downloadURL.subscribe(url => {
+            if (url) {
+              this.fb = url;
+            }
+            console.log(this.fb);
+          });
+        })
+      )
+      .subscribe(url => {
+        if (url) {
+          console.log(url);
+        }
+      });
+  }
+
   ngOnInit(): void {
     this.checkEmail=true;
     this.loginService.findAllField().subscribe((data) => {
       this.fields = data;
     })
-    this.loginService.findAllEnterprise().subscribe((data) => {
-      this.enterprise = data;
-    });
-    this.loginService.findAllUser().subscribe((data) => {
-      this.appUser = data;
-    });
-
+      this.loginService.findAllEnterprise().subscribe((data) => {
+        this.enterprise = data;
+      });
+      this.loginService.findAllUser().subscribe((data) => {
+        this.appUser = data;
+      });
   }
-
   registerForm = new FormGroup({
     nameEnterprise: new FormControl("", Validators.required),
     codeConfirmEnterprise: new FormControl("", Validators.required),
     gmailEnterprise: new FormControl("", Validators.required),
-    imgEnterprise: new FormControl(localStorage.getItem("urlImange"), Validators.required),
+    imgEnterprise: new FormControl(""),
     addressMainEnterprise: new FormControl("", Validators.required),
     idField: new FormControl(),
     describeEnterprise: new FormControl("", Validators.required),
   })
+  register() {
+    this.registerForm.get("imgEnterprise")?.setValue(this.fb);
+    let filed = this.registerForm.value;
+    let filedNew = {
+      nameEnterprise: filed.nameEnterprise,
+      codeConfirmEnterprise: filed.codeConfirmEnterprise,
+      gmailEnterprise: filed.gmailEnterprise,
+      imgEnterprise: filed.imgEnterprise,
+      addressMainEnterprise: filed.addressMainEnterprise,
+      describeEnterprise: filed.describeEnterprise,
+      fieldEnterprise: {
+        idField: filed.idField
+      }
+    }
+    this.loginService.register(filedNew).subscribe(() => {
+      alert("Đăng ký thành công !");
+      this.router.navigate([""])
+    })
+  }
 
 
 
@@ -73,58 +117,5 @@ checkEmailE(){
   }
   console.log(this.checkEmail)
 }
-
-
-  register() {
-    let urlImage= localStorage.getItem("urlImange")
-    console.log(this.registerForm)
-    // console.log("URL Image")
-    // console.log(urlImage)
-    let filed = this.registerForm.value;
-    let filedNew = {
-      nameEnterprise: filed.nameEnterprise,
-      codeConfirmEnterprise: filed.codeConfirmEnterprise,
-      gmailEnterprise: filed.gmailEnterprise,
-      imgEnterprise: filed.imgEnterprise,
-      addressMainEnterprise: filed.addressMainEnterprise,
-      describeEnterprise: filed.describeEnterprise,
-      fieldEnterprise: {
-        idField: filed.idField
-      }
-    }
-    // console.log("doanh nghieppppppp")
-    // console.log(filed)
-    if (this.checkUsername&&this.checkEmail){
-    this.loginService.register(filedNew).subscribe(() => {
-      alert("Đăng ký thành công !");
-      this.router.navigate([""])
-    })}
-  }
-  onFileSelected(event:any) {
-    var n = Date.now();
-    const file = event.target.files[0];
-    const filePath = `RoomsImages/${n}`;
-    const fileRef = this.storage.ref(filePath);
-    const task = this.storage.upload(`RoomsImages/${n}`, file);
-    task
-      .snapshotChanges()
-      .pipe(
-        finalize(() => {
-          this.downloadURL = fileRef.getDownloadURL();
-          this.downloadURL.subscribe(url => {
-            if (url) {
-              this.fb = url;
-            }
-            console.log(this.fb);
-            localStorage.setItem("urlImange",this.fb);
-          });
-        })
-      )
-      .subscribe(url => {
-        if (url) {
-          console.log(url);
-        }
-      });
-  }
 
 }
