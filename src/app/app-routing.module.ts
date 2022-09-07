@@ -6,13 +6,14 @@ import {
 } from "./LoginAndRegister/Register/enterprise-register/enterprise-register.component";
 import {AdminGuard} from "./admin/admin.guard";
 import {EnterpriseGuard} from "./enterprise/enterprise.guard";
-import {AppUserModule} from "./user/AppUser.module";
 import {UserGuard} from "./user/user.guard";
 import {UserRegisterComponent} from "./LoginAndRegister/Register/user-register/user-register.component";
+import {RegisterComponent} from "./LoginAndRegister/Register/register/register.component";
 
 
 const routes: Routes = [
   {path: '', component: LoginComponent},
+  {path: 'register', component: RegisterComponent},
   {path: 'login', component: LoginComponent},
   {path: 'registerEnterprise', component:EnterpriseRegisterComponent},
   {path: 'registerUser', component:UserRegisterComponent},
