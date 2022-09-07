@@ -53,4 +53,13 @@ export class EnterpriseService {
   listPostThuongByEnterprise(id:number):Observable<PostEnterprise[]>{
     return this.http.get<any>(`http://localhost:8080/enterprise/listPostThuongByEnterprise/${id}`,);
   }
+  statusPost(id: number): Observable<any> {
+    return this.http.get<any>(`http://localhost:8080/enterprise/statusPost/${id}`,);
+  }
+  openKeyPost(id: number): Observable<any> {
+    return this.http.get<any>(`http://localhost:8080/enterprise/openKeyPost/${id}`,);
+  }
+  findPostById(id: number): Observable<any>{
+    return this.http.get<any>(`http://localhost:8080/enterprise/findPostById/${id}`,);
+  }
 }

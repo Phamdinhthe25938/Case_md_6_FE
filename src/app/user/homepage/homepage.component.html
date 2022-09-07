@@ -204,7 +204,7 @@
             </ul>
             <ul class="nav navbar-nav navbar-right float-right">
               <li data-toggle="modal" data-target="#CreateCv" style="cursor: pointer" class="left"><a ><i class="ti-pencil-alt" ></i>Tạo CV</a></li>
-              <li class="right"><a href="" routerLink="login"><i class="ti-lock"></i>Log In</a></li>
+              <li class="right"><a style="cursor: pointer" (click)="logout()" ><i class="ti-lock"></i>Log In</a></li>
             </ul>
           </div>
         </div>
@@ -386,7 +386,7 @@
                 <div class="icon">
                   <i class="ti-heart"></i>
                 </div>
-                <a  style="margin-right: 20px"  class="btn btn-common btn-rm">Apply</a>
+                <a  style="margin-right: 20px"  class="btn btn-common btn-rm" data-toggle="modal" data-target="#myModal">Apply</a>
                 <a  class="btn btn-common btn-rm" style="background-color: black;">Chi tiết</a>
               </div>
             </div>
@@ -917,20 +917,23 @@
                <label style="padding-left: 10px; margin-bottom: 9px;font-size: 18px;" for="username1" class="text-info">Họ và tên </label><br>
                <input type="text" value=""formControlName="name"id="username1" class="form-control" style="border-radius: 12px">
              </div>
+             <p *ngIf="!saveCvForm.get('name')?.valid && saveCvForm.get('name')?.touched" style="margin-left: 10px;;color: red">Dữ liệu không hợp lệ !</p>
              <div class="form-group">
                <label style="padding-left: 10px; margin-bottom: 9px;font-size: 18px;" for="username2" class="text-info">Gmail :</label><br>
                <input type="mail" min="5"formControlName="mail"  id="username2" class="form-control" style="border-radius: 12px">
              </div>
+             <p *ngIf="!saveCvForm.get('mail')?.valid && saveCvForm.get('mail')?.touched" style="    margin-left: 10px;;color: red">Dữ liệu không hợp lệ !</p>
              <div class="form-group">
                <label style="    padding-left: 10px; margin-bottom: 9px;font-size: 18px;" for="username23" class="text-info">Số điện thoại</label><br>
                <input type="mail" min="5" formControlName="telephone"  id="username23" class="form-control" style="border-radius: 12px">
              </div>
+             <p *ngIf="!saveCvForm.get('telephone')?.valid && saveCvForm.get('telephone')?.touched" style="    margin-left: 10px;color: red">Dữ liệu không hợp lệ !</p>
            </div>
             <div style="display:flex;flex-direction: column;align-items: center;justify-content: center;width: 50%">
-              <img style="width:300px;height: 300px;border-radius: 50%" src="{{fb}}" alt="">
+              <img id="imgCV" style="width:300px;height: 300px;border-radius: 50%" src="{{fb}}"alt="">
               <div class="form-group" style="margin-top: 15px">
-                <label  class="btn btn-primary" style="cursor: pointer;color: #fff;padding: 10px;margin-bottom: 9px;font-size: 18px;background-color: darkseagreen;border-radius: 7px;" class="text-info">Up Cv</label><br>
-                <input type="file"  #userPhoto (change)="upImgCv({event : $event})" name="image" autocomplete="off"  id="file" class="form-control" style="border-radius: 12px;color: black;background-color: black">
+                <label  class="btn btn-primary" style="cursor: pointer;color: #fff;width: 100px;text-align: center;padding: 10px;margin-bottom: 9px;font-size: 18px;background-color: cornflowerblue;border-radius: 7px;" class="text-info">Up Cv</label><br>
+                <input type="file"  #userPhoto (change)="onFileSelected({event : $event})" name="image" autocomplete="off"  id="file" class="form-control" style="border-radius: 12px;color: black;background-color: black">
               </div>
             </div>
           </div>
@@ -942,6 +945,25 @@
   </div>
 </div>
 </div>
+<div class="modal" id="myModal">
+  <div class="modal-dialog">
+    <div class="modal-content" style="max-width: 455px;position: relative;left: 100px;">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title" style="display:inline-block;font-weight: 900">Xác thực</h4>
+        <button type="button" class="close" data-dismiss="modal">X</button>
+      </div>
+      <!-- Modal body -->
+      <div class="modal-body" style="font-size: 18px;color: red">
+        Bạn có chắc chắn Apply công việc này !
+      </div>
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" style="background-color: #FF4F57">Xác thức</button>
+      </div>
+    </div>
+  </div>
 <!-- Main JS  -->
 <script type="text/javascript" src="/assets/user/js/jquery-min.js"></script>
 <script type="text/javascript" src="/assets/user/js/bootstrap.min.js"></script>
@@ -959,3 +981,4 @@
 <script type="text/javascript" src="/assets/user/js/contact-form-script.js"></script>
 <script type="text/javascript" src="/assets/user/js/jquery.themepunch.revolution.min.js"></script>
 <script type="text/javascript" src="/assets/user/js/jquery.themepunch.tools.min.js"></script>
+</div>

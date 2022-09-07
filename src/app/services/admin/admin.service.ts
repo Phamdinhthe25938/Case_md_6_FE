@@ -36,4 +36,7 @@ export class AdminService {
   totalTransaction():Observable<number>{
     return this.http.get<any>(`http://localhost:8080/admin/totalTransaction`);
   }
+  listTransactionHistoryByDateNow():Observable<TransactionHistory[]>{
+    return this.http.get<any>(`http://localhost:8080/admin/listTransactionHistoryByDateNow`);
+  }
 }

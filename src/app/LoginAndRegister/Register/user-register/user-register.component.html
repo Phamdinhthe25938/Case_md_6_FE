@@ -13,22 +13,21 @@
               <label for="username" class="text-info">Username:</label><br>
               <input type="text"  id="username" class="form-control" formControlName="username">
             </div>
-            <p *ngIf="!registerUserForm.get('username')?.valid && registerUserForm.get('username')?.touched" style="color: red">Không được để trống</p>
+            <p *ngIf="!registerUserForm.get('username')?.valid && registerUserForm.get('username')?.touched" style="color: red;margin: 0">Không được để trống</p>
             <div class="form-group">
               <label for="password" class="text-info">Password:</label><br>
               <input type="text" name="password" id="password" class="form-control" formControlName="password">
             </div>
-            <p *ngIf="!registerUserForm.get('password')?.valid && registerUserForm.get('password')?.touched" style="color: red">Không được để trống</p>
+            <p *ngIf="!registerUserForm.get('password')?.valid && registerUserForm.get('password')?.touched" style="color: red;margin: 0">Không được để trống</p>
             <div class="form-group">
               <label for="passwordAgain" class="text-info">Password again:</label><br>
               <input type="text" name="password" id="passwordAgain" class="form-control" formControlName="password">
             </div>
-            <p *ngIf="!registerUserForm.get('password')?.valid && registerUserForm.get('password')?.touched" style="color: red">Không được để trống</p>
             <div class="form-group">
               <label for="password" class="text-info">Email:</label><br>
               <input type="text" name="password" id="email" class="form-control" formControlName="email">
             </div>
-            <p *ngIf="!registerUserForm.get('email')?.valid && registerUserForm.get('email')?.touched" style="color: red">Không được để trống</p>
+            <p *ngIf="!registerUserForm.get('email')?.valid && registerUserForm.get('email')?.touched" style="color: red;margin: 0">Không được để trống</p>
             <div class="form-group" style="display: flex;justify-content: right">
               <input style=""  type="submit" name="submit" class="btn btn-info btn-md" value="Đăng ký">
             </div>

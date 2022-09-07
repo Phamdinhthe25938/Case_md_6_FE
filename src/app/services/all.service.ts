@@ -12,7 +12,7 @@ export class AllService {
   title = "cloudsSorage";
   fb: string = "";
   downloadURL: Observable<string> | undefined;
-  constructor(private storage: AngularFireStorage) { }
+  constructor(private storage: AngularFireStorage){}
   onFileSelected(event:any) {
     let str =""
     console.log("hello");

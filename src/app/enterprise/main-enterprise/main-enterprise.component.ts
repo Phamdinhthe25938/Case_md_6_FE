@@ -8,6 +8,7 @@ import {FormJob} from "../../model/FormJob";
 import {Regime} from "../../model/Regime";
 import {Field} from "../../model/Field";
 import {PostEnterprise} from "../../model/PostEnterprise";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-table-enterprise',
@@ -21,9 +22,13 @@ export class MainEnterpriseComponent implements OnInit {
   listRegime!: Regime[];
   listField!: Field[];
   listPostByIdEnterprise!:PostEnterprise[];
-  constructor(private enterpriseService: EnterpriseService, private loginService: LoginService) {
+  postEnterpriseKey!: PostEnterprise;
+  constructor(private router:Router, private enterpriseService: EnterpriseService, private loginService: LoginService) {
   }
-
+  logout(){
+     this.loginService.logout();
+     this.router.navigate(["/login"]);
+  }
   enterpriseLoginFunction(): void {
     let username = this.loginService.getUserToken().username;
     this.enterpriseService.findEnterpriseByName(username).subscribe((data) => {
@@ -73,7 +78,7 @@ export class MainEnterpriseComponent implements OnInit {
 
   walletForm = new FormGroup({
     codeVi: new FormControl("", Validators.required),
-    viEnterprise: new FormControl(0, Validators.min(5))
+    viEnterprise: new FormControl(0, [Validators.required,Validators.pattern("^[0-9]+"),Validators.min(5)])
   })
   changeCodeViForm = new FormGroup({
     codeViOld: new FormControl("", Validators.required),
@@ -86,13 +91,12 @@ export class MainEnterpriseComponent implements OnInit {
         idField: new FormControl(),
         idFormJob: new FormControl(),
         idRegime: new FormControl(),
-        salarySmallPostEnterprise: new FormControl(0, [Validators.required, Validators.min(0)]),
-        salaryBigPostEnterprise: new FormControl(0, [Validators.required, Validators.min(0)]),
+        salarySmallPostEnterprise: new FormControl(0, [Validators.required, Validators.min(0),Validators.pattern("^[0-9]+")]),
+        salaryBigPostEnterprise: new FormControl(0, [Validators.required, Validators.min(0),Validators.pattern("^[0-9]+")]),
         vacanciesPostEnterprise: new FormControl("", Validators.required),
         expirationDatePostEnterprise: new FormControl("", Validators.required),
         describePostEnterprise: new FormControl("", Validators.required),
       })
-
   createPost() {
     if (this.createPostForm.valid) {
       let createPostForm = this.createPostForm.value;
@@ -118,8 +122,20 @@ export class MainEnterpriseComponent implements OnInit {
         }
       }
       this.enterpriseService.savePost(postEnterprise).subscribe(() => {
-        alert("create thành công!")
+        alert("Tạo bài  thành công!")
         this.enterpriseLoginFunction();
+        this.createPostForm = new FormGroup({
+          namePostEnterprise: new FormControl("", Validators.required),
+          addressMainEnterprise: new FormControl("", Validators.required),
+          idField: new FormControl(),
+          idFormJob: new FormControl(),
+          idRegime: new FormControl(),
+          salarySmallPostEnterprise: new FormControl(0, [Validators.required, Validators.min(0),Validators.pattern("^[0-9]+")]),
+          salaryBigPostEnterprise: new FormControl(0, [Validators.required, Validators.min(0),Validators.pattern("^[0-9]+")]),
+          vacanciesPostEnterprise: new FormControl("", Validators.required),
+          expirationDatePostEnterprise: new FormControl("", Validators.required),
+          describePostEnterprise: new FormControl("", Validators.required),
+        })
       })
     } else {
       alert("Form khong hop le !");
@@ -137,38 +153,48 @@ export class MainEnterpriseComponent implements OnInit {
     }
   }
   rechargeWallet() {
-    if (this.walletForm.value.codeVi === this.enterpriseLogin.codeViEnterprise) {
-      let id = this.enterpriseLogin.idEnterprise;
-      console.log(this.walletForm.value)
-      this.enterpriseService.rechargeWallet(id, Number(this.walletForm.value.viEnterprise)).subscribe(() => {
-        alert("Nạp ví thành công !")
-        this.walletForm = new FormGroup({
-          codeVi: new FormControl("", Validators.required),
-          viEnterprise: new FormControl(0, Validators.required)
+    if(this.walletForm.valid){
+      if (this.walletForm.value.codeVi === this.enterpriseLogin.codeViEnterprise) {
+        let id = this.enterpriseLogin.idEnterprise;
+        console.log(this.walletForm.value)
+        this.enterpriseService.rechargeWallet(id, Number(this.walletForm.value.viEnterprise)).subscribe(() => {
+          alert("Nạp ví thành công !")
+          this.walletForm = new FormGroup({
+            codeVi: new FormControl("", Validators.required),
+            viEnterprise: new FormControl(0, [Validators.required,Validators.pattern("^[0-9]+")])
+          })
+          this.enterpriseLoginFunction();
         })
-        this.enterpriseLoginFunction();
-      })
-      // @ts-ignore
-      document.getElementById('codeVi2').style.display = "none";
-    } else {
-      alert("Mã ví không hợp lệ!")
+        // @ts-ignore
+        document.getElementById('codeVi2').style.display = "none";
+      } else {
+        alert("Mã ví không hợp lệ!")
+      }
+    }else {
+      alert("Dữ liệu form không hợp lệ !")
     }
+
   }
   changeCodeVi() {
-    let id = this.enterpriseLogin.idEnterprise;
-    if (this.changeCodeViForm.value.codeViNewAgain === this.changeCodeViForm.value.codeViNew && this.changeCodeViForm.value.codeViOld === this.enterpriseLogin.codeViEnterprise) {
-      this.enterpriseService.changeCodeVi(id, String(this.changeCodeViForm.value.codeViNew)).subscribe(() => {
-        alert("Thay đổi mã ví thành công");
-        this.changeCodeViForm = new FormGroup({
-          codeViOld: new FormControl("", Validators.required),
-          codeViNew: new FormControl("", [Validators.required, Validators.minLength(4), Validators.pattern("(?=^.{8,}$)((?=.*\\d)|(?=.*\\W+))(?![.\\n])(?=.*[A-Z])(?=.*[a-z]).*$")]),
-          codeViNewAgain: new FormControl("", [Validators.required, Validators.minLength(4), Validators.pattern("(?=^.{8,}$)((?=.*\\d)|(?=.*\\W+))(?![.\\n])(?=.*[A-Z])(?=.*[a-z]).*$")]),
-        })
-        this.enterpriseLoginFunction();
-      })
-    } else {
-      alert("Vui lòng kiểm tra lại có gì đó chưa đúng!")
-    }
+      if(this.changeCodeViForm.valid){
+        let id = this.enterpriseLogin.idEnterprise;
+        if (this.changeCodeViForm.value.codeViNewAgain === this.changeCodeViForm.value.codeViNew && this.changeCodeViForm.value.codeViOld === this.enterpriseLogin.codeViEnterprise) {
+          this.enterpriseService.changeCodeVi(id, String(this.changeCodeViForm.value.codeViNew)).subscribe(() => {
+            alert("Thay đổi mã ví thành công");
+            this.changeCodeViForm = new FormGroup({
+              codeViOld: new FormControl("", Validators.required),
+              codeViNew: new FormControl("", [Validators.required, Validators.minLength(4), Validators.pattern("(?=^.{8,}$)((?=.*\\d)|(?=.*\\W+))(?![.\\n])(?=.*[A-Z])(?=.*[a-z]).*$")]),
+              codeViNewAgain: new FormControl("", [Validators.required, Validators.minLength(4), Validators.pattern("(?=^.{8,}$)((?=.*\\d)|(?=.*\\W+))(?![.\\n])(?=.*[A-Z])(?=.*[a-z]).*$")]),
+            })
+            this.enterpriseLoginFunction();
+          })
+        } else {
+          alert("Vui lòng kiểm tra lại có gì đó chưa đúng!")
+        }
+      }
+      else {
+        alert("Dữ liệu form không hợp lệ !")
+      }
   }
 
   // Validate các forrm
@@ -228,5 +254,20 @@ export class MainEnterpriseComponent implements OnInit {
     }
   }
 
-
+  editStatus(id: number){
+    this.enterpriseService.findPostById(id).subscribe((data)=>{
+        this.postEnterpriseKey =data;
+        if(!this.postEnterpriseKey.statusPostEnterprise){
+             this.enterpriseService.openKeyPost(id).subscribe(()=>{
+               alert("Mở khóa thành công !")
+               this.getAllPostByEnterprise();
+             })
+        }else {
+          this.enterpriseService.statusPost(id).subscribe(()=>{
+            alert("Khóa thành công !")
+            this.getAllPostByEnterprise();
+          })
+        }
+    })
+  }
 }
