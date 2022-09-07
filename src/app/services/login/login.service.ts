@@ -3,6 +3,8 @@ import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {UserToken} from "../../model/UserToken";
 import {Field} from "../../model/Field";
+import {AppUser} from "../../model/AppUser";
+import {Enterprise} from "../../model/Enterprise";
 
 @Injectable({
   providedIn: 'root'
@@ -41,4 +43,10 @@ export class LoginService {
       localStorage.removeItem("userToken");
       localStorage.removeItem("token");
   }
+  findAllUser():Observable<AppUser[]>{
+    return this.http.get<any>("http://localhost:8080/register/checkUser");
+  }
+  findAllEnterprise():Observable<Enterprise[]>{
+  return this.http.get<any>("http://localhost:8080/register/checkEnterprise");
+}
 }

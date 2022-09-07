@@ -7,21 +7,25 @@ import {Field} from "../../../model/Field";
 import {Router} from "@angular/router";
 import { AngularFireStorage } from '@angular/fire/compat/storage';
 import {finalize, Observable} from "rxjs";
-
+import {AppUser} from "../../../model/AppUser";
 @Component({
   selector: 'app-enterprise-register',
   templateUrl: './enterprise-register.component.html',
   styleUrls: ['./enterprise-register.component.css']
 })
-
 export class EnterpriseRegisterComponent implements OnInit {
   enterpriseDeltal!: Enterprise;
+
   fields!: Field[];
+  appUser!: AppUser[];
+  enterprise!: Enterprise[];
+  checkUsername!: boolean ;
+  checkEmail!: boolean
   title = "cloudsSorage";
   fb: string = "";
   downloadURL: Observable<string> | undefined;
   constructor(private loginService: LoginService,private router :Router,private storage: AngularFireStorage) {}
-  onFileSelected({event}: { event: any }){
+  onFileSelected({event}: { event: any }) {
     var n = Date.now();
     const file = event.target.files[0];
     const filePath = `RoomsImages/${n}`;
@@ -52,37 +56,57 @@ export class EnterpriseRegisterComponent implements OnInit {
       this.fields = data;
     })
   }
+
   registerForm = new FormGroup({
-    nameEnterprise: new FormControl("", [Validators.required,Validators.pattern("^[a-zA-Z0-9]*$")]),
-    codeConfirmEnterprise: new FormControl("", [Validators.required,Validators.pattern("^[0-9]+")]),
-    gmailEnterprise: new FormControl("", [Validators.required,Validators.pattern("^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$")]),
-    imgEnterprise: new FormControl(""),
+    nameEnterprise: new FormControl("", Validators.required),
+    codeConfirmEnterprise: new FormControl("", Validators.required),
+    gmailEnterprise: new FormControl("", Validators.required),
+    imgEnterprise: new FormControl("", Validators.required),
     addressMainEnterprise: new FormControl("", Validators.required),
     idField: new FormControl(),
     describeEnterprise: new FormControl("", Validators.required),
   })
+
   register() {
-    this.registerForm.get("imgEnterprise")?.setValue(this.fb);
-    if(this.registerForm.value.imgEnterprise!==""){
-      let filed = this.registerForm.value;
-      let filedNew = {
-        nameEnterprise: filed.nameEnterprise,
-        codeConfirmEnterprise: filed.codeConfirmEnterprise,
-        gmailEnterprise: filed.gmailEnterprise,
-        imgEnterprise: filed.imgEnterprise,
-        addressMainEnterprise: filed.addressMainEnterprise,
-        describeEnterprise: filed.describeEnterprise,
-        fieldEnterprise: {
-          idField: filed.idField
-        }
+    let filed = this.registerForm.value;
+    let filedNew = {
+      nameEnterprise: filed.nameEnterprise,
+      codeConfirmEnterprise: filed.codeConfirmEnterprise,
+      gmailEnterprise: filed.gmailEnterprise,
+      imgEnterprise: filed.imgEnterprise,
+      addressMainEnterprise: filed.addressMainEnterprise,
+      describeEnterprise: filed.describeEnterprise,
+      fieldEnterprise: {
+        idField: filed.idField
       }
-      this.loginService.register(filedNew).subscribe(() => {
-        alert("Đăng ký thành công !");
-        this.router.navigate([""])
-      })
-    }else {
-        alert("Vui lòng đợi ảnh được load !");
+    }
+    this.loginService.register(filedNew).subscribe(() => {
+      alert("Đăng ký thành công !");
+      this.router.navigate([""])
+    })
+  }
+
+
+
+
+checkEmailE(){
+  let email=this.registerForm.value.gmailEnterprise
+  console.log("email")
+  console.log(email)
+  this.checkEmail=true;
+  for (let i = 0; i < this.appUser.length; i++) {
+    if (email==this.appUser[i].email){
+      this.checkEmail=false
+      break;
     }
   }
+  for (let i = 0; i < this.enterprise.length; i++) {
+    if (email===this.enterprise[i].gmailEnterprise){
+      this.checkEmail=false
+      break;
+    }
+  }
+  console.log(this.checkEmail)
+}
 
 }

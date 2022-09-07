@@ -48,12 +48,18 @@ export class MainEnterpriseComponent implements OnInit {
     this.enterpriseLoginFunction();
     this.enterpriseService.findAllFormJob().subscribe((data) => {
       this.listFormJob = data;
+      console.log("find all form job")
+      console.log(data)
     })
     this.enterpriseService.findAllRegime().subscribe((data) => {
       this.listRegime = data;
+      console.log("find all regime")
+      console.log(data)
     })
     this.loginService.findAllField().subscribe((data) => {
       this.listField = data;
+      console.log("fimd all field")
+      console.log(data)
     })
   }
 
