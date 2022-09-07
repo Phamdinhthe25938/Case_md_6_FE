@@ -203,7 +203,7 @@
               </li>
             </ul>
             <ul class="nav navbar-nav navbar-right float-right">
-              <li style="cursor: pointer" class="left"><a ><i class="ti-pencil-alt"></i>Tạo CV</a></li>
+              <li data-toggle="modal" data-target="#CreateCv" style="cursor: pointer" class="left"><a ><i class="ti-pencil-alt" ></i>Tạo CV</a></li>
               <li class="right"><a href="" routerLink="login"><i class="ti-lock"></i>Log In</a></li>
             </ul>
           </div>
@@ -428,6 +428,8 @@
                   </div>
                 </div>
 <!--                -->
+                <a  style="margin-right: 20px"  class="btn btn-common btn-rm">Apply</a>
+                <a  class="btn btn-common btn-rm" style="background-color: black;">Chi tiết</a>
               </div>
             </div>
           </div>
@@ -436,7 +438,6 @@
       </div>
       <div class="col-md-12">
         <div class="showing pull-left">
-          <a href="#">Showing <span>6-10</span> Of 24 Jobs</a>
         </div>
         <ul class="pagination pull-right">
           <li class="active"><a href="#" class="btn btn-common" ><i class="ti-angle-left"></i> prev</a></li>
@@ -939,8 +940,50 @@
   <i class="ti-arrow-up"></i>
 </a>
 
-
-
+<div class="container">
+  <!-- Trigger the modal with a button --><!-- Modal -->
+  <div  class="modal" id="CreateCv">
+    <div class="modal-dialog">
+      <!-- Modal content-->
+      <form style="width: 800px" [formGroup]="saveCvForm" (ngSubmit)="saveCV()">
+        <div  class="modal-content" style="position: relative;right: 95px;background: aliceblue;">
+          <div class="modal-header" >
+            <div style="display: flex;flex-direction: column">
+              <h4 class="modal-title" style="text-align: center;font-weight: 800;color: red;font-size: 26px">Tạo CV</h4>
+            </div>
+<!--            <button type="button" class="close" data-dismiss="modal">X</button>-->
+          </div>
+          <div class="modal-body" style="display: flex" >
+           <div  style="width: 50%">
+             <div class="form-group" >
+               <label style="padding-left: 10px; margin-bottom: 9px;font-size: 18px;" for="username1" class="text-info">Họ và tên </label><br>
+               <input type="text" value=""formControlName="name"id="username1" class="form-control" style="border-radius: 12px">
+             </div>
+             <div class="form-group">
+               <label style="padding-left: 10px; margin-bottom: 9px;font-size: 18px;" for="username2" class="text-info">Gmail :</label><br>
+               <input type="mail" min="5"formControlName="mail"  id="username2" class="form-control" style="border-radius: 12px">
+             </div>
+             <div class="form-group">
+               <label style="    padding-left: 10px; margin-bottom: 9px;font-size: 18px;" for="username23" class="text-info">Số điện thoại</label><br>
+               <input type="mail" min="5" formControlName="telephone"  id="username23" class="form-control" style="border-radius: 12px">
+             </div>
+           </div>
+            <div style="display:flex;flex-direction: column;align-items: center;justify-content: center;width: 50%">
+              <img style="width:300px;height: 300px;border-radius: 50%" src="{{fb}}" alt="">
+              <div class="form-group" style="margin-top: 15px">
+                <label  class="btn btn-primary" style="cursor: pointer;color: #fff;padding: 10px;margin-bottom: 9px;font-size: 18px;background-color: darkseagreen;border-radius: 7px;" class="text-info">Up Cv</label><br>
+                <input type="file"  #userPhoto (change)="upImgCv({event : $event})" name="image" autocomplete="off"  id="file" class="form-control" style="border-radius: 12px;color: black;background-color: black">
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer" style="display:flex;justify-content: left">
+            <button type="submit" style="left: 18px;font-weight: 600" class="btn btn-primary">Tạo ngay</button>
+          </div>
+        </div>
+      </form>
+  </div>
+</div>
+</div>
 <!-- Main JS  -->
 <script type="text/javascript" src="/assets/user/js/jquery-min.js"></script>
 <script type="text/javascript" src="/assets/user/js/bootstrap.min.js"></script>
