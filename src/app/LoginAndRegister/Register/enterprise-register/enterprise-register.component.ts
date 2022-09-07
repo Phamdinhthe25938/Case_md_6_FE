@@ -21,7 +21,7 @@ export class EnterpriseRegisterComponent implements OnInit {
   fb: string = "";
   downloadURL: Observable<string> | undefined;
   constructor(private loginService: LoginService,private router :Router,private storage: AngularFireStorage) {}
-  onFileSelected({event}: { event: any }) {
+  onFileSelected({event}: { event: any }){
     var n = Date.now();
     const file = event.target.files[0];
     const filePath = `RoomsImages/${n}`;
@@ -53,9 +53,9 @@ export class EnterpriseRegisterComponent implements OnInit {
     })
   }
   registerForm = new FormGroup({
-    nameEnterprise: new FormControl("", Validators.required),
-    codeConfirmEnterprise: new FormControl("", Validators.required),
-    gmailEnterprise: new FormControl("", Validators.required),
+    nameEnterprise: new FormControl("", [Validators.required,Validators.pattern("^[a-zA-Z0-9]*$")]),
+    codeConfirmEnterprise: new FormControl("", [Validators.required,Validators.pattern("^[0-9]+")]),
+    gmailEnterprise: new FormControl("", [Validators.required,Validators.pattern("^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$")]),
     imgEnterprise: new FormControl(""),
     addressMainEnterprise: new FormControl("", Validators.required),
     idField: new FormControl(),
@@ -63,23 +63,26 @@ export class EnterpriseRegisterComponent implements OnInit {
   })
   register() {
     this.registerForm.get("imgEnterprise")?.setValue(this.fb);
-    let filed = this.registerForm.value;
-    let filedNew = {
-      nameEnterprise: filed.nameEnterprise,
-      codeConfirmEnterprise: filed.codeConfirmEnterprise,
-      gmailEnterprise: filed.gmailEnterprise,
-      imgEnterprise: filed.imgEnterprise,
-      addressMainEnterprise: filed.addressMainEnterprise,
-      describeEnterprise: filed.describeEnterprise,
-      fieldEnterprise: {
-        idField: filed.idField
+    if(this.registerForm.value.imgEnterprise!==""){
+      let filed = this.registerForm.value;
+      let filedNew = {
+        nameEnterprise: filed.nameEnterprise,
+        codeConfirmEnterprise: filed.codeConfirmEnterprise,
+        gmailEnterprise: filed.gmailEnterprise,
+        imgEnterprise: filed.imgEnterprise,
+        addressMainEnterprise: filed.addressMainEnterprise,
+        describeEnterprise: filed.describeEnterprise,
+        fieldEnterprise: {
+          idField: filed.idField
+        }
       }
+      this.loginService.register(filedNew).subscribe(() => {
+        alert("Đăng ký thành công !");
+        this.router.navigate([""])
+      })
+    }else {
+        alert("Vui lòng đợi ảnh được load !");
     }
-    this.loginService.register(filedNew).subscribe(() => {
-      alert("Đăng ký thành công !");
-      this.router.navigate([""])
-    })
   }
-
 
 }

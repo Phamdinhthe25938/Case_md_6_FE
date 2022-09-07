@@ -4,6 +4,7 @@ import {Enterprise} from "../../model/Enterprise";
 import {Router} from "@angular/router";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {EnterpriseService} from "../../services/enterprise/enterprise.service";
+import {LoginService} from "../../services/login/login.service";
 
 @Component({
   selector: 'app-mainEnterprise',
@@ -15,7 +16,7 @@ export class MainComponent implements OnInit {
   enterprisesConfirm!: Enterprise[];
   enterpriseDeltail!: Enterprise;
 
-  constructor(private adminService:AdminService,private router:Router,private enterpriseService:EnterpriseService) {
+  constructor(private adminService:AdminService,private router:Router,private enterpriseService:EnterpriseService,private loginService:LoginService) {
 
   }
 
@@ -28,7 +29,10 @@ export class MainComponent implements OnInit {
       this.enterprisesConfirm=data;
     })
   }
-
+  logout(){
+      this.loginService.logout();
+      this.router.navigate(["/login"])
+  }
   toTurnoverComponet(){
     this.router.navigate(["/turnover"]);
   }

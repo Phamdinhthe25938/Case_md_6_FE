@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {Router} from "@angular/router";
 import {AdminService} from "../../services/admin/admin.service";
 import {TransactionHistory} from "../../model/TransactionHistory";
@@ -13,62 +13,67 @@ import {Enterprise} from "../../model/Enterprise";
 })
 export class TurnoverComponent implements OnInit {
 
-  constructor(private router: Router, private adminService: AdminService, private enterpriseService: EnterpriseService) {
-  }
+  constructor(private router:Router,private adminService:AdminService,private enterpriseService:EnterpriseService) { }
 
-  transactionHistoryS !: TransactionHistory[];
+  transactionHistoryS !:TransactionHistory[];
 
-  postVipByEnterpriseS!: PostEnterprise[];
-  postThuongByEnterpriseS!: PostEnterprise[];
-  enterpriseOderByRates!: Enterprise[];
+  transactionHistoryNowS !:TransactionHistory[];
+  postVipByEnterpriseS!:PostEnterprise[];
+  postThuongByEnterpriseS!:PostEnterprise[];
+  enterpriseOderByRates!:Enterprise[];
 
-  totalMoneyTransaction!: number;
+  totalMoneyTransaction!:number;
 
   ngOnInit(): void {
     this.totalTransaction();
     this.listTransactionHistory();
+    // this.listTransactionHistoryByDateNow();
     this.listEnterpriseOderByRates();
   }
-
-  toTableComponent() {
-    this.router.navigate(["/admin"])
+  toTableComponent(){
+      this.router.navigate(["/admin"])
   }
-
-  listTransactionHistory() {
-    this.adminService.listTransactionHistory().subscribe((data) => {
-      this.transactionHistoryS = data;
+  listTransactionHistory(){
+    this.adminService.listTransactionHistory().subscribe((data)=>{
+        this.transactionHistoryS=data;
     })
   }
-
-  listEnterpriseOderByRates() {
-    this.adminService.listEnterpriseOderByRates().subscribe((data) => {
-      this.enterpriseOderByRates = data;
+  listEnterpriseOderByRates(){
+    this.adminService.listEnterpriseOderByRates().subscribe((data)=>{
+      this.enterpriseOderByRates=data;
     })
   }
-
-  listPostVipByEnterprise(id: number) {
-    this.enterpriseService.listPostVipByEnterprise(id).subscribe((data) => {
-      this.postVipByEnterpriseS = data;
-    })
+  listTransactionHistoryByDateNow(){
+      this.adminService.listTransactionHistoryByDateNow().subscribe((data)=>{
+          this.transactionHistoryNowS =data;
+      })
+  }
+  listPostVipByEnterprise(id:number){
+      this.enterpriseService.listPostVipByEnterprise(id).subscribe((data)=>{
+           this.postVipByEnterpriseS =data;
+      })
 
   }
-
-  listPostThuongEnterprise(id: number) {
-    this.enterpriseService.listPostThuongByEnterprise(id).subscribe((data) => {
-      this.postThuongByEnterpriseS = data;
+  listPostThuongEnterprise(id:number){
+    this.enterpriseService.listPostThuongByEnterprise(id).subscribe((data)=>{
+         this.postThuongByEnterpriseS =data;
     })
   }
-
-  totalTransaction() {
-    this.adminService.totalTransaction().subscribe((data) => {
-      this.totalMoneyTransaction = data;
-    })
+  totalTransaction(){
+     this.adminService.totalTransaction().subscribe((data)=>{
+           this.totalMoneyTransaction=data;
+     })
   }
-
-  statusPost(id: number) {
-    this.enterpriseService.statusPost(id).subscribe((data) => {
-      this.statusPost = data;
-    })
+  transactionDateNow(){
+       // @ts-ignore
+    document.getElementById("transactionDateNow").style.display="block";
+    // @ts-ignore
+    document.getElementById("transactionALL").style.display="none";
   }
-
+  transactionAll(){
+    // @ts-ignore
+    document.getElementById("transactionDateNow").style.display="none";
+    // @ts-ignore
+    document.getElementById("transactionALL").style.display="block";
+  }
 }
