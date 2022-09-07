@@ -23,6 +23,7 @@ export class MainEnterpriseComponent implements OnInit {
   listField!: Field[];
   listPostByIdEnterprise!:PostEnterprise[];
   postEnterpriseKey!: PostEnterprise;
+  postEdit!: Enterprise;
   constructor(private router:Router, private enterpriseService: EnterpriseService, private loginService: LoginService) {
   }
   logout(){
@@ -275,5 +276,11 @@ export class MainEnterpriseComponent implements OnInit {
           })
         }
     })
+  }
+  editPost(id:number){
+    this.enterpriseService.findPostById(id).subscribe((data)=>{
+      this.postEdit=data;
+    })
+
   }
 }
