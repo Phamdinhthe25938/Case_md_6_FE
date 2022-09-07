@@ -11,7 +11,7 @@ import {LoginService} from "../../services/login/login.service";
   templateUrl: './main.component.html',
   styleUrls: ['./main.component.css']
 })
-export class MainComponent implements OnInit {
+export class MainComponent implements OnInit{
   enterprisesNotConfirm !: Enterprise[];
   enterprisesConfirm!: Enterprise[];
   enterpriseDeltail!: Enterprise;

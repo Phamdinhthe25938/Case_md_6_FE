@@ -8,6 +8,8 @@ import {finalize, Observable} from "rxjs";
 import {Field} from "../../model/Field";
 import {AngularFireStorage} from "@angular/fire/compat/storage";
 import {Router} from "@angular/router";
+import {CvUser} from "../../model/CvUser";
+import {doc} from "@angular/fire/firestore";
 
 @Component({
   selector: 'app-homepage',
@@ -20,17 +22,25 @@ export class HomepageComponent implements OnInit {
   title = "cloudsSorage";
   fb: string = "";
   downloadURL: Observable<string> | undefined;
-  constructor(private router:Router,private userService :UserService,private storage: AngularFireStorage,private loginService:LoginService,private allService:AllService) { }
 
-  postEnterpriseOffer!:PostEnterprise[];
-  ngOnInit(): void {
-     this.listPostByOderPriority();
+  constructor(private router: Router, private userService: UserService, private storage: AngularFireStorage, private loginService: LoginService, private allService: AllService) {
   }
-  logout(){
+
+  postEnterpriseDetail!: PostEnterprise;
+  postEnterpriseOffer!: PostEnterprise[];
+  cvByUser!: CvUser;
+
+  ngOnInit(): void {
+    this.listPostByOderPriority();
+    this.findCvByIdUser();
+  }
+
+  logout() {
     this.loginService.logout();
     this.router.navigate(["/login"]);
   }
-  onFileSelected({event}: { event: any }){
+
+  onFileSelected({event}: { event: any }) {
     var n = Date.now();
     const file = event.target.files[0];
     const filePath = `RoomsImages/${n}`;
@@ -55,41 +65,102 @@ export class HomepageComponent implements OnInit {
         }
       });
   }
-  listPostByOderPriority(){
-      return this.userService.listPostByOderPriority().subscribe((data)=>{
-             this.postEnterpriseOffer=data;
-      })
+
+  listPostByOderPriority() {
+    return this.userService.listPostByOderPriority().subscribe((data) => {
+      this.postEnterpriseOffer = data;
+    })
   }
+
   saveCvForm = new FormGroup({
-    name: new FormControl("",[Validators.required,Validators.pattern("[A-Za-z]+")]),
-    telephone: new FormControl("", [Validators.required,Validators.pattern("^0[0-9]+")]),
-    mail : new FormControl("", [Validators.required,Validators.pattern("^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$")]),
-    imgCV:new FormControl()
+    name: new FormControl("", [Validators.required, Validators.pattern("[A-Za-z]+")]),
+    telephone: new FormControl("", [Validators.required, Validators.pattern("^0[0-9]+")]),
+    mail: new FormControl("", [Validators.required, Validators.pattern("^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$")]),
+    imgCV: new FormControl()
   })
-  async saveCV(){
-      if(this.saveCvForm.valid){
-        this.saveCvForm.get("imgCV")?.setValue(this.fb);
-          let idLogin = this.loginService.getUserToken().id;
-          if(this.saveCvForm.value.imgCV===""){
-               alert("Vui lòng upload Cv")
-          }else{
-            let cvFormValue = this.saveCvForm.value;
-            let Cv={
-              name: cvFormValue.name,
-              telephone:cvFormValue.telephone,
-              mail:cvFormValue.mail,
-              imgCV:cvFormValue.imgCV,
-              appUser:{
-                id: idLogin
-              }
-            }
-            this.userService.saveCv(Cv).subscribe(()=>{
-              alert("ok la");
-            })
-          }
-      }else{
-        alert("Lỗi Form!");
+
+  saveCV() {
+    let idLogin = this.loginService.getUserToken().id;
+    this.userService.findCvByIdUser(idLogin).subscribe((data)=>{
+      if(data!=null){
+        if(this.saveCvForm.valid){
+          this.saveChangeCV(idLogin);
+        }
+        else {
+          alert("Lỗi form")
+        }
+      }else {
+        if(this.saveCvForm.valid){
+          this.saveCvNew(idLogin);
+        }
+        else {
+          alert("Lỗi form")
+        }
       }
+  })
+}
+  saveCvNew(idLogin:number){
+    this.saveCvForm.get("imgCV")?.setValue(this.fb);
+    if (this.saveCvForm.value.imgCV === "") {
+      alert("Vui lòng upload Cv")
+    } else {
+      let cvFormValue = this.saveCvForm.value;
+      let Cv = {
+        name: cvFormValue.name,
+        telephone: cvFormValue.telephone,
+        mail: cvFormValue.mail,
+        imgCV: cvFormValue.imgCV,
+        appUser: {
+          id: idLogin
+        }
+      }
+      this.userService.saveCv(Cv).subscribe(() => {
+        alert("ok la");
+      })
+    }
+  }
+  saveChangeCV(idLogin:number) {
+    this.saveCvForm.get("imgCV")?.setValue(this.fb);
+    if (this.saveCvForm.value.imgCV === "") {
+      alert("Vui lòng  upload Cv")
+    } else {
+      let cv = this.saveCvForm.value;
+      let Cv = {
+        id: this.cvByUser.id,
+        name: cv.name,
+        telephone: cv.telephone,
+        mail: cv.mail,
+        imgCV: cv.imgCV,
+        appUser: {
+          id: idLogin
+        }
+      }
+      this.userService.saveCv(Cv).subscribe(() => {
+        alert("Lưu thay đổi thành công");
+      })
+    }
+  }
+  postDetail(id: number) {
+    this.userService.postDetail(id).subscribe((data) => {
+      this.postEnterpriseDetail = data;
+    })
+  }
+
+  findCvByIdUser() {
+    let id = this.loginService.getUserToken().id;
+    this.userService.findCvByIdUser(id).subscribe((data) => {
+      if (data != null) {
+        this.cvByUser = data;
+        this.fb = this.cvByUser.imgCV;
+        this.saveCvForm.get("name")?.setValue(this.cvByUser.name);
+        this.saveCvForm.get("telephone")?.setValue(this.cvByUser.telephone);
+        this.saveCvForm.get("mail")?.setValue(this.cvByUser.mail);
+        // @ts-ignore
+        document.getElementById('saveChangeCV').style.display = "block";
+        // @ts-ignore
+        document.getElementById('confirmCv').style.display = "none";
+      }
+    })
   }
 }
 
