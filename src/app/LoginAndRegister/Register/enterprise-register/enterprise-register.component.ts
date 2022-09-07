@@ -1,16 +1,13 @@
 import {Component, OnInit} from '@angular/core';
 import {LoginService} from "../../../services/login/login.service";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
+import {AdminService} from "../../../services/admin/admin.service";
 import {Enterprise} from "../../../model/Enterprise";
 import {Field} from "../../../model/Field";
-import {finalize, Observable} from "rxjs";
-import {AngularFireStorage} from "@angular/fire/compat/storage";
-
-
 import {Router} from "@angular/router";
+import { AngularFireStorage } from '@angular/fire/compat/storage';
+import {finalize, Observable} from "rxjs";
 import {AppUser} from "../../../model/AppUser";
-
-
 @Component({
   selector: 'app-enterprise-register',
   templateUrl: './enterprise-register.component.html',
@@ -18,17 +15,17 @@ import {AppUser} from "../../../model/AppUser";
 })
 export class EnterpriseRegisterComponent implements OnInit {
   enterpriseDeltal!: Enterprise;
-  fb:any;
-  downloadURL: Observable<string> | undefined;
+
   fields!: Field[];
   appUser!: AppUser[];
   enterprise!: Enterprise[];
   checkUsername!: boolean ;
   checkEmail!: boolean
-  constructor(private loginService: LoginService,private storage: AngularFireStorage,private router :Router) {
-  }
-
-  onFileSelected({event}: { event: any }){
+  title = "cloudsSorage";
+  fb: string = "";
+  downloadURL: Observable<string> | undefined;
+  constructor(private loginService: LoginService,private router :Router,private storage: AngularFireStorage) {}
+  onFileSelected({event}: { event: any }) {
     var n = Date.now();
     const file = event.target.files[0];
     const filePath = `RoomsImages/${n}`;
@@ -55,28 +52,22 @@ export class EnterpriseRegisterComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.checkEmail=true;
     this.loginService.findAllField().subscribe((data) => {
       this.fields = data;
     })
-      this.loginService.findAllEnterprise().subscribe((data) => {
-        this.enterprise = data;
-      });
-      this.loginService.findAllUser().subscribe((data) => {
-        this.appUser = data;
-      });
   }
+
   registerForm = new FormGroup({
     nameEnterprise: new FormControl("", Validators.required),
     codeConfirmEnterprise: new FormControl("", Validators.required),
     gmailEnterprise: new FormControl("", Validators.required),
-    imgEnterprise: new FormControl(""),
+    imgEnterprise: new FormControl("", Validators.required),
     addressMainEnterprise: new FormControl("", Validators.required),
     idField: new FormControl(),
     describeEnterprise: new FormControl("", Validators.required),
   })
+
   register() {
-    this.registerForm.get("imgEnterprise")?.setValue(this.fb);
     let filed = this.registerForm.value;
     let filedNew = {
       nameEnterprise: filed.nameEnterprise,

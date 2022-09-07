@@ -11,7 +11,6 @@ import {ReactiveFormsModule} from "@angular/forms";
 import {AngularFireStorageModule} from "@angular/fire/compat/storage";
 import {AngularFireModule} from "@angular/fire/compat";
 import {environment} from "../environments/environment";
-import { RegisterComponent } from './LoginAndRegister/Register/register/register.component';
 
 
 
@@ -21,7 +20,6 @@ import { RegisterComponent } from './LoginAndRegister/Register/register/register
     UserRegisterComponent,
     EnterpriseRegisterComponent,
     LoginComponent,
-    RegisterComponent,
 
   ],
   imports: [
@@ -31,7 +29,6 @@ import { RegisterComponent } from './LoginAndRegister/Register/register/register
     ReactiveFormsModule,
     AngularFireStorageModule,
     AngularFireModule.initializeApp(environment.firebaseConfig, "cloud")
-
   ],
   providers: [],
   bootstrap: [AppComponent]

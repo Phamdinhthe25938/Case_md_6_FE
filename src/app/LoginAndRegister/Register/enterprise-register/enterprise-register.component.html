@@ -6,7 +6,7 @@
   <div class="container py-5 h-100" style="padding: 40px;background: azure">
     <div class="row d-flex justify-content-center align-items-center h-100">
       <div class="col">
-        <div class="card card-registration my-4">
+        <div class="card card-registration my-4" style="width: 1200px">
           <div class="row g-0" style="display:flex;">
             <div style="width: 40%" class="col-xl-3  d-none d-xl-block">
               <img  src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-registration/img4.webp"
@@ -22,7 +22,7 @@
                     <div class="col-md-6 mb-4">
                       <div class="form-outline">
                         <label class="form-label" for="form3Example1m">Tên doanh nghiệp</label>
-                        <input type="text" id="form3Example1m" formControlName="nameEnterprise" class="form-control ">
+                        <input type="text" id="form3Example1m" formControlName="nameEnterprise" class="form-control " />
                       </div>
                       <p *ngIf="!registerForm.get('nameEnterprise')?.valid && registerForm.get('nameEnterprise')?.touched" style="color: red">Không được để trống</p>
                     </div>
@@ -38,15 +38,14 @@
                     <div class="col-md-6 mb-4">
                       <div class="form-outline">
                         <label class="form-label"   for="form3Example1m12">Email doanh nghiệp</label>
-                        <input type="text" formControlName="gmailEnterprise"id="form3Example1m12" class="form-control form-control-lg" (change)="checkEmailE()" />
+                        <input type="text" formControlName="gmailEnterprise"id="form3Example1m12" class="form-control form-control-lg" />
                       </div>
-                      <p *ngIf="!checkEmail" style="color: red">Email đã tồn tại</p>
                       <p *ngIf="!registerForm.get('gmailEnterprise')?.valid && registerForm.get('gmailEnterprise')?.touched" style="color: red">Không được để trống</p>
 
                     </div>
                     <div class="col-md-6 mb-4">
                       <div class="form-outline">
-                        <label class="form-label" >Ảnh đại diện</label>
+                        <label class="form-label" for="file">Ảnh đại diện</label>
                         <input type="file" id="file" #userPhoto (change)="onFileSelected({event : $event})" name="image" autocomplete="off"  class="form-control form-control-lg" />
                       </div>
                       <p *ngIf="!registerForm.get('imgEnterprise')?.valid && registerForm.get('imgEnterprise')?.touched" style="color: red">Không được để trống</p>
