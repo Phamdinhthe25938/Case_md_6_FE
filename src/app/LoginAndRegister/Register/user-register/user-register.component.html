@@ -19,7 +19,7 @@
               <label for="password" class="text-info">Password:</label><br>
               <input type="text" name="password" id="password" class="form-control" formControlName="password">
             </div>
-            <p *ngIf="!registerUserForm.get('password')?.valid && registerUserForm.get('password')?.touched" style="color: red">Không được để trống</p>
+            <p *ngIf="!registerUserForm.get('password')?.valid && registerUserForm.get('password')?.touched" style="color: red;margin: 0">Không được để trống</p>
             <div class="form-group">
               <label for="passwordAgain" class="text-info">Password again:</label><br>
               <input type="text" name="password" id="passwordAgain" class="form-control" formControlName="password">

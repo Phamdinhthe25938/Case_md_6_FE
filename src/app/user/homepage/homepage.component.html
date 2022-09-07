@@ -204,7 +204,7 @@
             </ul>
             <ul class="nav navbar-nav navbar-right float-right">
               <li data-toggle="modal" data-target="#CreateCv" style="cursor: pointer" class="left"><a ><i class="ti-pencil-alt" ></i>Tạo CV</a></li>
-              <li class="right"><a href="" routerLink="login"><i class="ti-lock"></i>Log In</a></li>
+              <li class="right"><a style="cursor: pointer" (click)="logout()" ><i class="ti-lock"></i>Log In</a></li>
             </ul>
           </div>
         </div>
@@ -386,8 +386,49 @@
                 <div class="icon">
                   <i class="ti-heart"></i>
                 </div>
-                <a  style="margin-right: 20px"  class="btn btn-common btn-rm">Apply</a>
-                <a  class="btn btn-common btn-rm" style="background-color: black;">Chi tiết</a>
+<!--                <a  class="btn btn-common btn-rm" data-toggle="modal" data-target="#PostDetail">Chi tiết</a>-->
+                <!-- Modal -->
+                <div class="modal fade" id="PostDetail" tabindex="-1" role="dialog" aria-labelledby="PostDetail" aria-hidden="true">
+                  <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">{{a.namePostEnterprise}}</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">
+                        <table>
+                          <th>
+                            <tr style="align-items: center"><a><img style="width: 100px" src="{{a.enterprise.imgEnterprise}}" alt=""></a></tr>
+                            <tr><h5 style="color: #FD003A">{{a.enterprise.nameEnterprise}}</h5></tr>
+                          </th>
+                          <th class="col-lg-4 col-sm-6 item-blue">
+                        <tr>Địa điểm: {{a.addressMainEnterprise}}</tr>
+                        <tr>Ngành nghề: {{a.field.nameField}}</tr>
+                        <tr>Hình thức: {{a.formJobPostEnterprise.nameFormJob}}</tr>
+                          </th>
+                          <th class="col-lg-4 col-sm-6 item-blue">
+                        <tr>Lương: {{a.salarySmallPostEnterprise}} tr - {{a.salaryBigPostEnterprise}} tr</tr>
+                        <tr>Vị trí: {{a.vacanciesPostEnterprise}}</tr>
+                        <tr>Hạn ứng tuyển: {{a.expirationDatePostEnterprise}}</tr>
+                          </th>
+                        </table>
+                      </div>
+                      <div class="modal-body">
+                        <h3> Mô tả công việc</h3>
+                      <div>{{a.describePostEnterprise}}
+                      </div>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+<!--                -->
+                <a  style="margin-right: 20px"  class="btn btn-common btn-rm" data-toggle="modal" data-target="#myModal">Apply</a>
+                <a  class="btn btn-common btn-rm" style="background-color: black;" data-toggle="modal" data-target="#PostDetail">Chi tiết</a>
               </div>
             </div>
           </div>
@@ -927,10 +968,10 @@
              </div>
            </div>
             <div style="display:flex;flex-direction: column;align-items: center;justify-content: center;width: 50%">
-              <img style="width:300px;height: 300px;border-radius: 50%" src="{{fb}}" alt="">
+              <img id="imgCV" style="width:300px;height: 300px;border-radius: 50%" src="{{fb}}"alt="">
               <div class="form-group" style="margin-top: 15px">
-                <label  class="btn btn-primary" style="cursor: pointer;color: #fff;padding: 10px;margin-bottom: 9px;font-size: 18px;background-color: darkseagreen;border-radius: 7px;" class="text-info">Up Cv</label><br>
-                <input type="file"  #userPhoto (change)="upImgCv({event : $event})" name="image" autocomplete="off"  id="file" class="form-control" style="border-radius: 12px;color: black;background-color: black">
+                <label  class="btn btn-primary" style="cursor: pointer;color: #fff;width: 100px;text-align: center;padding: 10px;margin-bottom: 9px;font-size: 18px;background-color: cornflowerblue;border-radius: 7px;" class="text-info">Up Cv</label><br>
+                <input type="file"  #userPhoto (change)="onFileSelected({event : $event})" name="image" autocomplete="off"  id="file" class="form-control" style="border-radius: 12px;color: black;background-color: black">
               </div>
             </div>
           </div>
@@ -941,6 +982,26 @@
       </form>
   </div>
 </div>
+</div>
+<div class="modal" id="myModal">
+  <div class="modal-dialog">
+    <div class="modal-content" style="max-width: 455px;position: relative;left: 100px;">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title" style="display:inline-block;font-weight: 900">Xác thực</h4>
+        <button type="button" class="close" data-dismiss="modal">X</button>
+      </div>
+      <!-- Modal body -->
+      <div class="modal-body" style="font-size: 18px;color: red">
+        Bạn có chắc chắn Apply công việc này !
+      </div>
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" style="background-color: #FF4F57">Xác thức</button>
+      </div>
+    </div>
+  </div>
 </div>
 <!-- Main JS  -->
 <script type="text/javascript" src="/assets/user/js/jquery-min.js"></script>

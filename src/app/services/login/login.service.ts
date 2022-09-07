@@ -39,6 +39,10 @@ export class LoginService {
   findFieldById(id:number):Observable<Field>{
     return this.http.get<any>(`http://localhost:8080/register/find/${id}`);
   }
+  logout(){
+      localStorage.removeItem("userToken");
+      localStorage.removeItem("token");
+  }
   findAllUser():Observable<AppUser[]>{
     return this.http.get<any>("http://localhost:8080/register/checkUser");
   }

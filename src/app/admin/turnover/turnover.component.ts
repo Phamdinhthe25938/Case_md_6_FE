@@ -17,6 +17,7 @@ export class TurnoverComponent implements OnInit {
 
   transactionHistoryS !:TransactionHistory[];
 
+  transactionHistoryNowS !:TransactionHistory[];
   postVipByEnterpriseS!:PostEnterprise[];
   postThuongByEnterpriseS!:PostEnterprise[];
   enterpriseOderByRates!:Enterprise[];
@@ -26,6 +27,7 @@ export class TurnoverComponent implements OnInit {
   ngOnInit(): void {
     this.totalTransaction();
     this.listTransactionHistory();
+    // this.listTransactionHistoryByDateNow();
     this.listEnterpriseOderByRates();
   }
   toTableComponent(){
@@ -40,6 +42,11 @@ export class TurnoverComponent implements OnInit {
     this.adminService.listEnterpriseOderByRates().subscribe((data)=>{
       this.enterpriseOderByRates=data;
     })
+  }
+  listTransactionHistoryByDateNow(){
+      this.adminService.listTransactionHistoryByDateNow().subscribe((data)=>{
+          this.transactionHistoryNowS =data;
+      })
   }
   listPostVipByEnterprise(id:number){
       this.enterpriseService.listPostVipByEnterprise(id).subscribe((data)=>{
@@ -57,5 +64,16 @@ export class TurnoverComponent implements OnInit {
            this.totalMoneyTransaction=data;
      })
   }
-
+  transactionDateNow(){
+       // @ts-ignore
+    document.getElementById("transactionDateNow").style.display="block";
+    // @ts-ignore
+    document.getElementById("transactionALL").style.display="none";
+  }
+  transactionAll(){
+    // @ts-ignore
+    document.getElementById("transactionDateNow").style.display="none";
+    // @ts-ignore
+    document.getElementById("transactionALL").style.display="block";
+  }
 }
