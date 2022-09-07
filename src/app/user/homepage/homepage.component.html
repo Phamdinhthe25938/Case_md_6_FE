@@ -386,8 +386,49 @@
                 <div class="icon">
                   <i class="ti-heart"></i>
                 </div>
+<!--                <a  class="btn btn-common btn-rm" data-toggle="modal" data-target="#PostDetail">Chi tiết</a>-->
+                <!-- Modal -->
+                <div class="modal fade" id="PostDetail" tabindex="-1" role="dialog" aria-labelledby="PostDetail" aria-hidden="true">
+                  <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">{{a.namePostEnterprise}}</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">
+                        <table>
+                          <th>
+                            <tr style="align-items: center"><a><img style="width: 100px" src="{{a.enterprise.imgEnterprise}}" alt=""></a></tr>
+                            <tr><h5 style="color: #FD003A">{{a.enterprise.nameEnterprise}}</h5></tr>
+                          </th>
+                          <th class="col-lg-4 col-sm-6 item-blue">
+                        <tr>Địa điểm: {{a.addressMainEnterprise}}</tr>
+                        <tr>Ngành nghề: {{a.field.nameField}}</tr>
+                        <tr>Hình thức: {{a.formJobPostEnterprise.nameFormJob}}</tr>
+                          </th>
+                          <th class="col-lg-4 col-sm-6 item-blue">
+                        <tr>Lương: {{a.salarySmallPostEnterprise}} tr - {{a.salaryBigPostEnterprise}} tr</tr>
+                        <tr>Vị trí: {{a.vacanciesPostEnterprise}}</tr>
+                        <tr>Hạn ứng tuyển: {{a.expirationDatePostEnterprise}}</tr>
+                          </th>
+                        </table>
+                      </div>
+                      <div class="modal-body">
+                        <h3> Mô tả công việc</h3>
+                      <div>{{a.describePostEnterprise}}
+                      </div>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+<!--                -->
                 <a  style="margin-right: 20px"  class="btn btn-common btn-rm" data-toggle="modal" data-target="#myModal">Apply</a>
-                <a  class="btn btn-common btn-rm" style="background-color: black;">Chi tiết</a>
+                <a  class="btn btn-common btn-rm" style="background-color: black;" data-toggle="modal" data-target="#PostDetail">Chi tiết</a>
               </div>
             </div>
           </div>
@@ -917,17 +958,14 @@
                <label style="padding-left: 10px; margin-bottom: 9px;font-size: 18px;" for="username1" class="text-info">Họ và tên </label><br>
                <input type="text" value=""formControlName="name"id="username1" class="form-control" style="border-radius: 12px">
              </div>
-             <p *ngIf="!saveCvForm.get('name')?.valid && saveCvForm.get('name')?.touched" style="margin-left: 10px;;color: red">Dữ liệu không hợp lệ !</p>
              <div class="form-group">
                <label style="padding-left: 10px; margin-bottom: 9px;font-size: 18px;" for="username2" class="text-info">Gmail :</label><br>
                <input type="mail" min="5"formControlName="mail"  id="username2" class="form-control" style="border-radius: 12px">
              </div>
-             <p *ngIf="!saveCvForm.get('mail')?.valid && saveCvForm.get('mail')?.touched" style="    margin-left: 10px;;color: red">Dữ liệu không hợp lệ !</p>
              <div class="form-group">
                <label style="    padding-left: 10px; margin-bottom: 9px;font-size: 18px;" for="username23" class="text-info">Số điện thoại</label><br>
                <input type="mail" min="5" formControlName="telephone"  id="username23" class="form-control" style="border-radius: 12px">
              </div>
-             <p *ngIf="!saveCvForm.get('telephone')?.valid && saveCvForm.get('telephone')?.touched" style="    margin-left: 10px;color: red">Dữ liệu không hợp lệ !</p>
            </div>
             <div style="display:flex;flex-direction: column;align-items: center;justify-content: center;width: 50%">
               <img id="imgCV" style="width:300px;height: 300px;border-radius: 50%" src="{{fb}}"alt="">
@@ -964,6 +1002,7 @@
       </div>
     </div>
   </div>
+</div>
 <!-- Main JS  -->
 <script type="text/javascript" src="/assets/user/js/jquery-min.js"></script>
 <script type="text/javascript" src="/assets/user/js/bootstrap.min.js"></script>
@@ -981,4 +1020,3 @@
 <script type="text/javascript" src="/assets/user/js/contact-form-script.js"></script>
 <script type="text/javascript" src="/assets/user/js/jquery.themepunch.revolution.min.js"></script>
 <script type="text/javascript" src="/assets/user/js/jquery.themepunch.tools.min.js"></script>
-</div>

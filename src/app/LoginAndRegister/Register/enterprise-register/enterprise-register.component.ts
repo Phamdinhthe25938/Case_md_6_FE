@@ -16,7 +16,6 @@ import {finalize, Observable} from "rxjs";
 
 export class EnterpriseRegisterComponent implements OnInit {
   enterpriseDeltal!: Enterprise;
-
   fields!: Field[];
   title = "cloudsSorage";
   fb: string = "";
