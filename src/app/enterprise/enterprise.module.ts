@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { EnterpriseRoutingModule } from './enterprise-routing.module';
 import { MainEnterpriseComponent } from './main-enterprise/main-enterprise.component';
-import {ReactiveFormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {AppComponent} from "../app.component";
 
 
@@ -14,7 +14,8 @@ import {AppComponent} from "../app.component";
     imports: [
         CommonModule,
         EnterpriseRoutingModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        FormsModule
     ],
 })
 export class EnterpriseModule { }

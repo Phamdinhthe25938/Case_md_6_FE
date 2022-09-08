@@ -23,6 +23,7 @@ export class MainEnterpriseComponent implements OnInit {
   listField!: Field[];
   listPostByIdEnterprise!:PostEnterprise[];
   postEnterpriseKey!: PostEnterprise;
+  postEdit!:PostEnterprise;
   constructor(private router:Router, private enterpriseService: EnterpriseService, private loginService: LoginService) {
   }
   logout(){
@@ -280,4 +281,67 @@ export class MainEnterpriseComponent implements OnInit {
         }
     })
   }
+  editPost(id:number){
+    this.enterpriseService.findPostById(id).subscribe((data)=>{
+      this.postEdit=data;
+      this.editPostForm.get("namePostEnterpriseEdit")?.setValue(this.postEdit.namePostEnterprise);
+      this.editPostForm.get("addressMainEnterpriseEdit")?.setValue(this.postEdit.addressMainEnterprise);
+      this.editPostForm.get("salarySmallPostEnterpriseEdit")?.setValue(Number(this.postEdit.salarySmallPostEnterprise));
+      this.editPostForm.get("salaryBigPostEnterpriseEdit")?.setValue(this.postEdit.salaryBigPostEnterprise);
+      this.editPostForm.get("vacanciesPostEnterpriseEdit")?.setValue(this.postEdit.vacanciesPostEnterprise);
+      this.editPostForm.get("expirationDatePostEnterpriseEdit")?.setValue(String(this.postEdit.expirationDatePostEnterprise));
+      this.editPostForm.get("describePostEnterpriseEdit")?.setValue(this.postEdit.describePostEnterprise);
+    })
+
+
+
+
+  }
+
+  editPostForm = new FormGroup({
+    namePostEnterpriseEdit: new FormControl("", Validators.required),
+    addressMainEnterpriseEdit: new FormControl("", Validators.required),
+    idFieldEdit: new FormControl(),
+    idFormJobEdit: new FormControl(),
+    idRegimeEdit: new FormControl(),
+    salarySmallPostEnterpriseEdit: new FormControl(0, [Validators.required, Validators.min(0),Validators.pattern("^[0-9]+")]),
+    salaryBigPostEnterpriseEdit: new FormControl(0, [Validators.required, Validators.min(0),Validators.pattern("^[0-9]+")]),
+    vacanciesPostEnterpriseEdit: new FormControl("", Validators.required),
+    expirationDatePostEnterpriseEdit: new FormControl("", Validators.required),
+    describePostEnterpriseEdit: new FormControl("", Validators.required),
+  })
+
+  editPostConfim() {
+    console.log("ok ok")
+      let editPostForm = this.editPostForm.value;
+      let postEnterprise = {
+        idPostEnterprise:this.postEdit.idPostEnterprise,
+        namePostEnterprise: editPostForm.namePostEnterpriseEdit,
+        addressMainEnterprise: editPostForm.addressMainEnterpriseEdit,
+        field: {
+          idField: editPostForm.idFieldEdit
+        },
+        regime: {
+          idRegime: editPostForm.idRegimeEdit
+        },
+        formJobPostEnterprise: {
+          idFormJob: editPostForm.idFormJobEdit
+        },
+        salarySmallPostEnterprise: editPostForm.salarySmallPostEnterpriseEdit,
+        salaryBigPostEnterprise: editPostForm.salaryBigPostEnterpriseEdit,
+        vacanciesPostEnterprise: editPostForm.vacanciesPostEnterpriseEdit,
+        expirationDatePostEnterprise: editPostForm.expirationDatePostEnterpriseEdit,
+        describePostEnterprise: editPostForm.describePostEnterpriseEdit,
+        enterprise: {
+          idEnterprise: this.enterpriseLogin.idEnterprise,
+        }
+      }
+      this.enterpriseService.savePost(postEnterprise).subscribe(() => {
+        alert("Chỉnh sửa bài viết  thành công!")
+        this.getAllPostByEnterprise();
+      })
+    }
+
+
+
 }
