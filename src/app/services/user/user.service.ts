@@ -22,4 +22,11 @@ export class UserService {
   findCvByIdUser(id:number):Observable<any>{
     return this.http.get<any>(`http://localhost:8080/user/findCvByIdUser/${id}`);
   }
+  saveApplyJob(userApplyJob:any){
+    return this.http.post<any>(`http://localhost:8080/user/saveApplyJob`,userApplyJob);
+  }
+  findUserApplyByIdAppUserAndIdPost(idAppUser:number,idPost:number){
+    return this.http.get<any>(`http://localhost:8080/user/findUserApplyByIdAppUserAndIdPost/${idAppUser}/${idPost}`);
+
+  }
 }

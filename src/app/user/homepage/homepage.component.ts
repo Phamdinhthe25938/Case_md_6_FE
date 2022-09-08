@@ -10,6 +10,7 @@ import {AngularFireStorage} from "@angular/fire/compat/storage";
 import {Router} from "@angular/router";
 import {CvUser} from "../../model/CvUser";
 import {doc} from "@angular/fire/firestore";
+import {UserApply} from "../../model/UserApply";
 
 @Component({
   selector: 'app-homepage',
@@ -23,13 +24,15 @@ export class HomepageComponent implements OnInit {
   fb: string = "";
   downloadURL: Observable<string> | undefined;
 
+  idJobApply!:number;
+
   constructor(private router: Router, private userService: UserService, private storage: AngularFireStorage, private loginService: LoginService, private allService: AllService) {
   }
 
   postEnterpriseDetail!: PostEnterprise;
   postEnterpriseOffer!: PostEnterprise[];
   cvByUser!: CvUser;
-
+  cvByIdAppUserAndIdPost!:UserApply;
   ngOnInit(): void {
     this.listPostByOderPriority();
     this.findCvByIdUser();
@@ -137,6 +140,7 @@ export class HomepageComponent implements OnInit {
       }
       this.userService.saveCv(Cv).subscribe(() => {
         alert("Lưu thay đổi thành công");
+            this.findCvByIdUser();
       })
     }
   }
@@ -160,6 +164,36 @@ export class HomepageComponent implements OnInit {
         // @ts-ignore
         document.getElementById('confirmCv').style.display = "none";
       }
+    })
+  }
+  setIdJobApply(id:number){
+    this.idJobApply =id;
+  }
+  saveApply(){
+    let idLogin = this.loginService.getUserToken().id;
+       let jobApply={
+         appUser:{
+           id: idLogin,
+         },
+         postEnterprise:{
+           idPostEnterprise:this.idJobApply,
+         }
+       }
+       this.userService.saveApplyJob(jobApply).subscribe(()=>{
+           alert("apply công việc thành công ")
+           // this.findCvByIdUser();
+       })
+  }
+  findUserApplyByIdAppUserAndIdPost(){
+    let idPost = this.idJobApply;
+    let idLogin = this.loginService.getUserToken().id;
+    this.userService.findUserApplyByIdAppUserAndIdPost(idLogin,idPost).subscribe((data)=>{
+        this.cvByIdAppUserAndIdPost = data;
+         if(this.cvByIdAppUserAndIdPost===null){
+           this.saveApply();
+         }else {
+           alert("Với CV ĐANG CÓ BẠN ĐÃ APPLY CÔNG VIỆC NÀY XIN THAY ĐỔI CV");
+         }
     })
   }
 }

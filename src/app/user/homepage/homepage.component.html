@@ -391,7 +391,7 @@
                   <div class="modal-dialog" role="document">
                     <div class="modal-content">
                       <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">{{postEnterpriseDetail.namePostEnterprise}}</h5>
+                        <h5 class="modal-title" id="exampleModalLabel">{{postEnterpriseDetail?.namePostEnterprise}}</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                           <span aria-hidden="true">&times;</span>
                         </button>
@@ -399,24 +399,24 @@
                       <div class="modal-body">
                         <table>
                           <th>
-                            <tr style="align-items: center"><a><img style="width: 100px" src="{{postEnterpriseDetail.enterprise.imgEnterprise}}" alt=""></a></tr>
-                            <tr><h5 style="color: #FD003A;text-align: center;margin-top: 10px">{{postEnterpriseDetail.enterprise.nameEnterprise}}</h5></tr>
+                            <tr style="align-items: center"><a><img style="width: 100px" src="{{postEnterpriseDetail?.enterprise?.imgEnterprise}}" alt=""></a></tr>
+                            <tr><h5 style="color: #FD003A;text-align: center;margin-top: 10px">{{postEnterpriseDetail?.enterprise?.nameEnterprise}}</h5></tr>
                           </th>
                           <th class="col-lg-4 col-sm-6 item-blue">
-                        <tr>Địa điểm: {{postEnterpriseDetail.addressMainEnterprise}}</tr>
-                        <tr>Ngành nghề: {{postEnterpriseDetail.field.nameField}}</tr>
-                        <tr>Hình thức: {{postEnterpriseDetail.formJobPostEnterprise.nameFormJob}}</tr>
+                        <tr>Địa điểm: {{postEnterpriseDetail?.addressMainEnterprise}}</tr>
+                        <tr>Ngành nghề: {{postEnterpriseDetail?.field?.nameField}}</tr>
+                        <tr>Hình thức: {{postEnterpriseDetail?.formJobPostEnterprise?.nameFormJob}}</tr>
                           </th>
                           <th class="col-lg-4 col-sm-6 item-blue">
-                        <tr>Lương: {{postEnterpriseDetail.salarySmallPostEnterprise}} tr - {{a.salaryBigPostEnterprise}} tr</tr>
-                        <tr>Vị trí: {{postEnterpriseDetail.vacanciesPostEnterprise}}</tr>
-                        <tr>Hạn ứng tuyển: {{postEnterpriseDetail.expirationDatePostEnterprise}}</tr>
+                        <tr>Lương: {{postEnterpriseDetail?.salarySmallPostEnterprise}} tr - {{postEnterpriseDetail?.salaryBigPostEnterprise}} tr</tr>
+                        <tr>Vị trí: {{postEnterpriseDetail?.vacanciesPostEnterprise}}</tr>
+                        <tr>Hạn ứng tuyển: {{postEnterpriseDetail?.expirationDatePostEnterprise}}</tr>
                           </th>
                         </table>
                       </div>
                       <div class="modal-body">
                         <h3> Mô tả công việc</h3>
-                      <div>{{postEnterpriseDetail.describePostEnterprise}}
+                      <div>{{postEnterpriseDetail?.describePostEnterprise}}
                       </div>
                       </div>
                       <div class="modal-footer">
@@ -425,8 +425,8 @@
                     </div>
                   </div>
                 </div>
-<!--                -->
-                <a  style="margin-right: 20px"  class="btn btn-common btn-rm" data-toggle="modal" data-target="#myModal">Apply</a>
+<!-- -->
+                <a  style="margin-right: 20px"  class="btn btn-common btn-rm" (click)="setIdJobApply(a.idPostEnterprise)" data-toggle="modal" data-target="#myModal">Apply</a>
                 <a  class="btn btn-common btn-rm" (click)="postDetail(a.idPostEnterprise)" style="background-color: black;" data-toggle="modal" data-target="#PostDetail">Chi tiết</a>
               </div>
             </div>
@@ -1003,7 +1003,7 @@
       </div>
       <!-- Modal footer -->
       <div class="modal-footer">
-        <button id=""  type="button" class="btn btn-primary" style="background-color: #FF4F57">Xác thức</button>
+        <button id="" (click)="findUserApplyByIdAppUserAndIdPost()"  type="button" class="btn btn-primary" style="background-color: #FF4F57">Xác thức</button>
       </div>
     </div>
   </div>
