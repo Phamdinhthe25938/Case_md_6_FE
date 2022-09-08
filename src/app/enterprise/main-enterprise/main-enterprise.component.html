@@ -25,6 +25,10 @@ License: For each use you must have a valid license purchased only from above li
   <!--begin::Global Stylesheets Bundle(used by all pages)-->
   <link href="/assets/enterprise/plugins/global/plugins.bundle.css" rel="stylesheet" type="text/css" />
   <link href="/assets/enterprise/css/style.bundle.css" rel="stylesheet" type="text/css" />
+<!--thư viện edit doanh nghiệp-->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
 <div class="d-flex flex-column flex-root">
   <!--begin::Page-->
@@ -1780,6 +1784,27 @@ License: For each use you must have a valid license purchased only from above li
                           </div>
                           <!--begin::Description-->
                         </a>
+<!--                        Tuan: doi thong tin doanh nghiep-->
+                        <a  class="custom-list d-flex align-items-center px-5 py-4">
+                          <!--begin::Symbol-->
+                          <div class="symbol symbol-40px me-5">
+																<span class="symbol-label">
+                               <i style="color: black" class='fas fa-user-tie'></i>
+																</span>
+                          </div>
+                          <!--end::Symbol-->
+                          <!--begin::Description-->
+                          <div data-toggle="modal" data-target="#changeProfileEterprise" class="d-flex flex-column flex-grow-1">
+                            <!--begin::Title-->
+                            <h5 style="cursor: pointer" class="custom-list-title fw-bold text-gray-800 mb-1">Thông tin tài khoản</h5>
+                            <!--end::Title-->
+                            <!--begin::Link-->
+                            <span class="text-gray-400 fw-bold"></span>
+                            <!--end::Link-->
+                          </div>
+                          <!--begin::Description-->
+                        </a>
+<!--                        end tuan-->
                         <a  class="custom-list d-flex align-items-center px-5 py-4">
                           <!--begin::Symbol-->
                           <div class="symbol symbol-40px me-5">
@@ -6181,12 +6206,94 @@ License: For each use you must have a valid license purchased only from above li
   </div>
 
 </div>
+
+<!--tuan modal doi thong tin doanh nghiep-->
+<div class="container" >
+<!-- Modal -->
+      <!-- Modal content-->
+      <div  class="modal" id="changeProfileEterprise">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Thông tin doanh nghiệp</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Đóng">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <div class="container rounded bg-white mt-5 mb-5">
+                <div class="row">
+                  <div class="col-md-3 border-right">
+                    <div class="d-flex flex-column align-items-center text-center p-3 py-5">
+                      <img class="rounded-circle mt-5" src="" alt="">
+                      <span class="font-weight-bold" >Tên doanh nghiệp</span>
+                      <span class="text-black-50">Email doanh nghiệp</span>
+                      <span> </span>
+                    </div>
+                  </div>
+                  <div class="col-md-5 border-right">
+                    <div class="p-3 py-5">
+                      <div class="row mt-2">
+                        <div class="col-md-6">
+                          <label class="labels">Tên doanh nghiệp</label>
+                          <input type="text" class="form-control" >
+                        </div>
+                        </div>
+                      <div class="row mt-3">
+                        <div class="col-md-12">
+                          <label class="labels">Số điện thoại </label>
+                          <input type="text" class="form-control" placeholder="enter phone number" value="">
+                        </div>
+                        <div class="col-md-12">
+                          <label class="labels">Địa chỉ</label>
+                          <input type="text" class="form-control" placeholder="enter address" value="">
+                        </div>
+                        <div class="col-md-12">
+                          <label class="labels">Email</label>
+                          <input type="text" class="form-control" placeholder="enter email id" value="">
+                        </div>
+                        <div class="col-md-12">
+                          <label class="labels">Mã doanh nghiệp</label>
+                          <input type="text" class="form-control" placeholder="ID Code" value="">
+                        </div>
+                      </div>
+                      <div class="row mt-3">
+                          <label class="labels">Giới thiệu doanh nghiệp</label>
+                          <input type="text" class="form-control" value="" placeholder="state">
+                        </div>
+                      </div>
+                      <div class="mt-5 text-center">
+                        <button class="btn btn-primary profile-button" type="button">Save Profile</button>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="p-3 py-5">
+                      <div class="col-md-6">
+                        <label class="labels">Lĩnh vực chính</label>
+                        <input type="text" class="form-control" placeholder="Lĩnh vực" value=""></div>
+                      <div class="col-md-6">
+
+              </div>
+
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+              <button type="button" class="btn btn-primary">Lưu thay đổi</button>
+            </div>
+          </div>
+        </div>
+      </div>
+</div>
+<!--      end modal-->
 <!--Create bài đăng-->
 <div class="container" >
   <!-- Trigger the modal with a button --><!-- Modal -->
   <div  class="modal" id="create">
     <div class="modal-dialog">
       <!-- Modal content-->
+
+
       <div class="modal-content" style="padding: 20px; width: 1200px;right: 333px">
         <div class=" text-center mt-5 ">
           <h1 >Tạo bài đăng mới</h1>

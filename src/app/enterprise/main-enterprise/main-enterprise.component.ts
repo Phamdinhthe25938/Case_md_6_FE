@@ -10,6 +10,7 @@ import {Field} from "../../model/Field";
 import {PostEnterprise} from "../../model/PostEnterprise";
 import {Router} from "@angular/router";
 
+
 @Component({
   selector: 'app-table-enterprise',
   templateUrl: './main-enterprise.component.html',
@@ -21,14 +22,21 @@ export class MainEnterpriseComponent implements OnInit {
   listFormJob!: FormJob[];
   listRegime!: Regime[];
   listField!: Field[];
-  listPostByIdEnterprise!:PostEnterprise[];
+  listPostByIdEnterprise!: PostEnterprise[];
   postEnterpriseKey!: PostEnterprise;
-  constructor(private router:Router, private enterpriseService: EnterpriseService, private loginService: LoginService) {
+
+  editProfileEnterPrise!:Enterprise;
+  profileForm!:any;
+
+
+  constructor(private router: Router, private enterpriseService: EnterpriseService, private loginService: LoginService) {
   }
-  logout(){
-     this.loginService.logout();
-     this.router.navigate(["/login"]);
+
+  logout() {
+    this.loginService.logout();
+    this.router.navigate(["/login"]);
   }
+
   enterpriseLoginFunction(): void {
     let username = this.loginService.getUserToken().username;
     this.enterpriseService.findEnterpriseByName(username).subscribe((data) => {
@@ -39,11 +47,13 @@ export class MainEnterpriseComponent implements OnInit {
     })
 
   }
-  getAllPostByEnterprise(){
-    this.enterpriseService.findAllByIdEnterprise(this.enterpriseLogin.idEnterprise).subscribe((data)=>{
-      this.listPostByIdEnterprise=data;
+
+  getAllPostByEnterprise() {
+    this.enterpriseService.findAllByIdEnterprise(this.enterpriseLogin.idEnterprise).subscribe((data) => {
+      this.listPostByIdEnterprise = data;
     })
   }
+
   ngOnInit(): void {
     this.enterpriseLoginFunction();
     this.enterpriseService.findAllFormJob().subscribe((data) => {
@@ -58,7 +68,7 @@ export class MainEnterpriseComponent implements OnInit {
     })
     this.loginService.findAllField().subscribe((data) => {
       this.listField = data;
-      console.log("fimd all field")
+      console.log("find all field")
       console.log(data)
     })
   }
@@ -84,7 +94,7 @@ export class MainEnterpriseComponent implements OnInit {
 
   walletForm = new FormGroup({
     codeVi: new FormControl("", Validators.required),
-    viEnterprise: new FormControl(0, [Validators.required,Validators.pattern("^[0-9]+"),Validators.min(5)])
+    viEnterprise: new FormControl(0, [Validators.required, Validators.pattern("^[0-9]+"), Validators.min(5)])
   })
   changeCodeViForm = new FormGroup({
     codeViOld: new FormControl("", Validators.required),
@@ -92,17 +102,18 @@ export class MainEnterpriseComponent implements OnInit {
     codeViNewAgain: new FormControl("", [Validators.required, Validators.minLength(4), Validators.pattern("(?=^.{8,}$)((?=.*\\d)|(?=.*\\W+))(?![.\\n])(?=.*[A-Z])(?=.*[a-z]).*$")]),
   })
   createPostForm = new FormGroup({
-        namePostEnterprise: new FormControl("", Validators.required),
-        addressMainEnterprise: new FormControl("", Validators.required),
-        idField: new FormControl(),
-        idFormJob: new FormControl(),
-        idRegime: new FormControl(),
-        salarySmallPostEnterprise: new FormControl(0, [Validators.required, Validators.min(0),Validators.pattern("^[0-9]+")]),
-        salaryBigPostEnterprise: new FormControl(0, [Validators.required, Validators.min(0),Validators.pattern("^[0-9]+")]),
-        vacanciesPostEnterprise: new FormControl("", Validators.required),
-        expirationDatePostEnterprise: new FormControl("", Validators.required),
-        describePostEnterprise: new FormControl("", Validators.required),
-      })
+    namePostEnterprise: new FormControl("", Validators.required),
+    addressMainEnterprise: new FormControl("", Validators.required),
+    idField: new FormControl(),
+    idFormJob: new FormControl(),
+    idRegime: new FormControl(),
+    salarySmallPostEnterprise: new FormControl(0, [Validators.required, Validators.min(0), Validators.pattern("^[0-9]+")]),
+    salaryBigPostEnterprise: new FormControl(0, [Validators.required, Validators.min(0), Validators.pattern("^[0-9]+")]),
+    vacanciesPostEnterprise: new FormControl("", Validators.required),
+    expirationDatePostEnterprise: new FormControl("", Validators.required),
+    describePostEnterprise: new FormControl("", Validators.required),
+  })
+
   createPost() {
     if (this.createPostForm.valid) {
       let createPostForm = this.createPostForm.value;
@@ -136,8 +147,8 @@ export class MainEnterpriseComponent implements OnInit {
           idField: new FormControl(),
           idFormJob: new FormControl(),
           idRegime: new FormControl(),
-          salarySmallPostEnterprise: new FormControl(0, [Validators.required, Validators.min(0),Validators.pattern("^[0-9]+")]),
-          salaryBigPostEnterprise: new FormControl(0, [Validators.required, Validators.min(0),Validators.pattern("^[0-9]+")]),
+          salarySmallPostEnterprise: new FormControl(0, [Validators.required, Validators.min(0), Validators.pattern("^[0-9]+")]),
+          salaryBigPostEnterprise: new FormControl(0, [Validators.required, Validators.min(0), Validators.pattern("^[0-9]+")]),
           vacanciesPostEnterprise: new FormControl("", Validators.required),
           expirationDatePostEnterprise: new FormControl("", Validators.required),
           describePostEnterprise: new FormControl("", Validators.required),
@@ -147,19 +158,21 @@ export class MainEnterpriseComponent implements OnInit {
       alert("Form khong hop le !");
     }
   }
+
   confirmCreatePost() {
     if (!this.enterpriseLogin.statusEnterprise) {
       alert("Tài khoản của bạn không đủ tiền để đăng bài mới vui lòng nạp thêm !")
     } else {
-        if(this.validateExpirationDate() && this.validatesalaryBigPostEnterprise()){
-          this.createPost();
-        }else {
-          alert("Vui lòng kiểm tra lại form");
-        }
+      if (this.validateExpirationDate() && this.validatesalaryBigPostEnterprise()) {
+        this.createPost();
+      } else {
+        alert("Vui lòng kiểm tra lại form");
+      }
     }
   }
+
   rechargeWallet() {
-    if(this.walletForm.valid){
+    if (this.walletForm.valid) {
       if (this.walletForm.value.codeVi === this.enterpriseLogin.codeViEnterprise) {
         let id = this.enterpriseLogin.idEnterprise;
         console.log(this.walletForm.value)
@@ -167,7 +180,7 @@ export class MainEnterpriseComponent implements OnInit {
           alert("Nạp ví thành công !")
           this.walletForm = new FormGroup({
             codeVi: new FormControl("", Validators.required),
-            viEnterprise: new FormControl(0, [Validators.required,Validators.pattern("^[0-9]+")])
+            viEnterprise: new FormControl(0, [Validators.required, Validators.pattern("^[0-9]+")])
           })
           this.enterpriseLoginFunction();
         })
@@ -176,47 +189,47 @@ export class MainEnterpriseComponent implements OnInit {
       } else {
         alert("Mã ví không hợp lệ!")
       }
-    }else {
+    } else {
       alert("Dữ liệu form không hợp lệ !")
     }
 
   }
+
   changeCodeVi() {
-      if(this.changeCodeViForm.valid){
-        let id = this.enterpriseLogin.idEnterprise;
-        if (this.changeCodeViForm.value.codeViNewAgain === this.changeCodeViForm.value.codeViNew && this.changeCodeViForm.value.codeViOld === this.enterpriseLogin.codeViEnterprise) {
-          this.enterpriseService.changeCodeVi(id, String(this.changeCodeViForm.value.codeViNew)).subscribe(() => {
-            alert("Thay đổi mã ví thành công");
-            this.changeCodeViForm = new FormGroup({
-              codeViOld: new FormControl("", Validators.required),
-              codeViNew: new FormControl("", [Validators.required, Validators.minLength(4), Validators.pattern("(?=^.{8,}$)((?=.*\\d)|(?=.*\\W+))(?![.\\n])(?=.*[A-Z])(?=.*[a-z]).*$")]),
-              codeViNewAgain: new FormControl("", [Validators.required, Validators.minLength(4), Validators.pattern("(?=^.{8,}$)((?=.*\\d)|(?=.*\\W+))(?![.\\n])(?=.*[A-Z])(?=.*[a-z]).*$")]),
-            })
-            this.enterpriseLoginFunction();
+    if (this.changeCodeViForm.valid) {
+      let id = this.enterpriseLogin.idEnterprise;
+      if (this.changeCodeViForm.value.codeViNewAgain === this.changeCodeViForm.value.codeViNew && this.changeCodeViForm.value.codeViOld === this.enterpriseLogin.codeViEnterprise) {
+        this.enterpriseService.changeCodeVi(id, String(this.changeCodeViForm.value.codeViNew)).subscribe(() => {
+          alert("Thay đổi mã ví thành công");
+          this.changeCodeViForm = new FormGroup({
+            codeViOld: new FormControl("", Validators.required),
+            codeViNew: new FormControl("", [Validators.required, Validators.minLength(4), Validators.pattern("(?=^.{8,}$)((?=.*\\d)|(?=.*\\W+))(?![.\\n])(?=.*[A-Z])(?=.*[a-z]).*$")]),
+            codeViNewAgain: new FormControl("", [Validators.required, Validators.minLength(4), Validators.pattern("(?=^.{8,}$)((?=.*\\d)|(?=.*\\W+))(?![.\\n])(?=.*[A-Z])(?=.*[a-z]).*$")]),
           })
-        } else {
-          alert("Vui lòng kiểm tra lại có gì đó chưa đúng!")
-        }
+          this.enterpriseLoginFunction();
+        })
+      } else {
+        alert("Vui lòng kiểm tra lại có gì đó chưa đúng!")
       }
-      else {
-        alert("Dữ liệu form không hợp lệ !")
-      }
+    } else {
+      alert("Dữ liệu form không hợp lệ !")
+    }
   }
 
   // Validate các forrm
 
-  validatesalaryBigPostEnterprise():boolean{
-      if(Number(this.createPostForm.value.salarySmallPostEnterprise)>=Number(this.createPostForm.value.salaryBigPostEnterprise)){
-        // @ts-ignore
-        document.getElementById("validateSalary").style.display="block";
-        return false;
-      }
-      else {
-        // @ts-ignore
-        document.getElementById("validateSalary").style.display="none";
-        return true;
-      }
+  validatesalaryBigPostEnterprise(): boolean {
+    if (Number(this.createPostForm.value.salarySmallPostEnterprise) >= Number(this.createPostForm.value.salaryBigPostEnterprise)) {
+      // @ts-ignore
+      document.getElementById("validateSalary").style.display = "block";
+      return false;
+    } else {
+      // @ts-ignore
+      document.getElementById("validateSalary").style.display = "none";
+      return true;
+    }
   }
+
   validateInputCodeViChangeCodeViForm() {
     if (this.changeCodeViForm.value.codeViOld !== this.enterpriseLogin.codeViEnterprise) {
       // @ts-ignore
@@ -230,6 +243,7 @@ export class MainEnterpriseComponent implements OnInit {
       document.getElementById('codeVi4').style.display = "block";
     }
   }
+
   validateExpirationDate() {
     let dateNow = new Date();
     let date = "'" + this.createPostForm.value.expirationDatePostEnterprise + "'";
@@ -244,6 +258,7 @@ export class MainEnterpriseComponent implements OnInit {
       return false;
     }
   }
+
   validateCodeViAgain() {
     if (this.changeCodeViForm.value.codeViNewAgain === this.changeCodeViForm.value.codeViNew) {
       // @ts-ignore
@@ -260,20 +275,53 @@ export class MainEnterpriseComponent implements OnInit {
     }
   }
 
-  editStatus(id: number){
-    this.enterpriseService.findPostById(id).subscribe((data)=>{
-        this.postEnterpriseKey =data;
-        if(!this.postEnterpriseKey.statusPostEnterprise){
-             this.enterpriseService.openKeyPost(id).subscribe(()=>{
-               alert("Mở khóa thành công !")
-               this.getAllPostByEnterprise();
-             })
-        }else {
-          this.enterpriseService.statusPost(id).subscribe(()=>{
-            alert("Khóa thành công !")
-            this.getAllPostByEnterprise();
-          })
-        }
+  editStatus(id: number) {
+    this.enterpriseService.findPostById(id).subscribe((data) => {
+      this.postEnterpriseKey = data;
+      if (!this.postEnterpriseKey.statusPostEnterprise) {
+        this.enterpriseService.openKeyPost(id).subscribe(() => {
+          alert("Mở khóa thành công !")
+          this.getAllPostByEnterprise();
+        })
+      } else {
+        this.enterpriseService.statusPost(id).subscribe(() => {
+          alert("Khóa thành công !")
+          this.getAllPostByEnterprise();
+        })
+      }
     })
   }
+  editProfile(id:number){
+    this.enterpriseService.findEnterpriseById(id).subscribe((data)=>{
+      this.editProfileEnterPrise=data;
+    })
+
+  }
+
+  formProfile = new FormGroup({
+    idEnterprise: new FormControl("", Validators.required),
+    nameEnterprise: new FormControl("", Validators.required),
+    codeConfirmEnterprise: new FormControl("", Validators.required),
+    gmailEnterprise: new FormControl("", Validators.required),
+    imgEnterprise: new FormControl("", Validators.required),
+    addressMainEnterprise: new FormControl("", Validators.required),
+    idField: new FormControl(),
+    describeEnterprise: new FormControl("", Validators.required),
+  })
+
+  // async editProfileEnterprise() {
+  //   let filed = this.profileForm.value;
+  //   let filedNew = {
+  //     idEnterprise: this.profileForm.get("id")?.setValue(this.profileForm);
+  //     nameEnterprise: filed.nameEnterprise,
+  //     codeConfirmEnterprise: filed.codeConfirmEnterprise,
+  //     gmailEnterprise: filed.gmailEnterprise,
+  //     imgEnterprise: filed.imgEnterprise,
+  //     addressMainEnterprise: filed.addressMainEnterprise,
+  //     describeEnterprise: filed.describeEnterprise,
+  //     fieldEnterprise: {
+  //       idField: filed.idField
+  //     }
+  //   }
+  // }
 }
