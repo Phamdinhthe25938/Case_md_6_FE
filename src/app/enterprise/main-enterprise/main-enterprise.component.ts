@@ -91,6 +91,10 @@ export class MainEnterpriseComponent implements OnInit {
     codeViNew: new FormControl("", [Validators.required, Validators.minLength(4), Validators.pattern("(?=^.{8,}$)((?=.*\\d)|(?=.*\\W+))(?![.\\n])(?=.*[A-Z])(?=.*[a-z]).*$")]),
     codeViNewAgain: new FormControl("", [Validators.required, Validators.minLength(4), Validators.pattern("(?=^.{8,}$)((?=.*\\d)|(?=.*\\W+))(?![.\\n])(?=.*[A-Z])(?=.*[a-z]).*$")]),
   })
+
+
+
+
   createPostForm = new FormGroup({
         namePostEnterprise: new FormControl("", Validators.required),
         addressMainEnterprise: new FormControl("", Validators.required),

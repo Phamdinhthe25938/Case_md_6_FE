@@ -26,6 +26,9 @@ export class LoginComponent implements OnInit {
   routerRegisterUser() {
           this.router.navigate(["/registerUser"]);
   }
+  routerForgotPass(){
+    this.router.navigate(["/forgotPass"]);
+  }
   login() {
      if(this.loginForm.valid){
        this.loginService.login(this.loginForm.value).subscribe((data) => {

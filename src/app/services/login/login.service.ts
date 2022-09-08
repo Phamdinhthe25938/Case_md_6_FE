@@ -49,4 +49,13 @@ export class LoginService {
   findAllEnterprise():Observable<Enterprise[]>{
   return this.http.get<any>("http://localhost:8080/register/checkEnterprise");
 }
+
+
+
+changePassword(checkPassWord:any):Observable<any>{
+    return  this.http.post<any>(`http://localhost:8080/changePassword`,checkPassWord);
+}
+
+
+
 }

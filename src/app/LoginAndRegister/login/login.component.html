@@ -21,9 +21,9 @@
           </div>
           <p *ngIf="!loginForm.get('password')?.valid && loginForm.get('password')?.touched" style="color: red">Không được để trống</p>
           <div class="form-check">
-            <label class="form-check-label">
-              <input type="checkbox" class="form-check-input">
-              <small>Remember Me</small>
+            <label class="form-check-label" style="color: #DE6262 ; font-size: 18px" >
+<!--              <input type="checkbox" class="form-check-input">-->
+              <a style="cursor: pointer" (click)="routerForgotPass()">Forgot password?</a>
             </label>
             <button type="submit" class="btn btn-login float-right">Login</button>
           </div>
