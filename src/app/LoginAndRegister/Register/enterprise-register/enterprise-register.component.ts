@@ -85,10 +85,6 @@ export class EnterpriseRegisterComponent implements OnInit {
       this.router.navigate([""])
     })
   }
-
-
-
-
 checkEmailE(){
   let email=this.registerForm.value.gmailEnterprise
   console.log("email")
@@ -100,7 +96,7 @@ checkEmailE(){
       break;
     }
   }
-  for (let i = 0; i < this.enterprise.length; i++) {
+  for (let i = 0; i < this.enterprise.length; i++){
     if (email===this.enterprise[i].gmailEnterprise){
       this.checkEmail=false
       break;
@@ -108,5 +104,4 @@ checkEmailE(){
   }
   console.log(this.checkEmail)
 }
-
 }
