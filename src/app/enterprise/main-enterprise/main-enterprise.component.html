@@ -3116,7 +3116,7 @@ License: For each use you must have a valid license purchased only from above li
                         </td>
                         <td>
                           <div class="d-flex justify-content-end flex-shrink-0">
-                            <a href="#" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1">
+                            <a  class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1">
                               <!--begin::Svg Icon | path: icons/duotune/general/gen019.svg-->
                               <span class="svg-icon svg-icon-3">
                                      <div *ngIf="a.statusPostEnterprise" style="margin-top: 7px;margin-left: 4px;">
@@ -3128,9 +3128,9 @@ License: For each use you must have a valid license purchased only from above li
 																		</span>
                               <!--end::Svg Icon-->
                             </a>
-                            <a href="#" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1">
+                            <a (click)="editPost(a.idPostEnterprise)" data-toggle="modal" data-target="#edit"class="btn btn-sm btn-light-primary" data-bs-toggle="modal" data-bs-target="#kt_modal_invite_friends" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1">
                               <!--begin::Svg Icon | path: icons/duotune/art/art005.svg-->
-                              <span (click)="editPost(a.idPostEnterprise)" class="svg-icon svg-icon-3">
+                              <span class="svg-icon svg-icon-3">
                                      <div style="margin-top: 7px;margin-left: 4px;">
                                         <i class="fa-solid fa-pen-to-square"></i>
                                      </div>
@@ -6288,6 +6288,130 @@ License: For each use you must have a valid license purchased only from above li
                         <div class="col-md-12" style="background: #50CD89; margin-top: 20px;border-radius: 5px;text-align: center;">
                           <input type="submit"  style="width: 100%" class="btn btn-success btn-send  pt-2 btn-block
                             " value="Tạo ngay" >
+                        </div>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+
+            </div>
+            <!-- /.8 -->
+          </div>
+          <!-- /.row-->
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="container" >
+  <!-- Trigger the modal with a button --><!-- Modal -->
+  <div  class="modal" id="edit">
+    <div class="modal-dialog">
+      <!-- Modal content-->
+      <div class="modal-content" style="padding: 20px; width: 1200px;right: 333px">
+        <div class=" text-center mt-5 ">
+          <h1 >Chỉnh sửa bài đăng</h1>
+        </div>
+        <div class="row ">
+          <div class="col-lg-10 mx-auto">
+            <div class="card mt-2 mx-auto p-4 bg-light">
+              <div class="card-body bg-light">
+                <div class = "container">
+                  <form  role="form" [formGroup]="editPostForm" (ngSubmit)="editPostConfim()">
+                    <div class="controls">
+                      <div class="row">
+                        <div class="col-md-4">
+                          <div class="form-group">
+                            <label for="form_name">Tên bài đăng</label>
+                            <input  type="text" formControlName="namePostEnterpriseEdit" name="name" class="form-control" placeholder="Nhập tên bài đăng" required="required" data-error="Firstname is required.">
+                          </div>
+                          <p *ngIf="!createPostForm.get('namePostEnterprise')?.valid && createPostForm.get('namePostEnterprise')?.touched" style="color: red;margin: 0">Dữ liệu không liêu!</p>
+                        </div>
+                        <div class="col-md-4">
+                          <div class="form-group">
+                            <label for="form_need">Thuộc loại lĩnh vực</label>
+                            <select   formControlName="idFieldEdit" class="form-control" required="required" data-error="Chọn lĩnh vục">
+                              <option *ngFor="let a of listField" value="{{a.idField}}">{{a.nameField}}</option>
+                            </select>
+                          </div>
+                          <p *ngIf="!createPostForm.get('idField')?.valid && createPostForm.get('idField')?.touched" style="color: red;margin: 0">Dữ liệu không liêu!</p>
+
+                        </div>
+                        <div class="col-md-4">
+                          <div class="form-group">
+                            <label for="form_name1">Vị trí ứng tuyển </label>
+                            <input  type="text" formControlName="vacanciesPostEnterpriseEdit" name="name" class="form-control" placeholder="Nhập tên bài đăng" required="required" data-error="Firstname is required.">
+                          </div>
+                          <p *ngIf="!createPostForm.get('vacanciesPostEnterprise')?.valid && createPostForm.get('vacanciesPostEnterprise')?.touched"style="color: red;margin: 0">Dữ liệu không liêu!</p>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-md-4">
+                          <div class="form-group">
+                            <label for="form_email">Khu vực</label>
+                            <input type="email" formControlName="addressMainEnterpriseEdit"  class="form-control" placeholder="Ứng tuyển tại khu vực" required="required" data-error="Ứng tuyển tại khu vực">
+                          </div>
+                          <p *ngIf="!createPostForm.get('addressMainEnterprise')?.valid && createPostForm.get('addressMainEnterprise')?.touched" style="color: red;margin: 0">Dữ liệu không liêu!</p>
+                        </div>
+                        <div class="col-md-4">
+                          <div class="form-group">
+                            <label for="form_lastname">Ngày hết hạn</label>
+                            <input  type="date" (ngModelChange)="validateExpirationDate()" formControlName="expirationDatePostEnterpriseEdit" name="surname" class="form-control" placeholder="Khu vực làm việc" required="required" data-error="Lastname is required.">
+                          </div>
+                          <p *ngIf="!createPostForm.get('expirationDatePostEnterprise')?.valid && createPostForm.get('expirationDatePostEnterprise')?.touched" style="color: red;margin: 0">Dữ liệu không liêu!</p>
+                          <p   style="margin: 0;color: red;display: none">Ngày không hợp lệ</p>
+                        </div>
+                        <div class="col-md-4">
+                          <div class="form-group">
+                            <label for="form_lastname1">Hình thức job</label>
+                            <select   name="need" formControlName="idFormJobEdit" class="form-control" required="required" data-error="Vip-thường">
+                              <option *ngFor="let a of listFormJob" value="{{a.idFormJob}}">{{a.nameFormJob}}</option>
+                            </select>
+                          </div>
+                          <p *ngIf="!createPostForm.get('idFormJob')?.valid && createPostForm.get('idFormJob')?.touched" style="color: red;margin: 0">Dữ liệu không liêu!</p>
+
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-md-4">
+                          <div class="form-group">
+                            <label for="form_need1">Chọn gói</label>
+                            <select  name="need" formControlName="idRegimeEdit" class="form-control" required="required" data-error="Vip-thường">
+                              <option *ngFor="let a of listRegime" value="{{a.idRegime}}">{{a.nameRegime}}</option>
+                            </select>
+                          </div>
+                          <p *ngIf="!createPostForm.get('idRegime')?.valid && createPostForm.get('idRegime')?.touched" style="color: red;margin: 0">Dữ liệu không liêu!</p>
+
+                        </div>
+                        <div class="col-md-4">
+                          <div class="form-group">
+                            <label for="form_lastname12">Mức lương thấp nhất(-triệu vnd)</label>
+                            <input  type="number"  (ngModelChange)="validatesalaryBigPostEnterprise()" formControlName="salarySmallPostEnterpriseEdit" name="surname" class="form-control" placeholder="Mức lương thấp nhất " required="required" data-error="Lastname is required.">
+                          </div>
+                          <p *ngIf="!createPostForm.get('salarySmallPostEnterprise')?.valid " style="color: red;margin: 0">Dữ liệu nhập không hợp lệ!</p>
+                        </div>
+                        <div class="col-md-4">
+                          <div class="form-group">
+                            <label for="form_lastname2">Mức lương cao nhất(-triệu vnd)</label>
+                            <input id="form_lastname21" type="number" (ngModelChange)="validatesalaryBigPostEnterprise()" formControlName="salaryBigPostEnterpriseEdit" name="surname" class="form-control" placeholder="Mức lương cao nhất" required="required" data-error="Lastname is required.">
+                          </div>
+                          <p *ngIf="!createPostForm.get('salaryBigPostEnterprise')?.valid " style="color: red;margin: 0">Dữ liệu nhập không hợp lệ</p>
+                          <p style="margin: 0;display: none;color: red" >Mức lương cao nhất không hợp lệ !<br>( > mức lương thấp nhất )!</p>
+                        </div>
+                        <div class="col-md-12">
+                          <div class="form-group">
+                            <label for="form_message">Mô tả bài đăng</label>
+                            <textarea name="message" formControlName="describePostEnterpriseEdit" class="form-control" placeholder="Write your message here." rows="4" required="required" data-error="Thêm mô tả bài viết"></textarea
+                            >
+                          </div>
+                          <p *ngIf="!createPostForm.get('describePostEnterprise')?.valid && createPostForm.get('describePostEnterprise')?.touched" style="color: red;">Dữ liệu không liêu!</p>
+                        </div>
+                        <div class="col-md-12" style="background: #50CD89; margin-top: 20px;border-radius: 5px;text-align: center;">
+                          <input type="submit"  style="width: 100%" class="btn btn-success btn-send  pt-2 btn-block
+                            " value="Chỉnh sửa" >
                         </div>
                       </div>
                     </div>
