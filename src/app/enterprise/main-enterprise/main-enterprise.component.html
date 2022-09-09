@@ -3087,7 +3087,7 @@ License: For each use you must have a valid license purchased only from above li
                       </thead>
                       <!--end::Table head-->
                       <!--begin::Table body-->
-                      <tbody *ngFor="let a of listPostByIdEnterprise">
+                      <tbody *ngFor="let a of listPostByIdEnterprise |paginate: {itemsPerPage: 4,currentPage:p}">
                       <tr>
                         <td>
                           <div class="d-flex align-items-center">
@@ -3151,6 +3151,10 @@ License: For each use you must have a valid license purchased only from above li
                       </tr>
 
                       </tbody>
+
+<!--                      Đức-Phân trang-->
+                      <p><pagination-controls class="btn btn-sm btn-outline-primary" class="myPagination" (pageChange)="p = $event">
+                      </pagination-controls></p>
                       <!--end::Table body-->
                     </table>
                     <!--end::Table-->
@@ -3288,6 +3292,7 @@ License: For each use you must have a valid license purchased only from above li
                       </div>
                       <span id="confirmCV" *ngIf="!a.statusConfirm" (click)="setIdConfirmNotifi(a.id)" data-toggle="modal" data-target="#myModalConfirmCV" style="color: red;cursor: pointer" class="badge badge-light fw-bolder my-2">Xác thức !</span>
                     </div>
+                    <!--end::Section-->
                   </div>
                   <!--end::Item-->
                 </div>
@@ -6146,7 +6151,7 @@ License: For each use you must have a valid license purchased only from above li
                               <option *ngFor="let a of listFormJob" value="{{a.idFormJob}}">{{a.nameFormJob}}</option>
                             </select>
                           </div>
-                          <p *ngIf="!createPostForm.get('idFormJob')?.valid && createPostForm.get('idFormJob')?.touched" style="color: red;margin: 0">Dữ liệu không hợp lệ!</p>
+                          <p *ngIf="!createPostForm.get('idFormJob')?.valid && createPostForm.get('idFormJob')?.touched" style="color: red;margin: 0">Dữ liệu không liêu!</p>
 
                         </div>
                       </div>
@@ -6369,4 +6374,5 @@ License: For each use you must have a valid license purchased only from above li
 <!--  <img class="modal-content" id="img01">-->
 <!--  <div id="caption"></div>-->
 <!--</div>-->
+
 

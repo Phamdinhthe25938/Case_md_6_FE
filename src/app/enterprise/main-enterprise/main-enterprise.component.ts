@@ -17,7 +17,7 @@ import {NotiEnter} from "../../model/NotiEnter";
   styleUrls: ['./main-enterprise.component.css']
 })
 export class MainEnterpriseComponent implements OnInit {
-
+ p:any;
   enterpriseLogin!: Enterprise;
   listFormJob!: FormJob[];
   listRegime!: Regime[];

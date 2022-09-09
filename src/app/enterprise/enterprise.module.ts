@@ -5,6 +5,7 @@ import { EnterpriseRoutingModule } from './enterprise-routing.module';
 import { MainEnterpriseComponent } from './main-enterprise/main-enterprise.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {AppComponent} from "../app.component";
+import {NgxPaginationModule} from "ngx-pagination";
 
 
 @NgModule({
@@ -15,7 +16,8 @@ import {AppComponent} from "../app.component";
         CommonModule,
         EnterpriseRoutingModule,
         ReactiveFormsModule,
-        FormsModule
+        FormsModule,
+        NgxPaginationModule
     ],
 })
 export class EnterpriseModule { }

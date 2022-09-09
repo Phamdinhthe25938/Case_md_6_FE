@@ -90,4 +90,7 @@ export class EnterpriseService {
     return this.http.post<any>(`http://localhost:8080/enterprise/confirmUserApply/${id}`,"");
 
   }
+  editPost(post:any):Observable<any>{
+    return this.http.post<any>(`http://localhost:8080/enterprise/editpost`,post);
+  }
 }
