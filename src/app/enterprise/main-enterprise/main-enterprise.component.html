@@ -3284,11 +3284,10 @@ License: For each use you must have a valid license purchased only from above li
                       <div class="flex-grow-1 me-2">
                         <a href="#" class="text-gray-800 text-hover-primary fs-6 fw-bolder">{{a.userApply.nameCV}}</a>
                         <span class="text-muted fw-bold d-block fs-7">SDT : {{a.userApply.numberCV}}</span>
-                        <span class="text-muted fw-bold d-block fs-7">  {{a.userApply.mailCv}}</span>
+                        <span class="text-muted fw-bold d-block fs-7">  {{a.userApply.mailCv}} </span>
                       </div>
-                      <span *ngIf="!a.statusConfirm" style="color: red" class="badge badge-light fw-bolder my-2">Chờ !</span>
+                      <span id="confirmCV" *ngIf="!a.statusConfirm" (click)="setIdConfirmNotifi(a.id)" data-toggle="modal" data-target="#myModalConfirmCV" style="color: red;cursor: pointer" class="badge badge-light fw-bolder my-2">Xác thức !</span>
                     </div>
-                    <!--end::Section-->
                   </div>
                   <!--end::Item-->
                 </div>
@@ -6204,8 +6203,7 @@ License: For each use you must have a valid license purchased only from above li
     </div>
   </div>
 </div>
-
-
+<!--modal chinh sua bai dang -->
 <div class="container" >
   <!-- Trigger the modal with a button --><!-- Modal -->
   <div  class="modal" id="edit">
@@ -6328,6 +6326,28 @@ License: For each use you must have a valid license purchased only from above li
     </div>
   </div>
 </div>
+<!-- modal xác thức cv-->
+<div class="modal" id="myModalConfirmCV">
+  <div class="modal-dialog">
+    <div class="modal-content" style="max-width: 380px;position: relative;left: 100px;">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title" style="display:inline-block;font-weight: 900">Xác thực</h4>
+        <button type="button" style="font-size: 13px" class="close" data-dismiss="modal">X</button>
+      </div>
+      <!-- Modal body -->
+      <div class="modal-body" style="font-size: 15px;color: red;padding: 10px 24px 16px 24px">
+         Bạn có chắc chắn xác thực cho CV này !
+      </div>
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button id="" (click)="confirmNotifi()"  type="button" class="btn btn-primary" style="padding: 8px !important;background-color: #FF4F57">Xác thức</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <!--<img id="myImg" src="https://baoquocte.vn/stores/news_dataimages/dieulinh/012020/29/15/nhung-buc-anh-dep-tuyet-voi-ve-tinh-ban.jpg" alt="Snow" style="width:100%;max-width:300px">-->
 <!--<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModalImg">Open Modal</button>-->
 

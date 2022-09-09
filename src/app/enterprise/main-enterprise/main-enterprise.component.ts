@@ -26,6 +26,7 @@ export class MainEnterpriseComponent implements OnInit {
   postEnterpriseKey!: PostEnterprise;
   postEdit!:PostEnterprise;
   notifiApplyFromUser!: NotiEnter[];
+  idConfirmNotifi!:number;
   constructor(private router:Router, private enterpriseService: EnterpriseService, private loginService: LoginService) {
   }
   logout(){
@@ -347,5 +348,14 @@ export class MainEnterpriseComponent implements OnInit {
       this.enterpriseService.listNorifiFromApplyUser(idEnterprise).subscribe((data)=>{
       this.notifiApplyFromUser = data;
       })
+  }
+
+  setIdConfirmNotifi(id: number){
+    this.idConfirmNotifi = id;
+  }
+  confirmNotifi(){
+       this.enterpriseService.confirmNotifi(this.idConfirmNotifi).subscribe(()=>{
+         alert("Xác thực thành công !");
+       })
   }
 }

@@ -86,4 +86,8 @@ export class EnterpriseService {
   listNorifiFromApplyUser(id: number): Observable<any>{
     return this.http.get<any>(`http://localhost:8080/enterprise/listNotiyApply/${id}`,);
   }
+  confirmNotifi(id:number):Observable<any>{
+    return this.http.post<any>(`http://localhost:8080/enterprise/confirmUserApply/${id}`,"");
+
+  }
 }
