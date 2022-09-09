@@ -908,7 +908,7 @@ License: For each use you must have a valid license purchased only from above li
       <!--begin::Secondary-->
       <div class="aside-secondary d-flex flex-row-fluid">
         <!--begin::Workspace-->
-        <div class="aside-workspace my-5 p-5" id="kt_aside_wordspace">
+        <div class="aside-workspace my-5 p-5" id="kt_aside_wordspace" style="width: 280px;">
           <div class="d-flex h-100 flex-column">
             <!--begin::Wrapper-->
             <div class="flex-column-fluid hover-scroll-y" data-kt-scroll="true" data-kt-scroll-activate="true" data-kt-scroll-height="auto" data-kt-scroll-wrappers="#kt_aside_wordspace" data-kt-scroll-dependencies="#kt_aside_secondary_footer" data-kt-scroll-offset="0px">
@@ -3055,7 +3055,7 @@ License: For each use you must have a valid license purchased only from above li
                 <div class="card-header border-0 pt-5">
                   <h3 class="card-title align-items-start flex-column">
                     <span class="card-label fw-bolder fs-3 mb-1">Quản ly bài đăng </span>
-                    <span class="text-muted mt-1 fw-bold fs-7">Số lượng bài đăng : {{listPostByIdEnterprise.length}}</span>
+                    <span class="text-muted mt-1 fw-bold fs-7">Số lượng bài đăng : {{listPostByIdEnterprise?.length}}</span>
                   </h3>
                   <div class="card-toolbar" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-trigger="hover" title="Click to add a user">
                     <a data-toggle="modal" data-target="#create"class="btn btn-sm btn-light-primary" data-bs-toggle="modal" data-bs-target="#kt_modal_invite_friends">
@@ -3169,8 +3169,8 @@ License: For each use you must have a valid license purchased only from above li
                 <!--begin::Header-->
                 <div class="card-header border-0 pt-5">
                   <h3 class="card-title align-items-start flex-column">
-                    <span class="card-label fw-bolder text-dark">Trends</span>
-                    <span class="text-muted mt-1 fw-bold fs-7">Latest tech trends</span>
+                    <span class="card-label fw-bolder text-dark">Thông báo</span>
+                    <span class="text-muted mt-1 fw-bold fs-7">Xác nhận CV người dùng </span>
                   </h3>
                   <div class="card-toolbar">
                     <!--begin::Menu-->
@@ -3271,121 +3271,22 @@ License: For each use you must have a valid license purchased only from above li
                 <!--begin::Body-->
                 <div class="card-body pt-5">
                   <!--begin::Item-->
-                  <div class="d-flex align-items-sm-center mb-7">
+                  <div class="d-flex align-items-sm-center mb-7" *ngFor="let a of notifiApplyFromUser">
                     <!--begin::Symbol-->
                     <div class="symbol symbol-50px me-5">
 													<span class="symbol-label">
-														<img src="assets/media/svg/brand-logos/plurk.svg" class="h-50 align-self-center" alt="" />
+														<img src="{{a.userApply.imgCV}}" class="h-50 align-self-center" alt="" />
 													</span>
                     </div>
                     <!--end::Symbol-->
                     <!--begin::Section-->
                     <div class="d-flex align-items-center flex-row-fluid flex-wrap">
                       <div class="flex-grow-1 me-2">
-                        <a href="#" class="text-gray-800 text-hover-primary fs-6 fw-bolder">Top Authors</a>
-                        <span class="text-muted fw-bold d-block fs-7">Mark, Rowling, Esther</span>
+                        <a href="#" class="text-gray-800 text-hover-primary fs-6 fw-bolder">{{a.userApply.nameCV}}</a>
+                        <span class="text-muted fw-bold d-block fs-7">SDT : {{a.userApply.numberCV}}</span>
+                        <span class="text-muted fw-bold d-block fs-7">  {{a.userApply.mailCv}}</span>
                       </div>
-                      <span class="badge badge-light fw-bolder my-2">+82$</span>
-                    </div>
-                    <!--end::Section-->
-                  </div>
-                  <!--end::Item-->
-                  <!--begin::Item-->
-                  <div class="d-flex align-items-sm-center mb-7">
-                    <!--begin::Symbol-->
-                    <div class="symbol symbol-50px me-5">
-													<span class="symbol-label">
-														<img src="assets/media/svg/brand-logos/telegram.svg" class="h-50 align-self-center" alt="" />
-													</span>
-                    </div>
-                    <!--end::Symbol-->
-                    <!--begin::Section-->
-                    <div class="d-flex align-items-center flex-row-fluid flex-wrap">
-                      <div class="flex-grow-1 me-2">
-                        <a href="#" class="text-gray-800 text-hover-primary fs-6 fw-bolder">Popular Authors</a>
-                        <span class="text-muted fw-bold d-block fs-7">Randy, Steve, Mike</span>
-                      </div>
-                      <span class="badge badge-light fw-bolder my-2">+280$</span>
-                    </div>
-                    <!--end::Section-->
-                  </div>
-                  <!--end::Item-->
-                  <!--begin::Item-->
-                  <div class="d-flex align-items-sm-center mb-7">
-                    <!--begin::Symbol-->
-                    <div class="symbol symbol-50px me-5">
-													<span class="symbol-label">
-														<img src="assets/media/svg/brand-logos/vimeo.svg" class="h-50 align-self-center" alt="" />
-													</span>
-                    </div>
-                    <!--end::Symbol-->
-                    <!--begin::Section-->
-                    <div class="d-flex align-items-center flex-row-fluid flex-wrap">
-                      <div class="flex-grow-1 me-2">
-                        <a href="#" class="text-gray-800 text-hover-primary fs-6 fw-bolder">New Users</a>
-                        <span class="text-muted fw-bold d-block fs-7">John, Pat, Jimmy</span>
-                      </div>
-                      <span class="badge badge-light fw-bolder my-2">+4500$</span>
-                    </div>
-                    <!--end::Section-->
-                  </div>
-                  <!--end::Item-->
-                  <!--begin::Item-->
-                  <div class="d-flex align-items-sm-center mb-7">
-                    <!--begin::Symbol-->
-                    <div class="symbol symbol-50px me-5">
-													<span class="symbol-label">
-														<img src="assets/media/svg/brand-logos/bebo.svg" class="h-50 align-self-center" alt="" />
-													</span>
-                    </div>
-                    <!--end::Symbol-->
-                    <!--begin::Section-->
-                    <div class="d-flex align-items-center flex-row-fluid flex-wrap">
-                      <div class="flex-grow-1 me-2">
-                        <a href="#" class="text-gray-800 text-hover-primary fs-6 fw-bolder">Active Customers</a>
-                        <span class="text-muted fw-bold d-block fs-7">Mark, Rowling, Esther</span>
-                      </div>
-                      <span class="badge badge-light fw-bolder my-2">+686$</span>
-                    </div>
-                    <!--end::Section-->
-                  </div>
-                  <!--end::Item-->
-                  <!--begin::Item-->
-                  <div class="d-flex align-items-sm-center mb-7">
-                    <!--begin::Symbol-->
-                    <div class="symbol symbol-50px me-5">
-													<span class="symbol-label">
-														<img src="assets/media/svg/brand-logos/kickstarter.svg" class="h-50 align-self-center" alt="" />
-													</span>
-                    </div>
-                    <!--end::Symbol-->
-                    <!--begin::Section-->
-                    <div class="d-flex align-items-center flex-row-fluid flex-wrap">
-                      <div class="flex-grow-1 me-2">
-                        <a href="#" class="text-gray-800 text-hover-primary fs-6 fw-bolder">Bestseller Theme</a>
-                        <span class="text-muted fw-bold d-block fs-7">Disco, Retro, Sports</span>
-                      </div>
-                      <span class="badge badge-light fw-bolder my-2">+726$</span>
-                    </div>
-                    <!--end::Section-->
-                  </div>
-                  <!--end::Item-->
-                  <!--begin::Item-->
-                  <div class="d-flex align-items-sm-center">
-                    <!--begin::Symbol-->
-                    <div class="symbol symbol-50px me-5">
-													<span class="symbol-label">
-														<img src="assets/media/svg/brand-logos/fox-hub.svg" class="h-50 align-self-center" alt="" />
-													</span>
-                    </div>
-                    <!--end::Symbol-->
-                    <!--begin::Section-->
-                    <div class="d-flex align-items-center flex-row-fluid flex-wrap">
-                      <div class="flex-grow-1 me-2">
-                        <a href="#" class="text-gray-800 text-hover-primary fs-6 fw-bolder">Fox Broker App</a>
-                        <span class="text-muted fw-bold d-block fs-7">Finance, Corporate, Apps</span>
-                      </div>
-                      <span class="badge badge-light fw-bolder my-2">+145$</span>
+                      <span *ngIf="!a.statusConfirm" style="color: red" class="badge badge-light fw-bolder my-2">Chờ !</span>
                     </div>
                     <!--end::Section-->
                   </div>
@@ -6179,7 +6080,6 @@ License: For each use you must have a valid license purchased only from above li
 
     </div>
   </div>
-
 </div>
 <!--Create bài đăng-->
 <div class="container" >
@@ -6428,3 +6328,25 @@ License: For each use you must have a valid license purchased only from above li
     </div>
   </div>
 </div>
+<!--<img id="myImg" src="https://baoquocte.vn/stores/news_dataimages/dieulinh/012020/29/15/nhung-buc-anh-dep-tuyet-voi-ve-tinh-ban.jpg" alt="Snow" style="width:100%;max-width:300px">-->
+<!--<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModalImg">Open Modal</button>-->
+
+<!--&lt;!&ndash; The Modal &ndash;&gt;-->
+<!--<div class="container"  >-->
+<!--  &lt;!&ndash; Trigger the modal with a button &ndash;&gt;&lt;!&ndash; Modal &ndash;&gt;-->
+<!--  <div  class="modal" id="myModalImg" >-->
+<!--    <div class="modal-dialog">-->
+<!--      &lt;!&ndash; Modal content&ndash;&gt;<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#edit">Open Modal</button>-->
+
+<!--      <div class="modal-content" style="">-->
+<!--        <img id="myImg" src="https://baoquocte.vn/stores/news_dataimages/dieulinh/012020/29/15/nhung-buc-anh-dep-tuyet-voi-ve-tinh-ban.jpg" alt="Snow" style="width:100%;max-width:300px">-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</div>-->
+<!--<div id="myModal" class="modal">-->
+<!--  <span class="close">&times;</span>-->
+<!--  <img class="modal-content" id="img01">-->
+<!--  <div id="caption"></div>-->
+<!--</div>-->
+
