@@ -16,7 +16,7 @@ import {Router} from "@angular/router";
   styleUrls: ['./main-enterprise.component.css']
 })
 export class MainEnterpriseComponent implements OnInit {
-
+ p:any;
   enterpriseLogin!: Enterprise;
   listFormJob!: FormJob[];
   listRegime!: Regime[];
@@ -332,7 +332,7 @@ export class MainEnterpriseComponent implements OnInit {
           idEnterprise: this.enterpriseLogin.idEnterprise,
         }
       }
-      this.enterpriseService.savePost(postEnterprise).subscribe(() => {
+      this.enterpriseService.editPost(postEnterprise).subscribe(() => {
         alert("Chỉnh sửa bài viết  thành công!")
         this.getAllPostByEnterprise();
       })

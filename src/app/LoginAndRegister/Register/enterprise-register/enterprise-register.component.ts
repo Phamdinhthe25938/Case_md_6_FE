@@ -52,6 +52,7 @@ export class EnterpriseRegisterComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.checkEmail=true;
     this.loginService.findAllField().subscribe((data) => {
       this.fields = data;
     })

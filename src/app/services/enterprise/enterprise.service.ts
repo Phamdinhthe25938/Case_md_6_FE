@@ -62,4 +62,7 @@ export class EnterpriseService {
   findPostById(id: number): Observable<any>{
     return this.http.get<any>(`http://localhost:8080/enterprise/findPostById/${id}`,);
   }
+  editPost(post:any):Observable<any>{
+    return this.http.post<any>(`http://localhost:8080/enterprise/editpost`,post);
+  }
 }
