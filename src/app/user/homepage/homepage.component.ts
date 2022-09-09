@@ -78,7 +78,7 @@ export class HomepageComponent implements OnInit {
   saveCvForm = new FormGroup({
     name: new FormControl("", [Validators.required, Validators.pattern("[A-Za-z]+")]),
     telephone: new FormControl("", [Validators.required, Validators.pattern("^0[0-9]+")]),
-    mail: new FormControl("", [Validators.required, Validators.pattern("^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$")]),
+    mail: new FormControl("", [Validators.required , Validators.pattern("^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$")]),
     imgCV: new FormControl()
   })
 

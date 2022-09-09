@@ -9,6 +9,7 @@ import {Regime} from "../../model/Regime";
 import {Field} from "../../model/Field";
 import {PostEnterprise} from "../../model/PostEnterprise";
 import {Router} from "@angular/router";
+import {NotiEnter} from "../../model/NotiEnter";
 
 @Component({
   selector: 'app-table-enterprise',
@@ -24,6 +25,7 @@ export class MainEnterpriseComponent implements OnInit {
   listPostByIdEnterprise!:PostEnterprise[];
   postEnterpriseKey!: PostEnterprise;
   postEdit!:PostEnterprise;
+  notifiApplyFromUser!: NotiEnter[];
   constructor(private router:Router, private enterpriseService: EnterpriseService, private loginService: LoginService) {
   }
   logout(){
@@ -37,6 +39,8 @@ export class MainEnterpriseComponent implements OnInit {
       this.enterpriseLogin = data;
       console.log(this.enterpriseLogin.statusEnterprise);
       this.getAllPostByEnterprise();
+      this.notifiFromUserApply();
+
     })
 
   }
@@ -92,9 +96,6 @@ export class MainEnterpriseComponent implements OnInit {
     codeViNew: new FormControl("", [Validators.required, Validators.minLength(4), Validators.pattern("(?=^.{8,}$)((?=.*\\d)|(?=.*\\W+))(?![.\\n])(?=.*[A-Z])(?=.*[a-z]).*$")]),
     codeViNewAgain: new FormControl("", [Validators.required, Validators.minLength(4), Validators.pattern("(?=^.{8,}$)((?=.*\\d)|(?=.*\\W+))(?![.\\n])(?=.*[A-Z])(?=.*[a-z]).*$")]),
   })
-
-
-
 
   createPostForm = new FormGroup({
         namePostEnterprise: new FormControl("", Validators.required),
@@ -264,7 +265,6 @@ export class MainEnterpriseComponent implements OnInit {
       document.getElementById("codeViNewAgain1").style.display = "block";
     }
   }
-
   editStatus(id: number){
     this.enterpriseService.findPostById(id).subscribe((data)=>{
         this.postEnterpriseKey =data;
@@ -281,6 +281,7 @@ export class MainEnterpriseComponent implements OnInit {
         }
     })
   }
+  //edit bài post
   editPost(id:number){
     this.enterpriseService.findPostById(id).subscribe((data)=>{
       this.postEdit=data;
@@ -292,12 +293,7 @@ export class MainEnterpriseComponent implements OnInit {
       this.editPostForm.get("expirationDatePostEnterpriseEdit")?.setValue(String(this.postEdit.expirationDatePostEnterprise));
       this.editPostForm.get("describePostEnterpriseEdit")?.setValue(this.postEdit.describePostEnterprise);
     })
-
-
-
-
   }
-
   editPostForm = new FormGroup({
     namePostEnterpriseEdit: new FormControl("", Validators.required),
     addressMainEnterpriseEdit: new FormControl("", Validators.required),
@@ -311,37 +307,45 @@ export class MainEnterpriseComponent implements OnInit {
     describePostEnterpriseEdit: new FormControl("", Validators.required),
   })
 
-  editPostConfim() {
-    console.log("ok ok")
-      let editPostForm = this.editPostForm.value;
-      let postEnterprise = {
-        idPostEnterprise:this.postEdit.idPostEnterprise,
-        namePostEnterprise: editPostForm.namePostEnterpriseEdit,
-        addressMainEnterprise: editPostForm.addressMainEnterpriseEdit,
-        field: {
-          idField: editPostForm.idFieldEdit
-        },
-        regime: {
-          idRegime: editPostForm.idRegimeEdit
-        },
-        formJobPostEnterprise: {
-          idFormJob: editPostForm.idFormJobEdit
-        },
-        salarySmallPostEnterprise: editPostForm.salarySmallPostEnterpriseEdit,
-        salaryBigPostEnterprise: editPostForm.salaryBigPostEnterpriseEdit,
-        vacanciesPostEnterprise: editPostForm.vacanciesPostEnterpriseEdit,
-        expirationDatePostEnterprise: editPostForm.expirationDatePostEnterpriseEdit,
-        describePostEnterprise: editPostForm.describePostEnterpriseEdit,
-        enterprise: {
-          idEnterprise: this.enterpriseLogin.idEnterprise,
+  editPostConfim(){
+      if(this.editPostForm.valid){
+        let editPostForm = this.editPostForm.value;
+        let postEnterprise = {
+          idPostEnterprise:this.postEdit.idPostEnterprise,
+          namePostEnterprise: editPostForm.namePostEnterpriseEdit,
+          addressMainEnterprise: editPostForm.addressMainEnterpriseEdit,
+          field: {
+            idField: editPostForm.idFieldEdit
+          },
+          regime: {
+            idRegime: editPostForm.idRegimeEdit
+          },
+          formJobPostEnterprise: {
+            idFormJob: editPostForm.idFormJobEdit
+          },
+          salarySmallPostEnterprise: editPostForm.salarySmallPostEnterpriseEdit,
+          salaryBigPostEnterprise: editPostForm.salaryBigPostEnterpriseEdit,
+          vacanciesPostEnterprise: editPostForm.vacanciesPostEnterpriseEdit,
+          expirationDatePostEnterprise: editPostForm.expirationDatePostEnterpriseEdit,
+          describePostEnterprise: editPostForm.describePostEnterpriseEdit,
+          enterprise: {
+            idEnterprise: this.enterpriseLogin.idEnterprise,
+          }
         }
+        this.enterpriseService.savePost(postEnterprise).subscribe(() => {
+          alert("Chỉnh sửa bài viết  thành công!")
+          this.getAllPostByEnterprise();
+        })
+      }else {
+          alert("Xin vui lòng kiểm tra lại form !")
       }
-      this.enterpriseService.savePost(postEnterprise).subscribe(() => {
-        alert("Chỉnh sửa bài viết  thành công!")
-        this.getAllPostByEnterprise();
-      })
     }
 
-
-
+//    danh sách thông báo khi có ng apply
+  notifiFromUserApply(){
+      let idEnterprise = this.enterpriseLogin.idEnterprise;
+      this.enterpriseService.listNorifiFromApplyUser(idEnterprise).subscribe((data)=>{
+      this.notifiApplyFromUser = data;
+      })
+  }
 }
