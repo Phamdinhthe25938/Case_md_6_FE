@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import {FormControl, FormGroup} from "@angular/forms";
+import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {ChangePassWord} from "../../model/ChangePassWord";
 import {LoginService} from "../../services/login/login.service";
 import {Router} from "@angular/router";
+import {AppUser} from "../../model/AppUser";
+import {Enterprise} from "../../model/Enterprise";
 
 @Component({
   selector: 'app-forgot-pas',
@@ -11,18 +13,28 @@ import {Router} from "@angular/router";
 })
 export class ForgotPasComponent implements OnInit {
 checkpass!:boolean;
+  appUser!: AppUser[];
+  enterprise!: Enterprise[];
   setPassWord!:ChangePassWord;
+  checkEmail!: boolean
   constructor( private loginService:LoginService, private router: Router) {
 
   }
 
   ngOnInit(): void {
     this.checkpass=true;
+    this.checkEmail=true;
+    this.loginService.findAllEnterprise().subscribe((data) => {
+      this.enterprise = data;
+    });
+    this.loginService.findAllUser().subscribe((data) => {
+      this.appUser = data;
+    });
   }
   changePasswordForm = new FormGroup({
-    email: new FormControl(""),
-    passwordNew: new FormControl(""),
-    enterPassword: new FormControl(""),
+    email: new FormControl("",Validators.required),
+    passwordNew: new FormControl("",Validators.required),
+    enterPassword: new FormControl("",Validators.required),
   })
   changePassword(){
     let formchange=this.changePasswordForm.value
@@ -47,4 +59,22 @@ checkpass!:boolean;
       this.checkpass=false
     }
   }
+  checkEmailU(){
+    this.checkEmail=false;
+    let emailcheck=this.changePasswordForm.value.email
+    for (let i = 0; i < this.appUser.length; i++) {
+      if (emailcheck==this.appUser[i].email){
+        this.checkEmail=true
+        break;
+      }
+    }
+    for (let i = 0; i < this.enterprise.length; i++) {
+      if (emailcheck==this.enterprise[i].gmailEnterprise){
+        this.checkEmail=true
+        break;
+      }
+    }
+    console.log(this.checkEmail)
+  }
+
 }

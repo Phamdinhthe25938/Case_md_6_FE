@@ -6204,7 +6204,7 @@ License: For each use you must have a valid license purchased only from above li
                             <label for="form_name">Tên bài đăng</label>
                             <input id="form_name" type="text" formControlName="namePostEnterprise" name="name" class="form-control" placeholder="Nhập tên bài đăng" required="required" data-error="Firstname is required.">
                           </div>
-                          <p *ngIf="!createPostForm.get('namePostEnterprise')?.valid && createPostForm.get('namePostEnterprise')?.touched" style="color: red;margin: 0">Dữ liệu không liêu!</p>
+                          <p *ngIf="!createPostForm.get('namePostEnterprise')?.valid && createPostForm.get('namePostEnterprise')?.touched" style="color: red;margin: 0">Dữ liệu không hợp lệ!</p>
                         </div>
                         <div class="col-md-4">
                           <div class="form-group">
@@ -6213,7 +6213,7 @@ License: For each use you must have a valid license purchased only from above li
                               <option *ngFor="let a of listField" value="{{a.idField}}">{{a.nameField}}</option>
                             </select>
                           </div>
-                          <p *ngIf="!createPostForm.get('idField')?.valid && createPostForm.get('idField')?.touched" style="color: red;margin: 0">Dữ liệu không liêu!</p>
+                          <p *ngIf="!createPostForm.get('idField')?.valid && createPostForm.get('idField')?.touched" style="color: red;margin: 0">Dữ liệu không hợp lệ!</p>
 
                         </div>
                         <div class="col-md-4">
@@ -6221,7 +6221,7 @@ License: For each use you must have a valid license purchased only from above li
                             <label for="form_name1">Vị trí ứng tuyển </label>
                             <input id="form_name1" type="text" formControlName="vacanciesPostEnterprise" name="name" class="form-control" placeholder="Nhập tên bài đăng" required="required" data-error="Firstname is required.">
                           </div>
-                          <p *ngIf="!createPostForm.get('vacanciesPostEnterprise')?.valid && createPostForm.get('vacanciesPostEnterprise')?.touched"style="color: red;margin: 0">Dữ liệu không liêu!</p>
+                          <p *ngIf="!createPostForm.get('vacanciesPostEnterprise')?.valid && createPostForm.get('vacanciesPostEnterprise')?.touched"style="color: red;margin: 0">Dữ liệu không hợp lệ!</p>
                         </div>
                       </div>
                       <div class="row">
@@ -6230,14 +6230,14 @@ License: For each use you must have a valid license purchased only from above li
                             <label for="form_email">Khu vực</label>
                             <input id="form_email" type="email" formControlName="addressMainEnterprise" name="email" class="form-control" placeholder="Ứng tuyển tại khu vực" required="required" data-error="Ứng tuyển tại khu vực">
                           </div>
-                          <p *ngIf="!createPostForm.get('addressMainEnterprise')?.valid && createPostForm.get('addressMainEnterprise')?.touched" style="color: red;margin: 0">Dữ liệu không liêu!</p>
+                          <p *ngIf="!createPostForm.get('addressMainEnterprise')?.valid && createPostForm.get('addressMainEnterprise')?.touched" style="color: red;margin: 0">Dữ liệu không hợp lệ!</p>
                         </div>
                         <div class="col-md-4">
                           <div class="form-group">
                             <label for="form_lastname">Ngày hết hạn</label>
                             <input id="form_lastname" type="date" (ngModelChange)="validateExpirationDate()" formControlName="expirationDatePostEnterprise" name="surname" class="form-control" placeholder="Khu vực làm việc" required="required" data-error="Lastname is required.">
                           </div>
-                          <p *ngIf="!createPostForm.get('expirationDatePostEnterprise')?.valid && createPostForm.get('expirationDatePostEnterprise')?.touched" style="color: red;margin: 0">Dữ liệu không liêu!</p>
+                          <p *ngIf="!createPostForm.get('expirationDatePostEnterprise')?.valid && createPostForm.get('expirationDatePostEnterprise')?.touched" style="color: red;margin: 0">Dữ liệu không hợp lệ!</p>
                           <p  id="expirationDate" style="margin: 0;color: red;display: none">Ngày không hợp lệ</p>
                         </div>
                         <div class="col-md-4">
@@ -6247,7 +6247,7 @@ License: For each use you must have a valid license purchased only from above li
                               <option *ngFor="let a of listFormJob" value="{{a.idFormJob}}">{{a.nameFormJob}}</option>
                             </select>
                           </div>
-                          <p *ngIf="!createPostForm.get('idFormJob')?.valid && createPostForm.get('idFormJob')?.touched" style="color: red;margin: 0">Dữ liệu không liêu!</p>
+                          <p *ngIf="!createPostForm.get('idFormJob')?.valid && createPostForm.get('idFormJob')?.touched" style="color: red;margin: 0">Dữ liệu không hợp lệ!</p>
 
                         </div>
                       </div>
@@ -6259,7 +6259,7 @@ License: For each use you must have a valid license purchased only from above li
                               <option *ngFor="let a of listRegime" value="{{a.idRegime}}">{{a.nameRegime}}</option>
                             </select>
                           </div>
-                          <p *ngIf="!createPostForm.get('idRegime')?.valid && createPostForm.get('idRegime')?.touched" style="color: red;margin: 0">Dữ liệu không liêu!</p>
+                          <p *ngIf="!createPostForm.get('idRegime')?.valid && createPostForm.get('idRegime')?.touched" style="color: red;margin: 0">Dữ liệu không hợp lệ!</p>
 
                         </div>
                         <div class="col-md-4">
@@ -6283,7 +6283,7 @@ License: For each use you must have a valid license purchased only from above li
                             <textarea id="form_message" name="message" formControlName="describePostEnterprise" class="form-control" placeholder="Write your message here." rows="4" required="required" data-error="Thêm mô tả bài viết"></textarea
                             >
                           </div>
-                          <p *ngIf="!createPostForm.get('describePostEnterprise')?.valid && createPostForm.get('describePostEnterprise')?.touched" style="color: red;">Dữ liệu không liêu!</p>
+                          <p *ngIf="!createPostForm.get('describePostEnterprise')?.valid && createPostForm.get('describePostEnterprise')?.touched" style="color: red;">Dữ liệu không hợp lệ!</p>
                         </div>
                         <div class="col-md-12" style="background: #50CD89; margin-top: 20px;border-radius: 5px;text-align: center;">
                           <input type="submit"  style="width: 100%" class="btn btn-success btn-send  pt-2 btn-block
@@ -6328,7 +6328,7 @@ License: For each use you must have a valid license purchased only from above li
                             <label for="form_name">Tên bài đăng</label>
                             <input  type="text" formControlName="namePostEnterpriseEdit" name="name" class="form-control" placeholder="Nhập tên bài đăng" required="required" data-error="Firstname is required.">
                           </div>
-                          <p *ngIf="!createPostForm.get('namePostEnterprise')?.valid && createPostForm.get('namePostEnterprise')?.touched" style="color: red;margin: 0">Dữ liệu không liêu!</p>
+                          <p *ngIf="!createPostForm.get('namePostEnterprise')?.valid && createPostForm.get('namePostEnterprise')?.touched" style="color: red;margin: 0">Dữ liệu không hợp lệ!</p>
                         </div>
                         <div class="col-md-4">
                           <div class="form-group">
@@ -6337,7 +6337,7 @@ License: For each use you must have a valid license purchased only from above li
                               <option *ngFor="let a of listField" value="{{a.idField}}">{{a.nameField}}</option>
                             </select>
                           </div>
-                          <p *ngIf="!createPostForm.get('idField')?.valid && createPostForm.get('idField')?.touched" style="color: red;margin: 0">Dữ liệu không liêu!</p>
+                          <p *ngIf="!createPostForm.get('idField')?.valid && createPostForm.get('idField')?.touched" style="color: red;margin: 0">Dữ liệu không hợp lệ!</p>
 
                         </div>
                         <div class="col-md-4">
@@ -6345,7 +6345,7 @@ License: For each use you must have a valid license purchased only from above li
                             <label for="form_name1">Vị trí ứng tuyển </label>
                             <input  type="text" formControlName="vacanciesPostEnterpriseEdit" name="name" class="form-control" placeholder="Nhập tên bài đăng" required="required" data-error="Firstname is required.">
                           </div>
-                          <p *ngIf="!createPostForm.get('vacanciesPostEnterprise')?.valid && createPostForm.get('vacanciesPostEnterprise')?.touched"style="color: red;margin: 0">Dữ liệu không liêu!</p>
+                          <p *ngIf="!createPostForm.get('vacanciesPostEnterprise')?.valid && createPostForm.get('vacanciesPostEnterprise')?.touched"style="color: red;margin: 0">Dữ liệu không hợp lệ!</p>
                         </div>
                       </div>
                       <div class="row">
@@ -6354,14 +6354,14 @@ License: For each use you must have a valid license purchased only from above li
                             <label for="form_email">Khu vực</label>
                             <input type="email" formControlName="addressMainEnterpriseEdit"  class="form-control" placeholder="Ứng tuyển tại khu vực" required="required" data-error="Ứng tuyển tại khu vực">
                           </div>
-                          <p *ngIf="!createPostForm.get('addressMainEnterprise')?.valid && createPostForm.get('addressMainEnterprise')?.touched" style="color: red;margin: 0">Dữ liệu không liêu!</p>
+                          <p *ngIf="!createPostForm.get('addressMainEnterprise')?.valid && createPostForm.get('addressMainEnterprise')?.touched" style="color: red;margin: 0">Dữ liệu không hợp lệ!</p>
                         </div>
                         <div class="col-md-4">
                           <div class="form-group">
                             <label for="form_lastname">Ngày hết hạn</label>
                             <input  type="date" (ngModelChange)="validateExpirationDate()" formControlName="expirationDatePostEnterpriseEdit" name="surname" class="form-control" placeholder="Khu vực làm việc" required="required" data-error="Lastname is required.">
                           </div>
-                          <p *ngIf="!createPostForm.get('expirationDatePostEnterprise')?.valid && createPostForm.get('expirationDatePostEnterprise')?.touched" style="color: red;margin: 0">Dữ liệu không liêu!</p>
+                          <p *ngIf="!createPostForm.get('expirationDatePostEnterprise')?.valid && createPostForm.get('expirationDatePostEnterprise')?.touched" style="color: red;margin: 0">Dữ liệu không hợp lệ!</p>
                           <p   style="margin: 0;color: red;display: none">Ngày không hợp lệ</p>
                         </div>
                         <div class="col-md-4">
@@ -6371,7 +6371,7 @@ License: For each use you must have a valid license purchased only from above li
                               <option *ngFor="let a of listFormJob" value="{{a.idFormJob}}">{{a.nameFormJob}}</option>
                             </select>
                           </div>
-                          <p *ngIf="!createPostForm.get('idFormJob')?.valid && createPostForm.get('idFormJob')?.touched" style="color: red;margin: 0">Dữ liệu không liêu!</p>
+                          <p *ngIf="!createPostForm.get('idFormJob')?.valid && createPostForm.get('idFormJob')?.touched" style="color: red;margin: 0">Dữ liệu không hợp lệ!</p>
 
                         </div>
                       </div>
@@ -6383,7 +6383,7 @@ License: For each use you must have a valid license purchased only from above li
                               <option *ngFor="let a of listRegime" value="{{a.idRegime}}">{{a.nameRegime}}</option>
                             </select>
                           </div>
-                          <p *ngIf="!createPostForm.get('idRegime')?.valid && createPostForm.get('idRegime')?.touched" style="color: red;margin: 0">Dữ liệu không liêu!</p>
+                          <p *ngIf="!createPostForm.get('idRegime')?.valid && createPostForm.get('idRegime')?.touched" style="color: red;margin: 0">Dữ liệu không hợp lệ!</p>
 
                         </div>
                         <div class="col-md-4">
@@ -6407,7 +6407,7 @@ License: For each use you must have a valid license purchased only from above li
                             <textarea name="message" formControlName="describePostEnterpriseEdit" class="form-control" placeholder="Write your message here." rows="4" required="required" data-error="Thêm mô tả bài viết"></textarea
                             >
                           </div>
-                          <p *ngIf="!createPostForm.get('describePostEnterprise')?.valid && createPostForm.get('describePostEnterprise')?.touched" style="color: red;">Dữ liệu không liêu!</p>
+                          <p *ngIf="!createPostForm.get('describePostEnterprise')?.valid && createPostForm.get('describePostEnterprise')?.touched" style="color: red;">Dữ liệu không hợp lệ!</p>
                         </div>
                         <div class="col-md-12" style="background: #50CD89; margin-top: 20px;border-radius: 5px;text-align: center;">
                           <input type="submit"  style="width: 100%" class="btn btn-success btn-send  pt-2 btn-block

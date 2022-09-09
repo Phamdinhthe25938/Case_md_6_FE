@@ -31,7 +31,8 @@
                 <div class="form-group">
                   <div class="input-group">
 <!--                    <span class="input-group-addon"> <i class="glyphicon glyphicon-envelope color-blue"> </i> </span>-->
-                    <input id="email" formControlName="email" name="email" placeholder="email address" class="form-control" style="margin-top: 20px; border-radius: 5px"  type="email">
+                    <input id="email" (change)="checkEmailU()" formControlName="email" name="email" placeholder="email address" class="form-control" style="margin-top: 20px; border-radius: 5px"  type="email">
+                    <p *ngIf="!checkEmail" style="color: red">Email không tồn tại</p>
                     <input id="new-password" formControlName="passwordNew" name="new-password" placeholder="new password" class="form-control" style="margin-top: 20px ; border-radius: 5px"  type="password">
                     <input (change)="checkpassword()" formControlName="enterPassword" id="enter-password" name="enter-password" placeholder="enter-password" class="form-control" style="margin-top: 20px; border-radius: 5px" type="enter-password">
                     <p *ngIf="!checkpass" style="color: red">Mật khẩu không khớp</p>
