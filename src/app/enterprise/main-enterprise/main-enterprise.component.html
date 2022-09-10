@@ -12,6 +12,7 @@ License: For each use you must have a valid license purchased only from above li
 -->
 
 <!--begin::Head-->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
 
   <link rel="canonical" href="Https://preview.keenthemes.com/seven-html-free" />
   <link rel="shortcut icon" href="/assets/enterprise/media/logos/favicon.ico" />
@@ -3087,7 +3088,7 @@ License: For each use you must have a valid license purchased only from above li
                       </thead>
                       <!--end::Table head-->
                       <!--begin::Table body-->
-                      <tbody *ngFor="let a of listPostByIdEnterprise |paginate: {itemsPerPage: 4,currentPage:p}">
+                      <tbody *ngFor="let a of listPostByIdEnterprise |paginate: {itemsPerPage: 1,currentPage:p}">
                       <tr>
                         <td>
                           <div class="d-flex align-items-center">
@@ -3104,7 +3105,7 @@ License: For each use you must have a valid license purchased only from above li
                           <span class="text-muted fw-bold text-muted d-block fs-7" style="    font-size: 12px !important;">{{a.datePostEnterprise}}</span>
                         </td>
                         <td class="text-end" style="text-align: center ">
-                          <span class="text-muted fw-bold text-muted d-block fs-7" style="  text-align: center;  font-size: 12px !important;">{{a.quantityApplyPost}}</span>
+                          <span  class="text-muted fw-bold text-muted d-block fs-7 quantityApply" data-toggle="modal" data-target="#showUserApply" (click)="userApplyByIdPost(a.idPostEnterprise)"   style="text-align: center;cursor: pointer;;  font-size: 12px !important;" >{{a.quantityApplyPost}}</span>
 <!--                          <div class="d-flex flex-column w-100 me-2">-->
 <!--                            <div class="d-flex flex-stack mb-2">-->
 <!--                              <span class="text-muted me-2 fs-7 fw-bold">50%</span>-->
@@ -3275,18 +3276,21 @@ License: For each use you must have a valid license purchased only from above li
                 <!--begin::Body-->
                 <div class="card-body pt-5">
                   <!--begin::Item-->
-                  <div class="d-flex align-items-sm-center mb-7" *ngFor="let a of notifiApplyFromUser">
+                  <div class=" d-flex align-items-sm-center mb-7" *ngFor="let a of notifiApplyFromUser">
                     <!--begin::Symbol-->
                     <div class="symbol symbol-50px me-5">
 													<span class="symbol-label">
-														<img src="{{a.userApply.imgCV}}" class="h-50 align-self-center" alt="" />
+														<img style="height: 85% !important;border-radius: 2px" src="{{a.userApply.imgCV}}" class="h-50 align-self-center" alt="" />
 													</span>
                     </div>
                     <!--end::Symbol-->
                     <!--begin::Section-->
                     <div class="d-flex align-items-center flex-row-fluid flex-wrap">
                       <div class="flex-grow-1 me-2">
-                        <a href="#" class="text-gray-800 text-hover-primary fs-6 fw-bolder">{{a.userApply.nameCV}}</a>
+                        <div>
+                          <a href="#" class="text-gray-800 text-hover-primary fs-6 fw-bolder">{{a.userApply.nameCV}}</a>
+                          <i style="margin-left: 10px ; color:green;font-size: 15px "  *ngIf="a.statusConfirm" class="fa-solid fa-square-check"></i>
+                        </div>
                         <span class="text-muted fw-bold d-block fs-7">SDT : {{a.userApply.numberCV}}</span>
                         <span class="text-muted fw-bold d-block fs-7">  {{a.userApply.mailCv}} </span>
                       </div>
@@ -6211,7 +6215,7 @@ License: For each use you must have a valid license purchased only from above li
 <!--modal chinh sua bai dang -->
 <div class="container" >
   <!-- Trigger the modal with a button --><!-- Modal -->
-  <div  class="modal" id="edit">
+  <div  class="modal " id="edit">
     <div class="modal-dialog">
       <!-- Modal content-->
       <div class="modal-content" style="padding: 20px; width: 1200px;right: 333px">
@@ -6352,6 +6356,79 @@ License: For each use you must have a valid license purchased only from above li
     </div>
   </div>
 </div>
+<div class="container">
+  <h2>Modal Example</h2>
+  <!-- Trigger the modal with a button -->
+  <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal1">Open Modal</button>
+  <!-- Modal -->
+  <div class="modal fade" id="myModal1" role="dialog">
+    <div class="modal-dialog">
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Modal Header</h4>
+        </div>
+        <div class="modal-body">
+          <p>Some text in the modal.</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+<div class="container" >
+  <!-- Trigger the modal with a button --><!-- Modal -->
+  <div  class="modal" id="showUserApply">
+    <div class="modal-dialog">
+      <!-- Modal content-->
+      <div class="modal-content" style="width: 1200px;position: relative;right: 340px;height: 600px;background: beige;">
+        <div class="container mt-5">
+          <div class="row">
+            <h2 style="text-align: center;color: red;font-size: 26px">Danh sách CV</h2>
+          </div>
+          <div class="row">
+            <div class="col-md-3" *ngFor="let a of listUserApplyByIdPost">
+              <div class="card">
+                <div class="image-container">
+                  <div class="first">
+                    <div class="d-flex justify-content-between align-items-center">
+<!--                      <span class="discount">-25%</span>-->
+<!--                      <span class="wishlist"><i class="fa-solid fa-badge-check"></i></span>-->
+                    </div>
+                  </div>
+                  <img src="{{a.imgCV}}" class="img-fluid rounded thumbnail-image">
+                </div>
+                <div class="product-detail-container p-2">
+                  <div class="d-flex justify-content-between align-items-center">
+                    <p style="margin: 0;width: 100%" class="dress-name">HVT : <span style="font-weight: 400;color: red;margin-left: 10px">  {{a.nameCV}}</span></p>
+                  </div>
+                  <div class="d-flex justify-content-between align-items-center pt-1">
+                    <p style="margin: 0;width: 100%" class="dress-name">SĐT : <span style="font-weight: 400;color: red;margin-left: 10px">  {{a.numberCV}}</span></p>
+                  </div>
+<!--                  <div class="d-flex justify-content-between align-items-center pt-1">-->
+<!--                    <p style="margin: 0;width: 100%" class="dress-name"><span style="font-weight: 400;color: red"> {{a.mailCv}}</span></p>-->
+<!--                  </div>-->
+                  <div class="d-flex justify-content-between align-items-center pt-1">
+                    <p style="margin: 0;width: 100%" class="dress-name">TT :
+                      <span *ngIf="!a.statusConfirm" style="font-weight: 400;color: red;margin-left: 10px">Chưa xác thực</span>
+                      <span *ngIf="a.statusConfirm" style="font-weight: 400;color: red;margin-left: 10px">Đã xác thực</span>
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!--<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#showUserApply">Open Modal</button>-->
 
 <!--<img id="myImg" src="https://baoquocte.vn/stores/news_dataimages/dieulinh/012020/29/15/nhung-buc-anh-dep-tuyet-voi-ve-tinh-ban.jpg" alt="Snow" style="width:100%;max-width:300px">-->
 <!--<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModalImg">Open Modal</button>-->

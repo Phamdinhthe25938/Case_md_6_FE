@@ -46,7 +46,7 @@
                     <div class="col-md-6 mb-4">
                       <div class="form-outline">
                         <label class="form-label" for="file">Ảnh đại diện</label>
-                        <input type="file" id="file" #userPhoto (change)="onFileSelected({event : $event})" name="image" autocomplete="off"  class="form-control form-control-lg" />
+                        <input type="file" id="file" #userPhoto (change)="onFileSelected({event : $event})" name="image"   class="form-control form-control-lg" />
                       </div>
                       <span *ngIf="!registerForm.get('imgEnterprise')?.valid && registerForm.get('imgEnterprise')?.touched" style="color: red">Dữ liệu không hợp lệ !</span>
                     </div>

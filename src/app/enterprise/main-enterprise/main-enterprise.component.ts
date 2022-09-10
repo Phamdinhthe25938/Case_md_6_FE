@@ -10,6 +10,7 @@ import {Field} from "../../model/Field";
 import {PostEnterprise} from "../../model/PostEnterprise";
 import {Router} from "@angular/router";
 import {NotiEnter} from "../../model/NotiEnter";
+import {UserApply} from "../../model/UserApply";
 
 @Component({
   selector: 'app-table-enterprise',
@@ -27,6 +28,7 @@ export class MainEnterpriseComponent implements OnInit {
   postEdit!:PostEnterprise;
   notifiApplyFromUser!: NotiEnter[];
   idConfirmNotifi!:number;
+  listUserApplyByIdPost!:UserApply[];
   constructor(private router:Router, private enterpriseService: EnterpriseService, private loginService: LoginService) {
   }
   logout(){
@@ -333,7 +335,7 @@ export class MainEnterpriseComponent implements OnInit {
             idEnterprise: this.enterpriseLogin.idEnterprise,
           }
         }
-        this.enterpriseService.savePost(postEnterprise).subscribe(() => {
+        this.enterpriseService.editPost(postEnterprise).subscribe(() => {
           alert("Chỉnh sửa bài viết  thành công!")
           this.getAllPostByEnterprise();
         })
@@ -356,6 +358,13 @@ export class MainEnterpriseComponent implements OnInit {
   confirmNotifi(){
        this.enterpriseService.confirmNotifi(this.idConfirmNotifi).subscribe(()=>{
          alert("Xác thực thành công !");
+         this.notifiFromUserApply();
+       })
+  }
+
+  userApplyByIdPost(id:number){
+    this.enterpriseService.allUserApplyByIdPost(id).subscribe((data)=>{
+      this.listUserApplyByIdPost =data;
        })
   }
 }

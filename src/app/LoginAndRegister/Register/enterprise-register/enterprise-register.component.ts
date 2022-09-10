@@ -62,7 +62,7 @@ export class EnterpriseRegisterComponent implements OnInit {
     nameEnterprise: new FormControl("", Validators.required),
     codeConfirmEnterprise: new FormControl("", Validators.required),
     gmailEnterprise: new FormControl("", Validators.required),
-    imgEnterprise: new FormControl("", Validators.required),
+    imgEnterprise: new FormControl(),
     addressMainEnterprise: new FormControl("", Validators.required),
     idField: new FormControl(),
     describeEnterprise: new FormControl("", Validators.required),
@@ -70,6 +70,7 @@ export class EnterpriseRegisterComponent implements OnInit {
 
   register() {
     let filed = this.registerForm.value;
+     this.registerForm.get("imgEnterprise")?.setValue(this.fb);
     let filedNew = {
       nameEnterprise: filed.nameEnterprise,
       codeConfirmEnterprise: filed.codeConfirmEnterprise,
