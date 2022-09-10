@@ -96,4 +96,9 @@ export class EnterpriseService {
   allUserApplyByIdPost(id:number):Observable<any>{
     return this.http.get<any>(`http://localhost:8080/enterprise/allUserApplyByIdPost/${id}`);
   }
+//  Thực hiện giao dịch nạp tiền
+  saveTransWallet(transWallet:any):Observable<any> {
+    return this.http.post<any>(`http://localhost:8080/enterprise/saveTransWallet`,transWallet);
+
+  }
 }

@@ -5987,9 +5987,22 @@ License: For each use you must have a valid license purchased only from above li
               <input type="number"  formControlName="viEnterprise"  id="username2" class="form-control" >
               <p *ngIf="!walletForm.get('viEnterprise')?.valid && walletForm.get('viEnterprise')?.touched " style="color: red">Số tiền nhỏ nhất nạp là 5$</p>
             </div>
+            <div class="form-group">
+                <div class="row">
+                   <div class="col-md-6">
+                     <label for="username234" class="text-info">Up hóa đơn giao dịch :</label><br>
+                     <input id="username234" type="file"  id="file" #userPhoto (change)="onFileSelected({event : $event})"   name="image" autocomplete="off"  class="form-control" >
+                   </div>
+                  <div class="col-md-6">
+                    <div class="image-container">
+                      <img src="{{fb}}" class="img-fluid rounded thumbnail-image">
+                    </div>
+                  </div>
+                </div>
+            </div>
           </div>
           <div class="modal-footer">
-            <button type="submit" class="btn btn-default btn btn-info add-new" >Nạp ví</button>
+            <button type="submit" class="btn btn-default btn btn-info add-new" >Gửi yêu cầu !</button>
           </div>
         </div>
       </form>

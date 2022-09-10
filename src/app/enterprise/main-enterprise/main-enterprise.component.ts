@@ -3,7 +3,7 @@ import {EnterpriseService} from "../../services/enterprise/enterprise.service";
 import {Enterprise} from "../../model/Enterprise";
 import {LoginService} from "../../services/login/login.service";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
-import {min} from "rxjs";
+import {finalize, min, Observable} from "rxjs";
 import {FormJob} from "../../model/FormJob";
 import {Regime} from "../../model/Regime";
 import {Field} from "../../model/Field";
@@ -11,6 +11,7 @@ import {PostEnterprise} from "../../model/PostEnterprise";
 import {Router} from "@angular/router";
 import {NotiEnter} from "../../model/NotiEnter";
 import {UserApply} from "../../model/UserApply";
+import {AngularFireStorage} from "@angular/fire/compat/storage";
 
 @Component({
   selector: 'app-table-enterprise',
@@ -29,11 +30,67 @@ export class MainEnterpriseComponent implements OnInit {
   notifiApplyFromUser!: NotiEnter[];
   idConfirmNotifi!:number;
   listUserApplyByIdPost!:UserApply[];
-  constructor(private router:Router, private enterpriseService: EnterpriseService, private loginService: LoginService) {
+  title = "cloudsSorage";
+  fb: string = "";
+  downloadURL: Observable<string> | undefined;
+  constructor(private router:Router,private storage: AngularFireStorage, private enterpriseService: EnterpriseService, private loginService: LoginService) {
+  }
+  onFileSelected({event}: { event: any }) {
+    var n = Date.now();
+    const file = event.target.files[0];
+    const filePath = `RoomsImages/${n}`;
+    const fileRef = this.storage.ref(filePath);
+    const task = this.storage.upload(`RoomsImages/${n}`, file);
+    task
+      .snapshotChanges()
+      .pipe(
+        finalize(() => {
+          this.downloadURL = fileRef.getDownloadURL();
+          this.downloadURL.subscribe(url => {
+            if (url) {
+              this.fb = url;
+            }
+            console.log(this.fb);
+          });
+        })
+      )
+      .subscribe(url => {
+        if (url) {
+          console.log(url);
+        }
+      });
+  }
+
+  walletForm = new FormGroup({
+    codeVi: new FormControl("", Validators.required),
+    viEnterprise: new FormControl(0, [Validators.required,Validators.pattern("^[0-9]+"),Validators.min(5)]),
+    imgTransWallet:new FormControl(),
+  })
+  changeCodeViForm = new FormGroup({
+    codeViOld: new FormControl("", Validators.required),
+    codeViNew: new FormControl("", [Validators.required, Validators.minLength(4), Validators.pattern("(?=^.{8,}$)((?=.*\\d)|(?=.*\\W+))(?![.\\n])(?=.*[A-Z])(?=.*[a-z]).*$")]),
+    codeViNewAgain: new FormControl("", [Validators.required, Validators.minLength(4), Validators.pattern("(?=^.{8,}$)((?=.*\\d)|(?=.*\\W+))(?![.\\n])(?=.*[A-Z])(?=.*[a-z]).*$")]),
+  })
+
+  createPostForm = new FormGroup({
+        namePostEnterprise: new FormControl("", Validators.required),
+        addressMainEnterprise: new FormControl("", Validators.required),
+        idField: new FormControl(),
+        idFormJob: new FormControl(),
+        idRegime: new FormControl(),
+        salarySmallPostEnterprise: new FormControl(0, [Validators.required, Validators.min(0),Validators.pattern("^[0-9]+")]),
+        salaryBigPostEnterprise: new FormControl(0, [Validators.required, Validators.min(0),Validators.pattern("^[0-9]+")]),
+        vacanciesPostEnterprise: new FormControl("", Validators.required),
+        expirationDatePostEnterprise: new FormControl("", Validators.required),
+        describePostEnterprise: new FormControl("", Validators.required),
+      })
+  setStatusEnterpriseTo1() {
+    this.enterpriseService.setStatusEnterpriseTo1(this.enterpriseLogin.idEnterprise).subscribe(() => {
+    })
   }
   logout(){
-     this.loginService.logout();
-     this.router.navigate(["/login"]);
+    this.loginService.logout();
+    this.router.navigate(["/login"]);
   }
   enterpriseLoginFunction(): void {
     let username = this.loginService.getUserToken().username;
@@ -70,12 +127,6 @@ export class MainEnterpriseComponent implements OnInit {
       console.log(data)
     })
   }
-
-  setStatusEnterpriseTo1() {
-    this.enterpriseService.setStatusEnterpriseTo1(this.enterpriseLogin.idEnterprise).subscribe(() => {
-    })
-  }
-
   inputCodeViWalletForm() {
     if (this.walletForm.value.codeVi !== this.enterpriseLogin.codeViEnterprise) {
       // @ts-ignore
@@ -89,29 +140,6 @@ export class MainEnterpriseComponent implements OnInit {
       document.getElementById('codeVi2').style.display = "block";
     }
   }
-
-  walletForm = new FormGroup({
-    codeVi: new FormControl("", Validators.required),
-    viEnterprise: new FormControl(0, [Validators.required,Validators.pattern("^[0-9]+"),Validators.min(5)])
-  })
-  changeCodeViForm = new FormGroup({
-    codeViOld: new FormControl("", Validators.required),
-    codeViNew: new FormControl("", [Validators.required, Validators.minLength(4), Validators.pattern("(?=^.{8,}$)((?=.*\\d)|(?=.*\\W+))(?![.\\n])(?=.*[A-Z])(?=.*[a-z]).*$")]),
-    codeViNewAgain: new FormControl("", [Validators.required, Validators.minLength(4), Validators.pattern("(?=^.{8,}$)((?=.*\\d)|(?=.*\\W+))(?![.\\n])(?=.*[A-Z])(?=.*[a-z]).*$")]),
-  })
-
-  createPostForm = new FormGroup({
-        namePostEnterprise: new FormControl("", Validators.required),
-        addressMainEnterprise: new FormControl("", Validators.required),
-        idField: new FormControl(),
-        idFormJob: new FormControl(),
-        idRegime: new FormControl(),
-        salarySmallPostEnterprise: new FormControl(0, [Validators.required, Validators.min(0),Validators.pattern("^[0-9]+")]),
-        salaryBigPostEnterprise: new FormControl(0, [Validators.required, Validators.min(0),Validators.pattern("^[0-9]+")]),
-        vacanciesPostEnterprise: new FormControl("", Validators.required),
-        expirationDatePostEnterprise: new FormControl("", Validators.required),
-        describePostEnterprise: new FormControl("", Validators.required),
-      })
   createPost() {
     if (this.createPostForm.valid) {
       let createPostForm = this.createPostForm.value;
@@ -175,18 +203,33 @@ export class MainEnterpriseComponent implements OnInit {
   rechargeWallet() {
     if(this.walletForm.valid){
       if (this.walletForm.value.codeVi === this.enterpriseLogin.codeViEnterprise) {
-        let id = this.enterpriseLogin.idEnterprise;
-        console.log(this.walletForm.value)
-        this.enterpriseService.rechargeWallet(id, Number(this.walletForm.value.viEnterprise)).subscribe(() => {
-          alert("Nạp ví thành công !")
-          this.walletForm = new FormGroup({
-            codeVi: new FormControl("", Validators.required),
-            viEnterprise: new FormControl(0, [Validators.required,Validators.pattern("^[0-9]+")])
+        this.walletForm.get("imgTransWallet")?.setValue(this.fb);
+        if(this.walletForm.value.imgTransWallet===""){
+          alert("Vui lòng đợi hóa đơn được upload !")
+        }
+        else {
+          let id = this.enterpriseLogin.idEnterprise;
+          let transWalletValue = this.walletForm.value;
+          let transWalletOj ={
+            enterprise:{
+              idEnterprise:id,
+            },
+            numberMoney:transWalletValue.viEnterprise,
+            imgTransaction:transWalletValue.imgTransWallet
+          }
+          this.enterpriseService.saveTransWallet(transWalletOj).subscribe(() => {
+            alert("Thực hiện gửi yêu cầu thành công vui lòng đợi admin xác nhận !")
+            this.walletForm = new FormGroup({
+              codeVi: new FormControl("", Validators.required),
+              viEnterprise: new FormControl(0, [Validators.required,Validators.pattern("^[0-9]+")]),
+              imgTransWallet:new FormControl(),
+            })
+            this.fb="";
+            this.enterpriseLoginFunction();
           })
-          this.enterpriseLoginFunction();
-        })
-        // @ts-ignore
-        document.getElementById('codeVi2').style.display = "none";
+          // @ts-ignore
+          document.getElementById('codeVi2').style.display = "none";
+        }
       } else {
         alert("Mã ví không hợp lệ!")
       }
