@@ -15,4 +15,7 @@
   width: 48px!important;
   height: 48px!important;
 }
+.col-sm-4 {
+   width: 40%;
+}
 

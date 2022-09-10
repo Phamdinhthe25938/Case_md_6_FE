@@ -119,6 +119,10 @@ export class HomepageComponent implements OnInit {
       }
       this.userService.saveCv(Cv).subscribe(() => {
         alert("ok la");
+        // @ts-ignore
+        document.getElementById('saveChangeCV').style.display = "block";
+        // @ts-ignore
+        document.getElementById('confirmCv').style.display = "none";
       })
     }
   }
@@ -187,13 +191,19 @@ export class HomepageComponent implements OnInit {
   findUserApplyByIdAppUserAndIdPost(){
     let idPost = this.idJobApply;
     let idLogin = this.loginService.getUserToken().id;
-    this.userService.findUserApplyByIdAppUserAndIdPost(idLogin,idPost).subscribe((data)=>{
-        this.cvByIdAppUserAndIdPost = data;
-         if(this.cvByIdAppUserAndIdPost===null){
-           this.saveApply();
-         }else {
-           alert("Với CV ĐANG CÓ BẠN ĐÃ APPLY CÔNG VIỆC NÀY XIN THAY ĐỔI CV");
-         }
+    this.userService.findCvByIdUser(idLogin).subscribe((data)=>{
+      if(data!=null){
+        this.userService.findUserApplyByIdAppUserAndIdPost(idLogin,idPost).subscribe((data)=>{
+          this.cvByIdAppUserAndIdPost = data;
+          if(this.cvByIdAppUserAndIdPost===null){
+            this.saveApply();
+          }else {
+            alert("Với CV ĐANG CÓ BẠN ĐÃ APPLY CÔNG VIỆC NÀY XIN THAY ĐỔI CV");
+          }
+        })
+      }else {
+        alert("Vui lòng tạo CV trước khi aplly mọi job !")
+      }
     })
   }
 }

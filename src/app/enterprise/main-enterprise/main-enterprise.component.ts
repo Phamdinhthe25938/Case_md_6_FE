@@ -158,13 +158,18 @@ export class MainEnterpriseComponent implements OnInit {
   }
   confirmCreatePost() {
     if (!this.enterpriseLogin.statusEnterprise) {
-      alert("Tài khoản của bạn không đủ tiền để đăng bài mới vui lòng nạp thêm !")
-    } else {
+      if(this.enterpriseLogin.viEnterprise<5){
+        alert("Tài khoản của bạn không đủ tiền để đăng bài mới vui lòng nạp thêm !")
+      }
+      else {
         if(this.validateExpirationDate() && this.validatesalaryBigPostEnterprise()){
           this.createPost();
         }else {
           alert("Vui lòng kiểm tra lại form");
         }
+    }
+    }else {
+      alert("Tài khoản của bạn đã bị khóa xin vui lòng liên hệ với admin !")
     }
   }
   rechargeWallet() {
