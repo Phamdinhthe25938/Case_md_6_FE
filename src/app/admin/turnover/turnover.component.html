@@ -643,53 +643,7 @@
     </div>
 </div>
 <!--Nạp Ví tiền cho admin -->
-<div  class="modal" id="wallegtAdmin">
-  <div class="modal-dialog">
-    <!-- Modal content-->
-    <form [formGroup]="walletForm" (ngSubmit)="rechargeWallet()">
-      <div class="modal-content">
-        <div class="modal-header" >
-          <div style="display: flex;flex-direction: column">
-            <h4 class="modal-title">Nạp ví tiền</h4>
-            <h4 style="margin-top: 4px" class="modal-title">Số tiền : {{enterpriseLogin?.viEnterprise}} $</h4>
-          </div>
-          <button type="button" class="close" style="border: none" data-dismiss="modal">X</button>
-        </div>
-        <div class="modal-body">
-          <div class="form-group">
-            <label for="username1" class="text-info">Nhập mã ví:</label><br>
-            <input type="text" value=""(ngModelChange)="inputCodeViWalletForm()" formControlName="codeVi"   id="username1" class="form-control">
-          </div>
-          <p *ngIf="!walletForm.get('codeVi')?.valid  && walletForm.get('codeVi')?.touched" style="color: red">Không được để trống</p>
-          <p id="codeVi1" style="display:none;color: red">Mã ví không hợp lệ!</p>
-          <p id="codeVi2" style="display:none;color: forestgreen">Mã ví hợp lệ !</p>
-          <div class="form-group">
-            <label for="username2" class="text-info">Nhập số tiền :</label><br>
-            <input type="number"  formControlName="viEnterprise"  id="username2" class="form-control" >
-            <p *ngIf="!walletForm.get('viEnterprise')?.valid && walletForm.get('viEnterprise')?.touched " style="color: red">Số tiền nhỏ nhất nạp là 5$</p>
-          </div>
-          <div class="form-group">
-            <div class="row">
-              <div class="col-md-6">
-                <label for="username234" class="text-info">Up hóa đơn giao dịch :</label><br>
-                <input id="username234" type="file"  id="file" #userPhoto (change)="onFileSelected({event : $event})"   name="image" autocomplete="off"  class="form-control" >
-              </div>
-              <div class="col-md-6">
-                <div class="image-container">
-                  <img src="{{fb}}" class="img-fluid rounded thumbnail-image">
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="modal-footer">
-          <button type="submit" class="btn btn-default btn btn-info add-new" >Gửi yêu cầu !</button>
-        </div>
-      </div>
-    </form>
 
-  </div>
-</div>
 
 
 
