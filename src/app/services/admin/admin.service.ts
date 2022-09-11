@@ -39,4 +39,16 @@ export class AdminService {
   listTransactionHistoryByDateNow():Observable<TransactionHistory[]>{
     return this.http.get<any>(`http://localhost:8080/admin/listTransactionHistoryByDateNow`);
   }
+  listTransWallet():Observable<any>{
+    return this.http.get<any>(`http://localhost:8080/admin/transWalletAll`);
+  }
+  getViAdmin():Observable<any>{
+    return this.http.get<any>(`http://localhost:8080/admin/getViAdmin`);
+  }
+  confirmTransWallet(id:number):Observable<any>{
+    return this.http.post<any>(`http://localhost:8080/admin/confirmTransWallet/${id}`,"");
+  }
+  getTransWalletById(id:number){
+    return this.http.get<any>(`http://localhost:8080/admin/getTransWalletById/${id}`,);
+  }
 }

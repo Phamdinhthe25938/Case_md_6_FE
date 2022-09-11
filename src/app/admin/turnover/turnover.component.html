@@ -1,5 +1,6 @@
 <link rel="apple-touch-icon" sizes="76x76" href="/assets/admin/img/apple-icon.png">
 <link rel="icon" type="image/png" href="/assets/admin/img/favicon.png">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 <!--     Fonts and icons     -->
 <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
 <!-- Nucleo Icons -->
@@ -12,7 +13,7 @@
 <link id="pagestyle" href="/assets/admin/css/argon-dashboard.css?v=2.0.4" rel="stylesheet" />
 
 <div class="min-height-300 bg-primary position-absolute w-100"></div>
-<aside class="sidenav bg-white navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-4 " id="sidenav-main">
+<aside style="z-index: 1;" class="sidenav bg-white navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-4 " id="sidenav-main">
   <div class="sidenav-header">
     <i class="fas fa-times p-3 cursor-pointer text-secondary opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
     <a class="navbar-brand m-0" href=" https://demos.creative-tim.com/argon-dashboard/pages/dashboard.html " target="_blank">
@@ -293,12 +294,12 @@
             <div class="row">
               <div class="col-8">
                 <div class="numbers">
-                  <p class="text-sm mb-0 text-uppercase font-weight-bold">Sales</p>
+                  <p class="text-sm mb-0 text-uppercase font-weight-bold">Tài khoản </p>
                   <h5 class="font-weight-bolder">
-<!--                    $103,430-->
+                        {{viAdmin.numberMoneyVi}} $
                   </h5>
                   <p class="mb-0">
-                    <span class="text-success text-sm font-weight-bolder">+5%</span> than last month
+<!--                    <span class="text-success text-sm font-weight-bolder">+5%</span> than last month-->
                   </p>
                 </div>
               </div>
@@ -459,29 +460,34 @@
           </div>
         </div>
       </div>
+<!--      <img style="width: 35px;height: 35px;margin-right: 10px;border-radius: 5px"  class="ni ni-mobile-button text-white opacity-10" src="{{a.imgEnterprise}}" alt="">-->
+
       <div class="col-lg-5">
         <div class="card">
           <div class="card-header pb-0 p-3">
             <h6 class="mb-0">Bảng xếp hạng</h6>
           </div>
           <div class="card-body p-3">
-            <ul class="list-group" *ngFor="let a of enterpriseOderByRates">
-              <li class="list-group-item border-0 d-flex justify-content-between ps-0 mb-2 border-radius-lg">
-                <div class="d-flex align-items-center">
-                  <div >
-                    <img style="width: 35px;height: 35px;margin-right: 10px;border-radius: 5px"  class="ni ni-mobile-button text-white opacity-10" src="{{a.imgEnterprise}}" alt="">
+            <div class="row">
+                <div class="row col-md-12" *ngFor="let a of transWallets">
+                  <div class="col-md-4">
+                    <img style="width: 35px;height: 35px;margin-right: 10px;border-radius: 5px"  class="ni ni-mobile-button text-white opacity-10" src="{{a.enterprise.imgEnterprise}}" alt="">
+                    <span>{{a.enterprise.nameEnterprise}}</span>
                   </div>
-                  <div class="d-flex flex-column">
-                    <h6 class="mb-1 text-dark text-sm" style="color:red !important;">{{a.nameEnterprise}}</h6>
-                    <span class="text-xs" style="color: black">Tỷ lệ : {{a.ratesEnterprise}} %<span class="font-weight-bold"></span></span>
+                  <div class="col-md-2" >
+                    <img data-target="#imgOder" data-toggle="modal" (click)="getImgTransWallet(a.id)" src="{{a.imgTransaction}}" style="cursor: pointer;width: 35px;height: 35px;margin-right: 10px;border-radius: 5px" alt="">
+                   </div>
+                  <div style="text-align: center;color: red;font-weight: 700" class="col-md-2">{{a.numberMoney}} $</div>
+                  <div class="col-md-3" style="display:flex;flex-direction: column;font-size: 12px;justify-content: center">
+                    <i style="text-align: center">{{a.timeTransaction}}</i>
+                    <i style="text-align: center">{{a.dateTransaction}}</i>
+                  </div>
+                  <div class="col-md-1">
+                       <span data-toggle="modal" (click)="getIdTransWallet(a.id)" data-target="#confirmWallet" *ngIf="!a.statusConfirm"><i style="cursor: pointer;font-size: 20px;color: red" class="fa-solid fa-circle-exclamation"></i></span>
+                       <span *ngIf="a.statusConfirm"><i class="fa-solid fa-check-to-slot"></i></span>
                   </div>
                 </div>
-                <div class="d-flex">
-                  <button class="btn btn-link btn-icon-only btn-rounded btn-sm text-dark icon-move-right my-auto"><i class="ni ni-bold-right" aria-hidden="true"></i></button>
-                </div>
-              </li>
-
-            </ul>
+            </div>
           </div>
         </div>
       </div>
@@ -592,6 +598,101 @@
     </div>
   </div>
 </div>
+
+<!--xÁC THỰC VIỆC NẠP TIỀN CỦA Enterprise-->
+<!--<div class="container" >-->
+  <!-- Trigger the modal with a button --><!-- Modal -->
+  <div  class="modal"   id="confirmWallet">
+    <div class="modal-dialog">
+      <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header" >
+            <div style="">
+              <h4 class="modal-title" style="font-size: inherit">Xác nhận hóa đơn nạp tiền của doanh nghiệp</h4>
+            </div>
+            <button type="button" class="close" style="border: none;background-color: #fff" data-dismiss="modal">X</button>
+          </div>
+          <div class="modal-body">
+            <div class="form-group">
+              <label for="username12" class="text-info">Nhập mã ví :</label><br>
+              <input type="text" [(ngModel)]="passViCFValue" (ngModelChange)="vdICodeViConfirm()"  id="username12" class="form-control">
+            <p  id="codeViAdmin1" style="display:none;margin: 8px 0 0 8px;color: red">Mã ví mới chưa khớp!</p>
+            <p id="codeViAdmin2" style="display:none;margin: 8px 0 0 8px;color: forestgreen">Mã ví mới đã khớp</p>
+          </div>
+        </div>
+          <div class="modal-footer" style="display: flex;align-items: center;justify-content: space-between">
+            <div >
+              <p id="notifiDkCF1" style="font-size: 14px;color: black;display: none">Lưu ý : <i style="color: red"> tài khoản không đủ đk giao dịch</i></p>
+              <p id="notifiDkCF2" style="font-size: 14px;color: black;display: none">Lưu ý : <i style="color: green"> tài khoản  đủ đk giao dịch</i></p>
+            </div>
+            <div>
+              <button  type="submit" (click)="confirmTransWallet()" class=" btn btn-default btn btn-info add-new"  >Xác nhận</button>
+            </div>
+          </div>
+    </div>
+  </div>
+  </div >
+<div  class="modal" id="imgOder" >
+  <div class="modal-dialog" >
+    <!-- Modal content-->
+    <div class="modal-content" style="display: flex;align-items: center;justify-content: center">
+              <div style="padding: 10px">
+                <img style="width: 100%;height: 100%;border-radius: 5px" src="{{imgTransWallet}}" alt="">
+              </div>
+      </div>
+    </div>
+</div>
+<!--Nạp Ví tiền cho admin -->
+<div  class="modal" id="wallegtAdmin">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <form [formGroup]="walletForm" (ngSubmit)="rechargeWallet()">
+      <div class="modal-content">
+        <div class="modal-header" >
+          <div style="display: flex;flex-direction: column">
+            <h4 class="modal-title">Nạp ví tiền</h4>
+            <h4 style="margin-top: 4px" class="modal-title">Số tiền : {{enterpriseLogin?.viEnterprise}} $</h4>
+          </div>
+          <button type="button" class="close" style="border: none" data-dismiss="modal">X</button>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <label for="username1" class="text-info">Nhập mã ví:</label><br>
+            <input type="text" value=""(ngModelChange)="inputCodeViWalletForm()" formControlName="codeVi"   id="username1" class="form-control">
+          </div>
+          <p *ngIf="!walletForm.get('codeVi')?.valid  && walletForm.get('codeVi')?.touched" style="color: red">Không được để trống</p>
+          <p id="codeVi1" style="display:none;color: red">Mã ví không hợp lệ!</p>
+          <p id="codeVi2" style="display:none;color: forestgreen">Mã ví hợp lệ !</p>
+          <div class="form-group">
+            <label for="username2" class="text-info">Nhập số tiền :</label><br>
+            <input type="number"  formControlName="viEnterprise"  id="username2" class="form-control" >
+            <p *ngIf="!walletForm.get('viEnterprise')?.valid && walletForm.get('viEnterprise')?.touched " style="color: red">Số tiền nhỏ nhất nạp là 5$</p>
+          </div>
+          <div class="form-group">
+            <div class="row">
+              <div class="col-md-6">
+                <label for="username234" class="text-info">Up hóa đơn giao dịch :</label><br>
+                <input id="username234" type="file"  id="file" #userPhoto (change)="onFileSelected({event : $event})"   name="image" autocomplete="off"  class="form-control" >
+              </div>
+              <div class="col-md-6">
+                <div class="image-container">
+                  <img src="{{fb}}" class="img-fluid rounded thumbnail-image">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-default btn btn-info add-new" >Gửi yêu cầu !</button>
+        </div>
+      </div>
+    </form>
+
+  </div>
+</div>
+
+
+
 <!--   Core JS Files   -->
 <script src="/src/assets/admin/js/core/popper.min.js"></script>
 <script src="/src/assets/admin/js/core/bootstrap.min.js"></script>

@@ -5,6 +5,8 @@ import {TransactionHistory} from "../../model/TransactionHistory";
 import {EnterpriseService} from "../../services/enterprise/enterprise.service";
 import {PostEnterprise} from "../../model/PostEnterprise";
 import {Enterprise} from "../../model/Enterprise";
+import {TransactionWallet} from "../../model/TransactionWallet";
+import {ViAdmin} from "../../model/ViAdmin";
 
 @Component({
   selector: 'app-turnover',
@@ -24,14 +26,30 @@ export class TurnoverComponent implements OnInit {
 
   totalMoneyTransaction!:number;
 
+  transWallets!:TransactionWallet[];
+
+  viAdmin! :ViAdmin;
+
+  passViCFValue! :"";
+  transWalletById!:TransactionWallet;
+  idTransWallet!:number;
+  imgTransWallet!:string;
   ngOnInit(): void {
     this.totalTransaction();
+    this.getViAdmin()
+
     this.listTransactionHistory();
     // this.listTransactionHistoryByDateNow();
     this.listEnterpriseOderByRates();
+    this.transWalletAll();
   }
   toTableComponent(){
       this.router.navigate(["/admin"])
+  }
+  transWalletAll(){
+      this.adminService.listTransWallet().subscribe((data)=>{
+         this.transWallets =data;
+      })
   }
   listTransactionHistory(){
     this.adminService.listTransactionHistory().subscribe((data)=>{
@@ -75,5 +93,75 @@ export class TurnoverComponent implements OnInit {
     document.getElementById("transactionDateNow").style.display="none";
     // @ts-ignore
     document.getElementById("transactionALL").style.display="block";
+  }
+  getViAdmin(){
+      this.adminService.getViAdmin().subscribe((data)=>{
+          this.viAdmin =data;
+      })
+  }
+  getIdTransWallet(id:number){
+    this.idTransWallet =id;
+    this.adminService.getTransWalletById(id).subscribe((data)=>{
+         this.transWalletById=data;
+         if(this.viAdmin.numberMoneyVi<this.transWalletById.numberMoney){
+           // @ts-ignore
+           document.getElementById("notifiDkCF1").style.display="block";
+         }else {
+           // @ts-ignore
+           document.getElementById("notifiDkCF2").style.display="block";
+         }
+    })
+  }
+  getImgTransWallet(id:number){
+    this.idTransWallet =id;
+    this.adminService.getTransWalletById(id).subscribe((data)=>{
+      this.transWalletById=data;
+      this.imgTransWallet=this.transWalletById.imgTransaction;
+    })
+  }
+  vdICodeViConfirm():boolean{
+      if(this.viAdmin.passwordVi===this.passViCFValue){
+          // @ts-ignore
+        document.getElementById("codeViAdmin1").style.display="none";
+        // @ts-ignore
+        document.getElementById("codeViAdmin2").style.display="block";
+        return true;
+      }
+      else {
+        // @ts-ignore
+        document.getElementById("codeViAdmin1").style.display="block";
+        // @ts-ignore
+        document.getElementById("codeViAdmin2").style.display="none";
+        return false;
+      }
+  }
+  transWalletDetal(id:number){
+    this.adminService.getTransWalletById(id).subscribe((data)=>{
+      this.transWalletById=data;
+    })
+  }
+  confirmTransWallet(){
+    let id = this.idTransWallet;
+       if(this.vdICodeViConfirm()){
+         this.adminService.getTransWalletById(id).subscribe((data)=>{
+             this.transWalletById=data;
+             if(this.viAdmin.numberMoneyVi>this.transWalletById.numberMoney){
+               this.adminService.confirmTransWallet(id).subscribe(()=>{
+                 alert("Xác nhận thành công !");
+                 this.getViAdmin();
+               })
+             }
+             else {
+               alert("Tài khoản của bạn không đủ tiền để xác thực giao dịch này !");
+               this.passViCFValue="";
+               // @ts-ignore
+               document.getElementById("codeViAdmin1").style.display="none";
+             }
+         })
+
+       }
+       else {
+         alert("Mã vi không hợp lệ !");
+       }
   }
 }
