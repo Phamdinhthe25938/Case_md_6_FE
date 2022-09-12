@@ -1,7 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {LoginService} from "../../../services/login/login.service";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
-import {AdminService} from "../../../services/admin/admin.service";
 import {Enterprise} from "../../../model/Enterprise";
 import {Field} from "../../../model/Field";
 import {Router} from "@angular/router";
@@ -19,12 +18,15 @@ export class EnterpriseRegisterComponent implements OnInit {
   fields!: Field[];
   appUser!: AppUser[];
   enterprise!: Enterprise[];
-  checkUsername!: boolean ;
+  checkUsername!: boolean;
   checkEmail!: boolean
   title = "cloudsSorage";
   fb: string = "";
   downloadURL: Observable<string> | undefined;
-  constructor(private loginService: LoginService,private router :Router,private storage: AngularFireStorage) {}
+
+  constructor(private loginService: LoginService, private router: Router, private storage: AngularFireStorage) {
+  }
+
   onFileSelected({event}: { event: any }) {
     var n = Date.now();
     const file = event.target.files[0];
@@ -52,7 +54,7 @@ export class EnterpriseRegisterComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.checkEmail=true;
+    this.checkEmail = true;
     this.loginService.findAllField().subscribe((data) => {
       this.fields = data;
     })
@@ -87,23 +89,24 @@ export class EnterpriseRegisterComponent implements OnInit {
       this.router.navigate([""])
     })
   }
-checkEmailE(){
-  let email=this.registerForm.value.gmailEnterprise
-  console.log("email")
-  console.log(email)
-  this.checkEmail=true;
-  for (let i = 0; i < this.appUser.length; i++) {
-    if (email==this.appUser[i].email){
-      this.checkEmail=false
-      break;
+
+  checkEmailE() {
+    let email = this.registerForm.value.gmailEnterprise
+    console.log("email")
+    console.log(email)
+    this.checkEmail = true;
+    for (let i = 0; i < this.appUser.length; i++) {
+      if (email == this.appUser[i].email) {
+        this.checkEmail = false
+        break;
+      }
     }
-  }
-  for (let i = 0; i < this.enterprise.length; i++){
-    if (email===this.enterprise[i].gmailEnterprise){
-      this.checkEmail=false
-      break;
+    for (let i = 0; i < this.enterprise.length; i++) {
+      if (email === this.enterprise[i].gmailEnterprise) {
+        this.checkEmail = false
+        break;
+      }
     }
+    console.log(this.checkEmail)
   }
-  console.log(this.checkEmail)
-}
 }

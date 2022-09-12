@@ -19,7 +19,8 @@ import {UserApply} from "../../model/UserApply";
 })
 export class HomepageComponent implements OnInit {
   // fields!: Field[];
-
+  indexPagination: number = 1;
+  totalPagination!: number;
   title = "cloudsSorage";
   fb: string = "";
   downloadURL: Observable<string> | undefined;
@@ -34,7 +35,7 @@ export class HomepageComponent implements OnInit {
   cvByUser!: CvUser;
   cvByIdAppUserAndIdPost!:UserApply;
   ngOnInit(): void {
-    this.listPostByOderPriority();
+    this.listPostByOderPriority(0);
     this.findCvByIdUser();
   }
 
@@ -69,11 +70,7 @@ export class HomepageComponent implements OnInit {
       });
   }
 
-  listPostByOderPriority() {
-    return this.userService.listPostByOderPriority().subscribe((data) => {
-      this.postEnterpriseOffer = data;
-    })
-  }
+
 
   saveCvForm = new FormGroup({
     name: new FormControl("", [Validators.required, Validators.pattern("[A-Za-z]+")]),
@@ -204,6 +201,62 @@ export class HomepageComponent implements OnInit {
       }else {
         alert("Vui lòng tạo CV trước khi aplly mọi job !")
       }
+    })
+  }
+
+  listPostByOderPriority(page:number) {
+    return this.userService.listPostByOderPriority(page).subscribe((data) => {
+      this.postEnterpriseOffer = data;
+      if ((this.postEnterpriseOffer.length % 5) != 0) {
+        this.totalPagination = (Math.round(this.postEnterpriseOffer.length / 5)) + 1;
+      }
+    })
+  }
+
+  findPaginnation() {
+    this.userService.listPostByOderPriority((this.indexPagination * 5) - 5).subscribe((data) => {
+      this.postEnterpriseOffer = data;
+    })
+  }
+
+  indexPaginationChage(value: any) {
+    // this.indexPagination = value;
+    console.log("value")
+    console.log("value")
+    console.log(value)
+  }
+
+  firtPage() {
+    this.indexPagination = 1;
+    this.ngOnInit();
+  }
+
+  nextPage() {
+    this.indexPagination = this.indexPagination + 1;
+    if (this.indexPagination > this.totalPagination) {
+      this.indexPagination = this.indexPagination - 1;
+    }
+    this.userService.listPostByOderPriority((this.indexPagination * 5) - 5).subscribe((data) => {
+      this.postEnterpriseOffer = data;
+    })
+  }
+
+  prviousPage() {
+    this.indexPagination = this.indexPagination - 1;
+    if (this.indexPagination == 0) {
+      this.indexPagination = 1;
+      this.ngOnInit();
+    } else {
+      this.userService.listPostByOderPriority((this.indexPagination * 5) - 5).subscribe((data) => {
+        this.postEnterpriseOffer = data;
+      })
+    }
+  }
+
+  lastPage() {
+    this.indexPagination = this.postEnterpriseOffer.length / 5;
+    this.userService.listPostByOderPriority((this.indexPagination * 5) - 5).subscribe((data) => {
+      this.postEnterpriseOffer = data;
     })
   }
 }
