@@ -7,6 +7,8 @@ import {PostEnterprise} from "../../model/PostEnterprise";
 import {Enterprise} from "../../model/Enterprise";
 import {TransactionWallet} from "../../model/TransactionWallet";
 import {ViAdmin} from "../../model/ViAdmin";
+import {FormControl, FormGroup, Validators} from "@angular/forms";
+import {TransWalletHr} from "../../model/TransWalletHr";
 
 @Component({
   selector: 'app-turnover',
@@ -34,6 +36,7 @@ export class TurnoverComponent implements OnInit {
   transWalletById!:TransactionWallet;
   idTransWallet!:number;
   imgTransWallet!:string;
+  transWalletHrAll!:TransWalletHr[];
   ngOnInit(): void {
     this.totalTransaction();
     this.getViAdmin()
@@ -43,6 +46,10 @@ export class TurnoverComponent implements OnInit {
     this.listEnterpriseOderByRates();
     this.transWalletAll();
   }
+  walletForm = new FormGroup({
+    passViAdmin: new FormControl("", Validators.required),
+    numberMoney: new FormControl(0, [Validators.required,Validators.pattern("^[0-9]+"),Validators.min(5)]),
+  })
   toTableComponent(){
       this.router.navigate(["/admin"])
   }
@@ -142,14 +149,22 @@ export class TurnoverComponent implements OnInit {
   }
   confirmTransWallet(){
     let id = this.idTransWallet;
+    // @ts-ignore
+    let check = document.getElementById("checkBOX1").checked;
        if(this.vdICodeViConfirm()){
          this.adminService.getTransWalletById(id).subscribe((data)=>{
              this.transWalletById=data;
              if(this.viAdmin.numberMoneyVi>this.transWalletById.numberMoney){
-               this.adminService.confirmTransWallet(id).subscribe(()=>{
-                 alert("Xác nhận thành công !");
-                 this.getViAdmin();
-               })
+                if(check){
+                  this.adminService.confirmTransWallet(id).subscribe(()=>{
+                    alert("Xác nhận thành công !");
+                    this.getViAdmin();
+                    this.passViCFValue="";
+                  })
+                }
+                else {
+                    alert("Vui lòng xác thực bạn đã xem hóa đơn !")
+                }
              }
              else {
                alert("Tài khoản của bạn không đủ tiền để xác thực giao dịch này !");
@@ -163,5 +178,56 @@ export class TurnoverComponent implements OnInit {
        else {
          alert("Mã vi không hợp lệ !");
        }
+  }
+
+//   Nạp vi tiền cho amdin
+  validateFormWallet():boolean{
+        if(this.viAdmin.passwordVi===this.walletForm.value.passViAdmin){
+          // @ts-ignore
+          document.getElementById("codeViAdmin4").style.display="block"
+          // @ts-ignore
+          document.getElementById("codeViAdmin3").style.display="none";
+          return true;
+        }else {
+          // @ts-ignore
+          document.getElementById("codeViAdmin3").style.display="block";
+          // @ts-ignore
+          document.getElementById("codeViAdmin4").style.display="none"
+          return  false;
+        }
+  }
+  rechargeWalletAdmin(){
+     if(this.walletForm.valid){
+       // @ts-ignore
+       let checked = document.getElementById("checkBOX").checked;
+         if(this.validateFormWallet()){
+           if(checked){
+             this.adminService.walletAdmin(this.walletForm.value).subscribe((data)=>{
+               alert("Nạp tiền thanh công")
+               // @ts-ignore
+               document.getElementById("codeViAdmin3").style.display="none";
+               // @ts-ignore
+               document.getElementById("codeViAdmin4").style.display="none"
+
+               this.getViAdmin();
+               this.walletForm = new FormGroup({
+                 passViAdmin: new FormControl("", Validators.required),
+                 numberMoney: new FormControl(0, [Validators.required,Validators.pattern("^[0-9]+"),Validators.min(5)]),
+               })
+             })
+           }else {
+             alert("Vui lòng đồng ý với mọi thỏa thuận !")
+           }
+         }else {
+           alert("Kiểm tra lại form !")
+         }
+     }else {
+       alert("Form không hợp lệ !")
+     }
+  }
+  getAllTransWalletHr(){
+      this.adminService.getAllTransWalletHr().subscribe((data)=>{
+        this.transWalletHrAll=data;
+      })
   }
 }

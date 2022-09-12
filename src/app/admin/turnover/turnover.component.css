@@ -13,3 +13,12 @@
   from {transform:scale(0)}
   to {transform:scale(1)}
 }
+.textWalletHr{
+  text-align: center;
+  font-size: small;
+  font-weight: 900;
+}
+.titleTextWalletHr{
+  color: black !important;
+  font-weight: 900 !important;
+}
