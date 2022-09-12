@@ -169,6 +169,15 @@ label {
  .current{
   background-color: red!important;
 }
+.textWalletHr{
+  text-align: center;
+  font-size: small;
+  font-weight: 900;
+}
+.titleTextWalletHr{
+  color: black !important;
+  font-weight: 900 !important;
+}
 /* The Close Button */
 /*.close {*/
 /*  position: absolute;*/
