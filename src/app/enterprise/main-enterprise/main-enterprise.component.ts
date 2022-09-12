@@ -11,13 +11,13 @@ import {PostEnterprise} from "../../model/PostEnterprise";
 import {Router} from "@angular/router";
 
 
+
 @Component({
   selector: 'app-table-enterprise',
   templateUrl: './main-enterprise.component.html',
   styleUrls: ['./main-enterprise.component.css']
 })
 export class MainEnterpriseComponent implements OnInit {
-
   enterpriseLogin!: Enterprise;
   listFormJob!: FormJob[];
   listRegime!: Regime[];
@@ -27,7 +27,7 @@ export class MainEnterpriseComponent implements OnInit {
 
   editProfileEnterPrise!:Enterprise;
   profileForm!:any;
-
+  fb: string = "";
 
   constructor(private router: Router, private enterpriseService: EnterpriseService, private loginService: LoginService) {
   }
@@ -71,6 +71,9 @@ export class MainEnterpriseComponent implements OnInit {
       console.log("find all field")
       console.log(data)
     })
+    let id=this.enterpriseLogin.idEnterprise;
+    this.enterpriseService.findEnterpriseById(id).subscribe((data)=>{
+      this.editProfileEnterPrise=data;})
   }
 
   setStatusEnterpriseTo1() {
@@ -291,15 +294,25 @@ export class MainEnterpriseComponent implements OnInit {
       }
     })
   }
-  editProfile(id:number){
+  editProfile(){
+
+    let id=this.enterpriseLogin.idEnterprise;
     this.enterpriseService.findEnterpriseById(id).subscribe((data)=>{
       this.editProfileEnterPrise=data;
+      this.formProfile.get("nameEnterprise")?.setValue(this.editProfileEnterPrise.nameEnterprise);
+      this.formProfile.get("codeConfirmEnterprise")?.setValue(this.editProfileEnterPrise.codeConfirmEnterprise);
+      this.formProfile.get("gmailEnterprise")?.setValue(this.editProfileEnterPrise.gmailEnterprise);
+      this.formProfile.get("addressMainEnterprise")?.setValue(this.editProfileEnterPrise.addressMainEnterprise);
+      // this.formProfile.get("fieldEnterprise")?.setValue(this.editProfileEnterPrise.fieldEnterprise);
+      this.formProfile.get("describeEnterprise")?.setValue(this.editProfileEnterPrise.describeEnterprise);
+      this.formProfile.get("imgEnterprise")?.setValue(this.editProfileEnterPrise.imgEnterprise);
+      // this.formProfile.get("mail")?.setValue(this.editProfileEnterPrise);
     })
 
   }
 
   formProfile = new FormGroup({
-    idEnterprise: new FormControl("", Validators.required),
+    // idEnterprise: new FormControl(0, Validators.required),
     nameEnterprise: new FormControl("", Validators.required),
     codeConfirmEnterprise: new FormControl("", Validators.required),
     gmailEnterprise: new FormControl("", Validators.required),
@@ -309,19 +322,31 @@ export class MainEnterpriseComponent implements OnInit {
     describeEnterprise: new FormControl("", Validators.required),
   })
 
-  // async editProfileEnterprise() {
-  //   let filed = this.profileForm.value;
-  //   let filedNew = {
-  //     idEnterprise: this.profileForm.get("id")?.setValue(this.profileForm);
-  //     nameEnterprise: filed.nameEnterprise,
-  //     codeConfirmEnterprise: filed.codeConfirmEnterprise,
-  //     gmailEnterprise: filed.gmailEnterprise,
-  //     imgEnterprise: filed.imgEnterprise,
-  //     addressMainEnterprise: filed.addressMainEnterprise,
-  //     describeEnterprise: filed.describeEnterprise,
-  //     fieldEnterprise: {
-  //       idField: filed.idField
-  //     }
-  //   }
-  // }
+
+  editProfileEnterprise() {
+
+    this.profileForm.get("imgEnterprise")?.setValue(this.fb);
+    let filed = this.profileForm.value;
+    let filedNew = {
+      idEnterprise: this.editProfileEnterPrise.idEnterprise,
+      nameEnterprise: filed.nameEnterprise,
+      codeConfirmEnterprise: filed.codeConfirmEnterprise,
+      gmailEnterprise: filed.gmailEnterprise,
+      // Chạy hàm upload ảnh và lấy ra link ảnh
+      imgEnterprise: this.editProfileEnterPrise.imgEnterprise,
+      addressMainEnterprise: filed.addressMainEnterprise,
+      describeEnterprise: filed.describeEnterprise,
+      fieldEnterprise: {
+        idField: filed.idField
+      }
+    }
+    console.log("fileNew")
+    console.log("fileNew")
+    console.log("fileNew")
+    console.log(filedNew)
+    this.enterpriseService.editProfile(filedNew).subscribe(() => {
+      alert("Lưu thay đổi thành công");
+    })
+  }
+
 }
