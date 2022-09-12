@@ -217,7 +217,6 @@ export class HomepageComponent implements OnInit {
   })
   search(){
     let search=this.searchForm.value;
-    if (this.searchForm.value.idField==""){this.searchForm.get("idField")?.setValue(null);}
     let searchform = {
       nameEnterprise: search.nameEnterprise,
       city: search.city,
