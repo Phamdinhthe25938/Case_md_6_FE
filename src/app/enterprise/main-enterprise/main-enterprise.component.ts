@@ -12,6 +12,7 @@ import {Router} from "@angular/router";
 import {NotiEnter} from "../../model/NotiEnter";
 import {UserApply} from "../../model/UserApply";
 import {AngularFireStorage} from "@angular/fire/compat/storage";
+import {TransWalletHr} from "../../model/TransWalletHr";
 
 @Component({
   selector: 'app-table-enterprise',
@@ -29,11 +30,33 @@ export class MainEnterpriseComponent implements OnInit {
   postEdit!:PostEnterprise;
   notifiApplyFromUser!: NotiEnter[];
   idConfirmNotifi!:number;
+  transWalletHrByIdEnters!:TransWalletHr[];
   listUserApplyByIdPost!:UserApply[];
+  userApplyById!:UserApply;
+  imgCvByIdUserApply!:string;
   title = "cloudsSorage";
   fb: string = "";
   downloadURL: Observable<string> | undefined;
   constructor(private router:Router,private storage: AngularFireStorage, private enterpriseService: EnterpriseService, private loginService: LoginService) {
+  }
+  ngOnInit(): void {
+    this.enterpriseLoginFunction();
+    this.enterpriseService.findAllFormJob().subscribe((data) => {
+      this.listFormJob = data;
+      console.log("find all form job")
+      console.log(data)
+    })
+    this.enterpriseService.findAllRegime().subscribe((data) => {
+      this.listRegime = data;
+      console.log("find all regime")
+      console.log(data)
+    })
+    this.loginService.findAllField().subscribe((data) => {
+      this.listField = data;
+      console.log("fimd all field")
+      console.log(data)
+    })
+    this.deletePostExpired();
   }
   onFileSelected({event}: { event: any }) {
     var n = Date.now();
@@ -109,24 +132,7 @@ export class MainEnterpriseComponent implements OnInit {
       this.listPostByIdEnterprise=data;
     })
   }
-  ngOnInit(): void {
-    this.enterpriseLoginFunction();
-    this.enterpriseService.findAllFormJob().subscribe((data) => {
-      this.listFormJob = data;
-      console.log("find all form job")
-      console.log(data)
-    })
-    this.enterpriseService.findAllRegime().subscribe((data) => {
-      this.listRegime = data;
-      console.log("find all regime")
-      console.log(data)
-    })
-    this.loginService.findAllField().subscribe((data) => {
-      this.listField = data;
-      console.log("fimd all field")
-      console.log(data)
-    })
-  }
+
   inputCodeViWalletForm() {
     if (this.walletForm.value.codeVi !== this.enterpriseLogin.codeViEnterprise) {
       // @ts-ignore
@@ -185,7 +191,7 @@ export class MainEnterpriseComponent implements OnInit {
     }
   }
   confirmCreatePost() {
-    if (!this.enterpriseLogin.statusEnterprise) {
+    if (this.enterpriseLogin.statusEnterprise) {
       if(this.enterpriseLogin.viEnterprise<5){
         alert("Tài khoản của bạn không đủ tiền để đăng bài mới vui lòng nạp thêm !")
       }
@@ -414,5 +420,30 @@ export class MainEnterpriseComponent implements OnInit {
     this.enterpriseService.allUserApplyByIdPost(id).subscribe((data)=>{
       this.listUserApplyByIdPost =data;
        })
+  }
+
+//  danh sach lich suw cua giao dich nap tien
+  getTransWalletHrByIdEnter(){
+      let idEnterpriseLogin = this.enterpriseLogin.idEnterprise;
+      this.enterpriseService.getTransWalletHrByIdEnter(idEnterpriseLogin).subscribe((data)=>{
+        this.transWalletHrByIdEnters=data;
+      })
+
+  }
+//  XÓA BÀI ĐĂNG khi hết hạn
+  deletePostExpired(){
+    this.enterpriseService.deletePostExpired().subscribe(()=>{
+    })
+  }
+
+//  tìm dối tượng userApply theo id;
+
+  getUserApplyById(id:number){
+      this.enterpriseService.getUserApplyById(id).subscribe((data)=>{
+        this.userApplyById =data;
+        this.imgCvByIdUserApply=this.userApplyById.imgCV;
+        console.log(this.imgCvByIdUserApply);
+        console.log(id)
+      })
   }
 }

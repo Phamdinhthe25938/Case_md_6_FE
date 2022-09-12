@@ -39,6 +39,7 @@ export class HomepageComponent implements OnInit {
     })
     this.listPostByOderPriority();
     this.findCvByIdUser();
+    this.deletePostExpired()
   }
 
   logout() {
@@ -224,6 +225,12 @@ export class HomepageComponent implements OnInit {
       }
     this.loginService.findPostByUser(searchform).subscribe((data) => {
       this.postEnterpriseOffer = data;
+    })
+  }
+
+  //  XÓA BÀI ĐĂNG khi hết hạn
+  deletePostExpired(){
+    this.userService.deletePostExpired().subscribe(()=>{
     })
   }
 

@@ -57,4 +57,11 @@ export class AdminService {
   getAllTransWalletHr():Observable<any>{
     return this.http.get<any>(`http://localhost:8080/admin/transWalletHrAll`);
   }
+  getAllTransWalletHrDateNow():Observable<any>{
+    return this.http.get<any>(`http://localhost:8080/admin/transWalletHrAllDateNow`);
+  }
+  totalMoneyTransDateNow():Observable<any>{
+    return this.http.get<any>(`http://localhost:8080/admin/totalMoneyTransDateNow`);
+
+  }
 }
