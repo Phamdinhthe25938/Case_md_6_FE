@@ -32,6 +32,8 @@ export class MainEnterpriseComponent implements OnInit {
   idConfirmNotifi!:number;
   transWalletHrByIdEnters!:TransWalletHr[];
   listUserApplyByIdPost!:UserApply[];
+  userApplyById!:UserApply;
+  imgCvByIdUserApply!:string;
   title = "cloudsSorage";
   fb: string = "";
   downloadURL: Observable<string> | undefined;
@@ -432,5 +434,16 @@ export class MainEnterpriseComponent implements OnInit {
   deletePostExpired(){
     this.enterpriseService.deletePostExpired().subscribe(()=>{
     })
+  }
+
+//  tìm dối tượng userApply theo id;
+
+  getUserApplyById(id:number){
+      this.enterpriseService.getUserApplyById(id).subscribe((data)=>{
+        this.userApplyById =data;
+        this.imgCvByIdUserApply=this.userApplyById.imgCV;
+        console.log(this.imgCvByIdUserApply);
+        console.log(id)
+      })
   }
 }
