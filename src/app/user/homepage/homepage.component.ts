@@ -207,6 +207,9 @@ export class HomepageComponent implements OnInit {
   listPostByOderPriority(page:number) {
     return this.userService.listPostByOderPriority(page).subscribe((data) => {
       this.postEnterpriseOffer = data;
+      console.log("data")
+      console.log("data")
+      console.log(data)
       if ((this.postEnterpriseOffer.length % 5) != 0) {
         this.totalPagination = (Math.round(this.postEnterpriseOffer.length / 5)) + 1;
       }
@@ -238,6 +241,8 @@ export class HomepageComponent implements OnInit {
     }
     this.userService.listPostByOderPriority((this.indexPagination * 5) - 5).subscribe((data) => {
       this.postEnterpriseOffer = data;
+      console.log("next page")
+      console.log(data)
     })
   }
 

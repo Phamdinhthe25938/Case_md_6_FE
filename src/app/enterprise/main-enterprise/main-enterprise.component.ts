@@ -185,7 +185,7 @@ export class MainEnterpriseComponent implements OnInit {
     }
   }
   confirmCreatePost() {
-    if (!this.enterpriseLogin.statusEnterprise) {
+    if (this.enterpriseLogin.statusEnterprise) {
       if(this.enterpriseLogin.viEnterprise<5){
         alert("Tài khoản của bạn không đủ tiền để đăng bài mới vui lòng nạp thêm !")
       }
