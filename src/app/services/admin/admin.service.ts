@@ -51,4 +51,10 @@ export class AdminService {
   getTransWalletById(id:number){
     return this.http.get<any>(`http://localhost:8080/admin/getTransWalletById/${id}`,);
   }
+  walletAdmin(adminWallet:any):Observable<any>{
+    return this.http.post<any>(`http://localhost:8080/admin/walletAdmin`,adminWallet);
+  }
+  getAllTransWalletHr():Observable<any>{
+    return this.http.get<any>(`http://localhost:8080/admin/transWalletHrAll`);
+  }
 }
