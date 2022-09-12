@@ -217,15 +217,21 @@ export class HomepageComponent implements OnInit {
   })
   search(){
     let search=this.searchForm.value;
-    if (this.searchForm.value.idField==""){this.searchForm.get("idField")?.setValue(null);}
     let searchform = {
       nameEnterprise: search.nameEnterprise,
       city: search.city,
       idField: search.idField,
       }
-    this.loginService.findPostByUser(searchform).subscribe((data) => {
-      this.postEnterpriseOffer = data;
-    })
+    if (this.searchForm.value.idField==""){
+      this.loginService.findPostByUserField(searchform).subscribe((data) => {
+        this.postEnterpriseOffer = data;
+      })
+    }else {
+      this.loginService.findPostByUser(searchform).subscribe((data) => {
+        this.postEnterpriseOffer = data;
+      })
+    }
+
   }
 
   //  XÓA BÀI ĐĂNG khi hết hạn
