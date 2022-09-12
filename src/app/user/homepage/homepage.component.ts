@@ -36,6 +36,7 @@ export class HomepageComponent implements OnInit {
   ngOnInit(): void {
     this.listPostByOderPriority();
     this.findCvByIdUser();
+    this.deletePostExpired()
   }
 
   logout() {
@@ -204,6 +205,11 @@ export class HomepageComponent implements OnInit {
       }else {
         alert("Vui lòng tạo CV trước khi aplly mọi job !")
       }
+    })
+  }
+  //  XÓA BÀI ĐĂNG khi hết hạn
+  deletePostExpired(){
+    this.userService.deletePostExpired().subscribe(()=>{
     })
   }
 }

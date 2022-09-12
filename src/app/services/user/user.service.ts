@@ -27,6 +27,8 @@ export class UserService {
   }
   findUserApplyByIdAppUserAndIdPost(idAppUser:number,idPost:number){
     return this.http.get<any>(`http://localhost:8080/user/findUserApplyByIdAppUserAndIdPost/${idAppUser}/${idPost}`);
-
+  }
+  deletePostExpired():Observable<any>{
+    return this.http.get<any>(`http://localhost:8080/user/deletePostExpired`);
   }
 }
