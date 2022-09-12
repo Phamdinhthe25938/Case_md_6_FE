@@ -23,7 +23,7 @@ export class HomepageComponent implements OnInit {
   title = "cloudsSorage";
   fb: string = "";
   downloadURL: Observable<string> | undefined;
-
+  fields!:Field[];
   idJobApply!:number;
 
   constructor(private router: Router, private userService: UserService, private storage: AngularFireStorage, private loginService: LoginService, private allService: AllService) {
@@ -34,6 +34,9 @@ export class HomepageComponent implements OnInit {
   cvByUser!: CvUser;
   cvByIdAppUserAndIdPost!:UserApply;
   ngOnInit(): void {
+    this.loginService.findAllField().subscribe((data) => {
+      this.fields = data;
+    })
     this.listPostByOderPriority();
     this.findCvByIdUser();
   }
@@ -206,5 +209,23 @@ export class HomepageComponent implements OnInit {
       }
     })
   }
+  searchForm=new FormGroup({
+    nameEnterprise: new FormControl(""),
+    city: new FormControl(""),
+    idField: new FormControl(""),
+  })
+  search(){
+    let search=this.searchForm.value;
+    if (this.searchForm.value.idField==""){this.searchForm.get("idField")?.setValue(null);}
+    let searchform = {
+      nameEnterprise: search.nameEnterprise,
+      city: search.city,
+      idField: search.idField,
+      }
+    this.loginService.findPostByUser(searchform).subscribe((data) => {
+      this.postEnterpriseOffer = data;
+    })
+  }
+
 }
 
