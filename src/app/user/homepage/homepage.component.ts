@@ -235,7 +235,9 @@ export class HomepageComponent implements OnInit {
     }
 
   }
-
+  deltalComponent(){
+       this.router.navigate(["/user/deltal"])
+  }
   //  XÓA BÀI ĐĂNG khi hết hạn
   deletePostExpired(){
     this.userService.deletePostExpired().subscribe(()=>{
