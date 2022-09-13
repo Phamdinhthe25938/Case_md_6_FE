@@ -24,7 +24,7 @@ export class MainEnterpriseComponent implements OnInit {
   listField!: Field[];
   listPostByIdEnterprise!: PostEnterprise[];
   postEnterpriseKey!: PostEnterprise;
-
+   imgEdit!:string
   editProfileEnterPrise!:Enterprise;
   profileForm!:any;
   fb: string = "";
@@ -299,13 +299,14 @@ export class MainEnterpriseComponent implements OnInit {
     let id=this.enterpriseLogin.idEnterprise;
     this.enterpriseService.findEnterpriseById(id).subscribe((data)=>{
       this.editProfileEnterPrise=data;
+      this.imgEdit= this.editProfileEnterPrise.imgEnterprise;
       this.formProfile.get("nameEnterprise")?.setValue(this.editProfileEnterPrise.nameEnterprise);
       this.formProfile.get("codeConfirmEnterprise")?.setValue(this.editProfileEnterPrise.codeConfirmEnterprise);
       this.formProfile.get("gmailEnterprise")?.setValue(this.editProfileEnterPrise.gmailEnterprise);
       this.formProfile.get("addressMainEnterprise")?.setValue(this.editProfileEnterPrise.addressMainEnterprise);
       // this.formProfile.get("fieldEnterprise")?.setValue(this.editProfileEnterPrise.fieldEnterprise);
       this.formProfile.get("describeEnterprise")?.setValue(this.editProfileEnterPrise.describeEnterprise);
-      this.formProfile.get("imgEnterprise")?.setValue(this.editProfileEnterPrise.imgEnterprise);
+      // this.formProfile.get("imgEnterprise")?.setValue(this.editProfileEnterPrise.imgEnterprise);
       // this.formProfile.get("mail")?.setValue(this.editProfileEnterPrise);
     })
 
@@ -316,7 +317,7 @@ export class MainEnterpriseComponent implements OnInit {
     nameEnterprise: new FormControl("", Validators.required),
     codeConfirmEnterprise: new FormControl("", Validators.required),
     gmailEnterprise: new FormControl("", Validators.required),
-    imgEnterprise: new FormControl("", Validators.required),
+    // imgEnterprise: new FormControl("", Validators.required),
     addressMainEnterprise: new FormControl("", Validators.required),
     idField: new FormControl(),
     describeEnterprise: new FormControl("", Validators.required),
@@ -324,16 +325,14 @@ export class MainEnterpriseComponent implements OnInit {
 
 
   editProfileEnterprise() {
-
-    this.profileForm.get("imgEnterprise")?.setValue(this.fb);
-    let filed = this.profileForm.value;
-    let filedNew = {
-      idEnterprise: this.editProfileEnterPrise.idEnterprise,
+    let filed = this.formProfile.value;
+      let filedNew = {
+        idEnterprise:this.enterpriseLogin.idEnterprise,
       nameEnterprise: filed.nameEnterprise,
       codeConfirmEnterprise: filed.codeConfirmEnterprise,
       gmailEnterprise: filed.gmailEnterprise,
       // Chạy hàm upload ảnh và lấy ra link ảnh
-      imgEnterprise: this.editProfileEnterPrise.imgEnterprise,
+      imgEnterprise: this.imgEdit,
       addressMainEnterprise: filed.addressMainEnterprise,
       describeEnterprise: filed.describeEnterprise,
       fieldEnterprise: {

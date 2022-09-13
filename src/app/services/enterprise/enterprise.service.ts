@@ -83,6 +83,6 @@ export class EnterpriseService {
     return this.http.post<any>(`http://localhost:8080/enterprise/saveProfile`, enterprise);
   }
   editProfile(enterprise: any): Observable<any> {
-    return this.http.post<any>(`http://localhost:8080/enterprise/editProfile`, enterprise);
+    return this.http.post<any>(`http://localhost:8080/enterprise/editProfile/`, enterprise);
   }
 }
