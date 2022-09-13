@@ -11,6 +11,7 @@ import {Router} from "@angular/router";
 import {CvUser} from "../../model/CvUser";
 import {doc} from "@angular/fire/firestore";
 import {UserApply} from "../../model/UserApply";
+import {UserToken} from "../../model/UserToken";
 
 @Component({
   selector: 'app-homepage',
@@ -25,7 +26,6 @@ export class HomepageComponent implements OnInit {
   downloadURL: Observable<string> | undefined;
   fields!:Field[];
   idJobApply!:number;
-
   constructor(private router: Router, private userService: UserService, private storage: AngularFireStorage, private loginService: LoginService, private allService: AllService) {
   }
 
@@ -33,6 +33,7 @@ export class HomepageComponent implements OnInit {
   postEnterpriseOffer!: PostEnterprise[];
   cvByUser!: CvUser;
   cvByIdAppUserAndIdPost!:UserApply;
+  userLogin!:UserToken;
   ngOnInit(): void {
     this.loginService.findAllField().subscribe((data) => {
       this.fields = data;
@@ -74,7 +75,7 @@ export class HomepageComponent implements OnInit {
   }
 
   listPostByOderPriority() {
-    return this.userService.listPostByOderPriority().subscribe((data) => {
+    return this.userService.listPostByOderPriority(this.loginService.getUserToken().id).subscribe((data) => {
       this.postEnterpriseOffer = data;
     })
   }
@@ -189,7 +190,8 @@ export class HomepageComponent implements OnInit {
        }
        this.userService.saveApplyJob(jobApply).subscribe(()=>{
            alert("apply công việc thành công ")
-           // this.findCvByIdUser();
+         this.listPostByOderPriority();
+         // this.findCvByIdUser();
        })
   }
   findUserApplyByIdAppUserAndIdPost(){

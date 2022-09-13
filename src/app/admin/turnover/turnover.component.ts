@@ -162,6 +162,7 @@ export class TurnoverComponent implements OnInit {
                     alert("Xác nhận thành công !");
                     this.getViAdmin();
                     this.getTotalMoneyTransDateNow();
+                    this.transWalletAll();
                     this.passViCFValue="";
                   })
                 }
