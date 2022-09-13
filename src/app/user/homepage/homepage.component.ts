@@ -209,7 +209,7 @@ export class HomepageComponent implements OnInit {
       this.postEnterpriseOffer = data;
       console.log("data")
       console.log("data")
-      console.log(data)
+      console.log( this.postEnterpriseOffer)
       if ((this.postEnterpriseOffer.length % 5) != 0) {
         this.totalPagination = (Math.round(this.postEnterpriseOffer.length / 5)) + 1;
       }
