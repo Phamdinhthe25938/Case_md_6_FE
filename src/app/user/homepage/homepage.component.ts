@@ -42,6 +42,9 @@ export class HomepageComponent implements OnInit {
     this.listPostByOderPriority();
     this.findCvByIdUser();
     this.deletePostExpired()
+    let pageChange = document.getElementsByClassName("pageChange");
+    // @ts-ignore
+    pageChange[this.page-1].style.background="#FF4F57";
   }
 
   logout() {
@@ -86,6 +89,35 @@ export class HomepageComponent implements OnInit {
          }
      }
     this.listPostByOderPriority();
+  }
+  preveAfter(){
+    let pageChange = document.getElementsByClassName("pageChange");
+    // @ts-ignore
+    pageChange[this.page].style.background="#FF4F57";
+    for(let i=0;i<pageChange.length;i++){
+      if(i!== this.page){
+        // @ts-ignore
+        pageChange[i].style.background="#fff";
+      }
+    }
+    this.page=this.page+1;
+    this.listPostByOderPriority();
+    console.log(this.page)
+  }
+  preveBefore(){
+    console.log(this.page)
+    let pageChange = document.getElementsByClassName("pageChange");
+    // @ts-ignore
+    pageChange[this.page-2].style.background="#FF4F57";
+    for(let i=0;i<pageChange.length;i++){
+      if(i!== this.page-2){
+        // @ts-ignore
+        pageChange[i].style.background="#fff";
+      }
+    }
+    this.page=this.page-1;
+    this.listPostByOderPriority();
+
   }
   listPostByOderPriority() {
     return this.userService.listPostByOderPriority(this.loginService.getUserToken().id,this.page).subscribe((data) => {
