@@ -38,7 +38,7 @@
       <div class="col-md-9 col-sm-8">
         <div *ngFor="let l of lisApply" class="job-list" style="width: 100%">
           <div class="thumb">
-            <a href="job-details.html"><img src="assets/img/jobs/img-1.jpg" alt=""></a>
+            <a href="job-details.html"><img style="width: 100px" src="{{l.enterprise.imgEnterprise}}" alt=""></a>
           </div>
           <div class="job-list-content">
             <h4><a>{{l.namePostEnterprise}}</a><span class="full-time">{{l.formJobPostEnterprise.nameFormJob}}</span></h4>
