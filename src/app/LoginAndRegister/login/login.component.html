@@ -8,28 +8,28 @@
   <div class="container">
     <div class="row">
       <div class="col-md-4 login-sec">
-        <h2 class="text-center">Login Now</h2>
+        <h2 class="text-center">Đăng nhập</h2>
         <form class="login-form" [formGroup]="loginForm" (ngSubmit)="login()">
           <div class="form-group">
-            <label for="exampleInputEmail12" class="text-uppercase">Username</label>
+            <label for="exampleInputEmail12" class="text-uppercase">Tên tài khoản</label>
             <input type="text" id="exampleInputEmail12" formControlName="username" class="form-control" placeholder="">
           </div>
           <p *ngIf="!loginForm.get('username')?.valid && loginForm.get('username')?.touched" style="color: red">Không được để trống</p>
           <div class="form-group">
-            <label for="exampleInputPassword1" class="text-uppercase">Password</label>
+            <label for="exampleInputPassword1" class="text-uppercase">Mật khẩu</label>
             <input type="password" formControlName="password" id="exampleInputPassword1" class="form-control" placeholder="">
           </div>
           <p *ngIf="!loginForm.get('password')?.valid && loginForm.get('password')?.touched" style="color: red">Không được để trống</p>
           <div class="form-check">
             <label class="form-check-label" style="color: #DE6262 ; font-size: 18px" >
 <!--              <input type="checkbox" class="form-check-input">-->
-              <a style="cursor: pointer" (click)="routerForgotPass()">Forgot password?</a>
+              <a style="cursor: pointer" (click)="routerForgotPass()">Quên mật khẩu?</a>
             </label>
-            <button type="submit" class="btn btn-login float-right">Login</button>
+            <button type="submit" class="btn btn-login float-right">Đăng nhập</button>
           </div>
         </form>
         <div style="display: flex">
-          <div class="copy-text">Created with <i class="fa fa-heart"></i><a style="margin-left: 9px;cursor: pointer" (click)="routerRegisterUser()">by User</a> / <a style="cursor: pointer" (click)="routerRegisterEnterprise()">by Enterprise</a> </div>
+          <div class="copy-text">Đăng ký <i class="fa fa-heart"></i><a style="margin-left: 9px;cursor: pointer" (click)="routerRegisterUser()">Người tìm việc</a> / <a style="cursor: pointer" (click)="routerRegisterEnterprise()"> Doanh nghiệp</a> </div>
         </div>
       </div>
       <div class="col-md-8 banner-sec">

@@ -47,7 +47,7 @@
             <ul class="nav navbar-nav">
               <li>
                 <a class="active" href="index.html">
-                  Home <i class="fa fa-angle-down"></i>
+                Trang chủ <i class="fa fa-angle-down"></i>
                 </a>
                 <ul class="dropdown">
                   <li>
@@ -121,7 +121,7 @@
               </li>
               <li>
                 <a href="#">
-                  Candidates <i class="fa fa-angle-down"></i>
+                  Về chúng tôi <i class="fa fa-angle-down"></i>
                 </a>
                 <ul class="dropdown">
                   <li>
@@ -151,60 +151,10 @@
                   </li>
                 </ul>
               </li>
-              <li>
-                <a href="#">
-                  Employers <i class="fa fa-angle-down"></i>
-                </a>
-                <ul class="dropdown">
-                  <li>
-                    <a href="post-job.html">
-                      Add Job
-                    </a>
-                  </li>
-                  <li>
-                    <a href="manage-jobs.html">
-                      Manage Jobs
-                    </a>
-                  </li>
-                  <li>
-                    <a href="manage-applications.html">
-                      Manage Applications
-                    </a>
-                  </li>
-                  <li>
-                    <a href="browse-resumes.html">
-                      Browse Resumes
-                    </a>
-                  </li>
-                </ul>
-              </li>
-              <li>
-                <a href="blog.html">
-                  Blog <i class="fa fa-angle-down"></i>
-                </a>
-                <ul class="dropdown">
-                  <li>
-                    <a href="blog.html">
-                      Blog - Right Sidebar
-                    </a>
-                  </li>
-                  <li>
-                    <a href="blog-left-sidebar.html">
-                      Blog - Left Sidebar
-                    </a>
-                  </li>
-                  <li><a href="blog-full-width.html">Blog - Full Width</a></li>
-                  <li>
-                    <a href="single-post.html">
-                      Blog Single Post
-                    </a>
-                  </li>
-                </ul>
-              </li>
             </ul>
             <ul class="nav navbar-nav navbar-right float-right">
               <li data-toggle="modal" data-target="#CreateCv" style="cursor: pointer" class="left"><a ><i class="ti-pencil-alt" ></i>Tạo CV</a></li>
-              <li class="right"><a style="cursor: pointer" (click)="logout()" ><i class="ti-lock"></i>Log In</a></li>
+              <li class="right"><a style="cursor: pointer" (click)="logout()" ><i class="ti-lock"></i>Đăng xuất</a></li>
             </ul>
           </div>
         </div>
@@ -242,26 +192,9 @@
               <li><a href="job-alerts.html">Job Alerts</a></li>
             </ul>
           </li>
-          <li>
-            <a href="#">For Employers</a>
-            <ul>
-              <li><a href="post-job.html">Add Job</a></li>
-              <li><a href="manage-jobs.html">Manage Jobs</a></li>
-              <li><a href="manage-applications.html">Manage Applications</a></li>
-              <li><a href="browse-resumes.html">Browse Resumes</a></li>
-            </ul>
-          </li>
-          <li>
-            <a href="blog.html">Blog</a>
-            <ul class="dropdown">
-              <li><a href="blog.html">Blog - Right Sidebar</a></li>
-              <li><a href="blog-left-sidebar.html">Blog - Left Sidebar</a></li>
-              <li><a href="blog-full-width.html">Blog - Full Width</a></li>
-              <li><a href="single-post.html">Blog Single Post</a></li>
-            </ul>
-          </li>
-          <li class="btn-m"><a href="post-job.html"><i class="ti-pencil-alt"></i> Post A Job</a></li>
-          <li class="btn-m"><a href="my-account.html"><i class="ti-lock"></i>  Log In</a></li>
+
+          <li class="btn-m"><a href="post-job.html"><i class="ti-pencil-alt"></i> Tạo bài tuyển dụng</a></li>
+          <li class="btn-m"><a href="my-account.html"><i class="ti-lock"></i>  Đăng nhập</a></li>
         </ul>
         <!-- Mobile Menu End -->
       </nav>
@@ -295,7 +228,7 @@
           <li><a>Browse Resumes</a></li>
           <li><a>Contact</a></li>
           <li><a >Faq</a></li>
-          <li><a routerLink="login">Login</a></li>
+          <li><a routerLink="login">Đăng nhập</a></li>
         </ul><!--- End Menu -->
       </div> <!--- End Off Canvas Side Menu -->
       <div class="tbtn wow pulse" id="menu" data-wow-iteration="infinite" data-wow-duration="500ms" data-toggle="offcanvas" data-target=".navmenu">
@@ -308,7 +241,7 @@
       <div class="container">
         <div class="row">
           <div class="col-md-12">
-            <h1>Find the job that fits your life</h1><br><h2>More than <strong>12,000</strong> jobs are waiting to Kickstart your career!</h2>
+            <h1>Kết nối ứng viên và doanh nghiệp hiệu quả</h1><br><h2>Với hơn <strong>12,000</strong> công việc phù hợp và <strong>50,000</strong> ứng viên!</h2>
             <div class="content">
               <form [formGroup]="searchForm" (ngSubmit)="search()" >
                 <div class="row">
@@ -341,7 +274,7 @@
               </form>
             </div>
             <div class="popular-jobs">
-              <b>Popular Keywords: </b>
+              <b>Từ khóa ưa chuộng: </b>
               <a href="#">Web Design</a>
               <a href="#">Manager</a>
               <a href="#">Programming</a>
@@ -357,7 +290,7 @@
 <!-- Showing 6-10 Of 24 JobFind Job Section Start -->
 <section class="find-job section">
   <div class="container">
-    <h2 class="section-title">Hot Jobs</h2>
+    <h2 class="section-title">Việc làm Hot</h2>
     <div class="row">
       <div class="col-md-12" *ngFor="let a of postEnterpriseOffer">
         <div  style="width: 100%" class="job-list">
@@ -419,7 +352,7 @@
                   </div>
                 </div>
 
-                <a  style="margin-right: 20px"  class="btn btn-common btn-rm" (click)="setIdJobApply(a.idPostEnterprise)" data-toggle="modal" data-target="#myModal">Apply</a>
+                <a  style="margin-right: 20px"  class="btn btn-common btn-rm" (click)="setIdJobApply(a.idPostEnterprise)" data-toggle="modal" data-target="#myModal">Nộp hồ sơ</a>
                 <a  class="btn btn-common btn-rm" (click)="postDetail(a.idPostEnterprise)" style="background-color: black;" data-toggle="modal" data-target="#PostDetail">Chi tiết</a>
               </div>
             </div>
@@ -431,13 +364,13 @@
         <div class="showing pull-left">
         </div>
         <ul class="pagination pull-right">
-          <li class="active"><a href="#" class="btn btn-common" ><i class="ti-angle-left"></i> prev</a></li>
+          <li class="active"><a href="#" class="btn btn-common" ><i class="ti-angle-left"></i> Trước</a></li>
           <li><a class="pageChange" style="cursor: pointer" (click)="pageChange(1)">1</a></li>
           <li><a class="pageChange" style="cursor: pointer" (click)="pageChange(2)">2</a></li>
           <li><a class="pageChange" style="cursor: pointer" (click)="pageChange(3)">3</a></li>
           <li><a class="pageChange" style="cursor: pointer"(click)="pageChange(4)">4</a></li>
           <li><a class="pageChange" style="cursor: pointer" (click)="pageChange(5)">5</a></li>
-          <li class="active"><a href="#" class="btn btn-common">Next <i class="ti-angle-right"></i></a></li>
+          <li class="active"><a href="#" class="btn btn-common">Tiếp theo <i class="ti-angle-right"></i></a></li>
         </ul>
       </div>
     </div>
@@ -996,7 +929,7 @@
       </div>
       <!-- Modal footer -->
       <div class="modal-footer">
-        <button id="" (click)="findUserApplyByIdAppUserAndIdPost()"  type="button" class="btn btn-primary" style="padding: 8px !important;background-color: #FF4F57">Xác thức</button>
+        <button id="" (click)="findUserApplyByIdAppUserAndIdPost()"  type="button" class="btn btn-primary" style="padding: 8px !important;background-color: #FF4F57">Xác thực</button>
       </div>
     </div>
   </div>
