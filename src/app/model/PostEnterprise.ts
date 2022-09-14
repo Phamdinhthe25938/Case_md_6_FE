@@ -42,4 +42,5 @@ export class PostEnterprise{
     this.field = field;
     this.enterprise = enterprise;
   }
+
 }

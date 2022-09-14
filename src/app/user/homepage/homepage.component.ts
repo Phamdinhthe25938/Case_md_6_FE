@@ -27,9 +27,9 @@ export class HomepageComponent implements OnInit {
   downloadURL: Observable<string> | undefined;
   fields!:Field[];
   idJobApply!:number;
+  page:number=1;
   constructor(private router: Router, private userService: UserService, private storage: AngularFireStorage, private loginService: LoginService, private allService: AllService) {
   }
-
   postEnterpriseDetail!: PostEnterprise;
   postEnterpriseOffer!: PostEnterprise[];
   cvByUser!: CvUser;
@@ -74,9 +74,21 @@ export class HomepageComponent implements OnInit {
         }
       });
   }
-
+  pageChange(page:number){
+    this.page =page;
+    let pageChange = document.getElementsByClassName("pageChange");
+    // @ts-ignore
+    pageChange[this.page-1].style.background="#FF4F57";
+    for(let i=0;i<pageChange.length;i++){
+         if(i!== this.page-1){
+           // @ts-ignore
+           pageChange[i].style.background="#fff";
+         }
+     }
+    this.listPostByOderPriority();
+  }
   listPostByOderPriority() {
-    return this.userService.listPostByOderPriority(this.loginService.getUserToken().id).subscribe((data) => {
+    return this.userService.listPostByOderPriority(this.loginService.getUserToken().id,this.page).subscribe((data) => {
       this.postEnterpriseOffer = data;
     })
   }
@@ -259,11 +271,6 @@ export class HomepageComponent implements OnInit {
   //   })
   // }
 
-  findPaginnation() {
-    this.userService.listPostByOderPriority((this.indexPagination * 5) - 5).subscribe((data) => {
-      this.postEnterpriseOffer = data;
-    })
-  }
 
   indexPaginationChage(value: any) {
     // this.indexPagination = value;
@@ -272,40 +279,7 @@ export class HomepageComponent implements OnInit {
     console.log(value)
   }
 
-  firtPage() {
-    this.indexPagination = 1;
-    this.ngOnInit();
-  }
 
-  nextPage() {
-    this.indexPagination = this.indexPagination + 1;
-    if (this.indexPagination > this.totalPagination) {
-      this.indexPagination = this.indexPagination - 1;
-    }
-    this.userService.listPostByOderPriority((this.indexPagination * 5) - 5).subscribe((data) => {
-      this.postEnterpriseOffer = data;
-      console.log("next page")
-      console.log(data)
-    })
-  }
 
-  prviousPage() {
-    this.indexPagination = this.indexPagination - 1;
-    if (this.indexPagination == 0) {
-      this.indexPagination = 1;
-      this.ngOnInit();
-    } else {
-      this.userService.listPostByOderPriority((this.indexPagination * 5) - 5).subscribe((data) => {
-        this.postEnterpriseOffer = data;
-      })
-    }
-  }
-
-  lastPage() {
-    this.indexPagination = this.postEnterpriseOffer.length / 5;
-    this.userService.listPostByOderPriority((this.indexPagination * 5) - 5).subscribe((data) => {
-      this.postEnterpriseOffer = data;
-    })
-  }
 }
 

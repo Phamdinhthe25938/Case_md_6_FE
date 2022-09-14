@@ -1800,6 +1800,29 @@ License: For each use you must have a valid license purchased only from above li
                           </div>
                           <!--begin::Description-->
                         </a>
+<!--                        Tuan: doi thong tin doanh nghiep-->
+                        <a class="custom-list d-flex align-items-center px-5 py-4">
+                          <!--begin::Symbol-->
+                          <div class="symbol symbol-40px me-5">
+																<span class="symbol-label">
+                               <i style="color: black" class='fas fa-user-tie'></i>
+																</span>
+                          </div>
+                          <!--end::Symbol-->
+                          <!--begin::Description-->
+                          <div (click)="editProfile()" data-toggle="modal" data-target="#changeProfileEterprise"
+                               class="d-flex flex-column flex-grow-1">
+                            <!--begin::Title-->
+                            <h5 style="cursor: pointer" class="custom-list-title fw-bold text-gray-800 mb-1">Thông tin
+                              tài khoản</h5>
+                            <!--end::Title-->
+                            <!--begin::Link-->
+                            <span class="text-gray-400 fw-bold"></span>
+                            <!--end::Link-->
+                          </div>
+                          <!--begin::Description-->
+                        </a>
+                        <!--                        end tuan-->
 
                         <a  class="custom-list d-flex align-items-center px-5 py-4">
                           <!--begin::Symbol-->
@@ -1809,6 +1832,7 @@ License: For each use you must have a valid license purchased only from above li
 																</span>
                           </div>
                           <!--end::Symbol-->
+
                           <!--begin::Description-->
                           <div  (click)="logout()" class="d-flex flex-column flex-grow-1">
                             <!--begin::Title-->
@@ -6074,6 +6098,7 @@ License: For each use you must have a valid license purchased only from above li
     </div>
   </div>
 </div>
+
 <!--Create bài đăng-->
 <div class="container" >
   <!-- Trigger the modal with a button --><!-- Modal -->
@@ -6436,7 +6461,83 @@ License: For each use you must have a valid license purchased only from above li
     </div>
   </div>
 </div>
+<!--tuan modal doi thong tin doanh nghiep-->
+<div class="container rounded bg-white mt-5 mb-5">
+<!-- Modal -->
+<!-- Modal content-->
+<div class="modal" id="changeProfileEterprise" >
+  <div class="modal-dialog" role="document">
+    <div class="modal-content" style="padding: 20px; width: 1100px;right: 300px">
+      <form [formGroup]="formProfile" (ngSubmit)="editProfileEnterprise()" >
+        <div class="row" >
+          <div class="modal-header col-md-12">
+            <h5 class="modal-title" id="exampleModalLabel" style="text-align: center;flex: 1">Thông tin doanh nghiệp</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Đóng">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body col-md-12 row">
+            <div class="col-md-4 border-right">
+              <div class="d-flex flex-column align-items-center text-center p-3 py-5">
+                <div class="symbol symbol-100px me-5">
+                  <img class="rounded-circle mt-5" src="{{imgEdit}}" alt=""/>
+                </div>
+                <span style="margin-top: 20px" class="font-weight-bold" ><h4>{{editProfileEnterPrise.nameEnterprise}}</h4></span>
+                <span class="text-black-50">{{editProfileEnterPrise.gmailEnterprise}}</span>
+                <span> </span>
+              </div>
+            </div>
+            <div class="col-md-4 border-right">
+              <div class="p-3 py-5">
+                <div class="row mt-2">
+                  <div class="col-md-12">
+                    <label class="labels">Tên doanh nghiệp</label>
+                    <input type="text" formControlName="nameEnterprise" class="form-control">
+                  </div>
+                </div>
+                <div class="row mt-3">
+                  <div class="col-md-12">
+                    <label class="labels">Địa chỉ</label>
+                    <input type="text" class="form-control" formControlName="addressMainEnterprise" placeholder="enter address" value="">
+                  </div>
+                  <div class="col-md-12">
+                    <label class="labels">Email</label>
+                    <input type="text" class="form-control" formControlName="gmailEnterprise" placeholder="enter email id" value="" readonly>
+                  </div>
+                  <div class="col-md-12">
+                    <label class="labels">Mã doanh nghiệp</label>
+                    <input type="text" formControlName="codeConfirmEnterprise" class="form-control" placeholder="ID Code" value="" readonly>
+                  </div>
+                </div>
 
+                <div class="col-md-12">
+                  <label class="labels">Lĩnh vực chính</label>
+                  <select   id="form3Example971" formControlName="idField" required="required" class="form-control form-control-lg">
+                    <option  *ngFor="let b of listField" value="{{b.idField}}">{{b.nameField}}</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4 border-right">
+              <div class="d-flex flex-column align-items-center text-center p-3 py-5">
+                <div class="col-md-12">
+                  <label class="labels">Giới thiệu doanh nghiệp</label>
+                  <textarea style="height: 300px;border: none;outline: none" type="text" class="form-control" formControlName="describeEnterprise" value="" placeholder="state">
+                </textarea> </div>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer col-md-12">
+            <input type="submit" style="width: 100%" class="btn btn-success btn-send  pt-2 btn-block"  value="Lưu thay đổi" >
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+</div>
+
+<!--      end modal-->
 
 
 
