@@ -57,5 +57,10 @@ changePassword(checkPassWord:any):Observable<any>{
 }
 
 
-
+  findPostByUser(post:any){
+    return this.http.post<any>("http://localhost:8080/user/findPostUser",post);
+  }
+  findPostByUserField(post:any){
+    return this.http.post<any>("http://localhost:8080/user/findPostUserField",post);
+  }
 }

@@ -18,25 +18,22 @@ import {TransWalletHr} from "../../model/TransWalletHr";
 export class TurnoverComponent implements OnInit {
 
   constructor(private router:Router,private adminService:AdminService,private enterpriseService:EnterpriseService) { }
-
   transactionHistoryS !:TransactionHistory[];
-
   transactionHistoryNowS !:TransactionHistory[];
   postVipByEnterpriseS!:PostEnterprise[];
   postThuongByEnterpriseS!:PostEnterprise[];
   enterpriseOderByRates!:Enterprise[];
-
   totalMoneyTransaction!:number;
-
   transWallets!:TransactionWallet[];
-
   viAdmin! :ViAdmin;
-
   passViCFValue! :"";
   transWalletById!:TransactionWallet;
   idTransWallet!:number;
   imgTransWallet!:string;
   transWalletHrAll!:TransWalletHr[];
+  transWalletHrAllDateNow!:TransWalletHr[];
+  dateNow!:Date;
+  totalMoneyTransDateNow!:number;
   ngOnInit(): void {
     this.totalTransaction();
     this.getViAdmin()
@@ -45,6 +42,7 @@ export class TurnoverComponent implements OnInit {
     // this.listTransactionHistoryByDateNow();
     this.listEnterpriseOderByRates();
     this.transWalletAll();
+    this.getTotalMoneyTransDateNow();
   }
   walletForm = new FormGroup({
     passViAdmin: new FormControl("", Validators.required),
@@ -113,7 +111,11 @@ export class TurnoverComponent implements OnInit {
          if(this.viAdmin.numberMoneyVi<this.transWalletById.numberMoney){
            // @ts-ignore
            document.getElementById("notifiDkCF1").style.display="block";
+           // @ts-ignore
+           document.getElementById("notifiDkCF2").style.display="none";
          }else {
+           // @ts-ignore
+           document.getElementById("notifiDkCF1").style.display="none";
            // @ts-ignore
            document.getElementById("notifiDkCF2").style.display="block";
          }
@@ -159,6 +161,8 @@ export class TurnoverComponent implements OnInit {
                   this.adminService.confirmTransWallet(id).subscribe(()=>{
                     alert("Xác nhận thành công !");
                     this.getViAdmin();
+                    this.getTotalMoneyTransDateNow();
+                    this.transWalletAll();
                     this.passViCFValue="";
                   })
                 }
@@ -171,6 +175,8 @@ export class TurnoverComponent implements OnInit {
                this.passViCFValue="";
                // @ts-ignore
                document.getElementById("codeViAdmin1").style.display="none";
+               // @ts-ignore
+               document.getElementById("codeViAdmin2").style.display="none";
              }
          })
 
@@ -179,7 +185,6 @@ export class TurnoverComponent implements OnInit {
          alert("Mã vi không hợp lệ !");
        }
   }
-
 //   Nạp vi tiền cho amdin
   validateFormWallet():boolean{
         if(this.viAdmin.passwordVi===this.walletForm.value.passViAdmin){
@@ -228,6 +233,17 @@ export class TurnoverComponent implements OnInit {
   getAllTransWalletHr(){
       this.adminService.getAllTransWalletHr().subscribe((data)=>{
         this.transWalletHrAll=data;
+      })
+  }
+  getAllTransWalletHrDateNow(){
+      this.adminService.getAllTransWalletHrDateNow().subscribe((data)=>{
+        this.transWalletHrAllDateNow=data;
+        this.dateNow= this.transWalletHrAllDateNow[0]?.dateTrans;
+      })
+  }
+  getTotalMoneyTransDateNow(){
+    this.adminService.totalMoneyTransDateNow().subscribe((data)=>{
+      this.totalMoneyTransDateNow=data;
       })
   }
 }

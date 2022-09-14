@@ -24,9 +24,8 @@ export class HomepageComponent implements OnInit {
   title = "cloudsSorage";
   fb: string = "";
   downloadURL: Observable<string> | undefined;
-
+  fields!:Field[];
   idJobApply!:number;
-
   constructor(private router: Router, private userService: UserService, private storage: AngularFireStorage, private loginService: LoginService, private allService: AllService) {
   }
 
@@ -34,9 +33,14 @@ export class HomepageComponent implements OnInit {
   postEnterpriseOffer!: PostEnterprise[];
   cvByUser!: CvUser;
   cvByIdAppUserAndIdPost!:UserApply;
+  userLogin!:UserToken;
   ngOnInit(): void {
-    this.listPostByOderPriority(0);
+    this.loginService.findAllField().subscribe((data) => {
+      this.fields = data;
+    })
+    this.listPostByOderPriority();
     this.findCvByIdUser();
+    this.deletePostExpired()
   }
 
   logout() {
@@ -70,6 +74,11 @@ export class HomepageComponent implements OnInit {
       });
   }
 
+  listPostByOderPriority() {
+    return this.userService.listPostByOderPriority(this.loginService.getUserToken().id).subscribe((data) => {
+      this.postEnterpriseOffer = data;
+    })
+  }
 
 
   saveCvForm = new FormGroup({
@@ -182,7 +191,8 @@ export class HomepageComponent implements OnInit {
        }
        this.userService.saveApplyJob(jobApply).subscribe(()=>{
            alert("apply công việc thành công ")
-           // this.findCvByIdUser();
+         this.listPostByOderPriority();
+         // this.findCvByIdUser();
        })
   }
   findUserApplyByIdAppUserAndIdPost(){
@@ -203,6 +213,36 @@ export class HomepageComponent implements OnInit {
       }
     })
   }
+  searchForm=new FormGroup({
+    nameEnterprise: new FormControl(""),
+    city: new FormControl(""),
+    idField: new FormControl(""),
+  })
+  search(){
+    let search=this.searchForm.value;
+    let searchform = {
+      nameEnterprise: search.nameEnterprise,
+      city: search.city,
+      idField: search.idField,
+      }
+    if (this.searchForm.value.idField==""){
+      this.loginService.findPostByUserField(searchform).subscribe((data) => {
+        this.postEnterpriseOffer = data;
+      })
+    }else {
+      this.loginService.findPostByUser(searchform).subscribe((data) => {
+        this.postEnterpriseOffer = data;
+      })
+    }
+
+  }
+
+  //  XÓA BÀI ĐĂNG khi hết hạn
+  deletePostExpired(){
+    this.userService.deletePostExpired().subscribe(()=>{
+    })
+  }
+
 
   listPostByOderPriority(page:number) {
     return this.userService.listPostByOderPriority(page).subscribe((data) => {

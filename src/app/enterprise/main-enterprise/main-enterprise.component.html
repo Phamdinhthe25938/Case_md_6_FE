@@ -1785,6 +1785,26 @@ License: For each use you must have a valid license purchased only from above li
                           <!--begin::Symbol-->
                           <div class="symbol symbol-40px me-5">
 																<span class="symbol-label">
+                                     <i style="color: black" class="fa-regular fa-money-check"></i>
+                                </span>
+                          </div>
+                          <!--end::Symbol-->
+                          <!--begin::Description-->
+                          <div data-toggle="modal" data-target="#transWalletHrS" (click)="getTransWalletHrByIdEnter()" class="d-flex flex-column flex-grow-1">
+                            <!--begin::Title-->
+                            <h5 style="cursor: pointer" class="custom-list-title fw-bold text-gray-800 mb-1">Lịch sử giao dịch</h5>
+                            <!--end::Title-->
+                            <!--begin::Link-->
+                            <span class="text-gray-400 fw-bold"></span>
+                            <!--end::Link-->
+                          </div>
+                          <!--begin::Description-->
+                        </a>
+
+                        <a  class="custom-list d-flex align-items-center px-5 py-4">
+                          <!--begin::Symbol-->
+                          <div class="symbol symbol-40px me-5">
+																<span class="symbol-label">
                                <i style="color: black" class="fa-solid fa-right-from-bracket"></i>
 																</span>
                           </div>
@@ -3074,7 +3094,7 @@ License: For each use you must have a valid license purchased only from above li
                               <img src="{{a.enterprise.imgEnterprise}}" alt="" />
                             </div>
                             <div class="d-flex justify-content-start flex-column">
-                              <a style="margin: 0" class="text-dark fw-bolder text-hover-primary fs-6">{{a.namePostEnterprise}}</a>
+                              <a style="margin: 0;font-size: 12px !important;" class="text-dark fw-bolder text-hover-primary fs-6">{{a.namePostEnterprise}}</a>
                               <span class="text-muted fw-bold text-muted d-block fs-7">{{a.formJobPostEnterprise.nameFormJob}}</span>
                             </div>
                           </div>
@@ -3128,14 +3148,13 @@ License: For each use you must have a valid license purchased only from above li
                           </div>
                         </td>
                       </tr>
-
                       </tbody>
-
 <!--                      Đức-Phân trang-->
-                      <p><pagination-controls class="btn btn-sm btn-outline-primary" class="myPagination" (pageChange)="p = $event">
-                      </pagination-controls></p>
                       <!--end::Table body-->
                     </table>
+                    <p style="display: flex;justify-content: center">
+                      <pagination-controls class="btn btn-sm btn-outline-primary" class="myPagination" (pageChange)="p = $event"></pagination-controls>
+                    </p>
                     <!--end::Table-->
                   </div>
                   <!--end::Table container-->
@@ -3258,7 +3277,7 @@ License: For each use you must have a valid license purchased only from above li
                     <!--begin::Symbol-->
                     <div class="symbol symbol-50px me-5">
 													<span class="symbol-label">
-														<img style="height: 85% !important;border-radius: 2px" src="{{a.userApply.imgCV}}" class="h-50 align-self-center" alt="" />
+														<img style="height: 85% !important;border-radius: 2px" (click)="getUserApplyById(a.userApply.idUserApply)"  data-toggle="modal" data-target="#imgCV" src="{{a.userApply.imgCV}}" class="h-50 align-self-center" alt="" />
 													</span>
                     </div>
                     <!--end::Symbol-->
@@ -6369,6 +6388,55 @@ License: For each use you must have a valid license purchased only from above li
     </div>
   </div>
 </div>
+<div  class="modal" id="transWalletHrS" >
+  <div class="modal-dialog" >
+    <!-- Modal content-->
+    <div class="modal-content"  style="width: 1000px;position: relative;right: 222px;">
+      <div class="modal-header" >
+        <div style="">
+          <h4 class="modal-title" style="font-size: inherit">Lịch sử giao dịch </h4>
+        </div>
+        <button type="button" class="close" style="border: none;background-color: #fff" data-dismiss="modal">X</button>
+      </div>
+      <div class="modal-body" style="height: 700px">
+        <div class="row" style="padding-top: 10px;background-color:rgb(0,0,0,0.05)" >
+          <div class="col-md-12 row" style="">
+            <div class="col-md-2 textWalletHr titleTextWalletHr">Tài khoản chuyển</div>
+            <div class="col-md-2 textWalletHr titleTextWalletHr">Tài khoản nhận</div>
+            <div class="col-md-2 textWalletHr titleTextWalletHr">Tiền gửi đi</div>
+            <div class="col-md-2 textWalletHr titleTextWalletHr">Tiền nhận </div>
+            <div class="col-md-2 textWalletHr titleTextWalletHr">Tiền chênh lệch</div>
+            <div class="col-md-2 textWalletHr titleTextWalletHr" >Thời gian XTGD</div>
+          </div>
+          <div style="padding: 10px 0;;" class="col-md-12 row" *ngFor="let a of transWalletHrByIdEnters">
+            <div class="col-md-2 textWalletHr">{{a.enterprise.numberViEnterprise}}</div>
+            <div class="col-md-2 textWalletHr">{{a.viAdmin.numberVi}}</div>
+            <div class="col-md-2 textWalletHr">{{a.moneyReceive}}</div>
+            <div class="col-md-2 textWalletHr">{{a.moneyAway}}</div>
+            <div class="col-md-2 textWalletHr" style="color: red">{{a.moneyDiscount}}</div>
+            <div class="col-md-2 textWalletHr">
+              <i>{{a.timeTrans}}</i> /
+              <i> {{a.dateTrans}}</i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--ẢNH CV-->
+<div  class="modal" id="imgCV" >
+  <div class="modal-dialog" >
+    <!-- Modal content-->
+    <div class="modal-content" style="display: flex;align-items: center;justify-content: center">
+      <div style="padding: 10px">
+        <img style="width: 100%;height: 100%;border-radius: 5px" src="{{imgCvByIdUserApply}}" alt="">
+      </div>
+    </div>
+  </div>
+</div>
+
 
 
 
