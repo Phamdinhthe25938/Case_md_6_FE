@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {PostEnterprise} from "../../model/PostEnterprise";
@@ -8,27 +8,38 @@ import {PostEnterprise} from "../../model/PostEnterprise";
 })
 export class UserService {
 
-  constructor(private http:HttpClient) { }
+  constructor(private http: HttpClient) {
+  }
 
-  listPostByOderPriority(id:number):Observable<PostEnterprise[]>{
+  listPostByOderPriority(id: number): Observable<PostEnterprise[]> {
     return this.http.get<any>(`http://localhost:8080/user/listPostByOderPriority/${id}`,);
   }
-  saveCv(cvUser:any):Observable<any>{
-    return this.http.post<any>(`http://localhost:8080/user/saveCvUser/`,cvUser);
+
+  saveCv(cvUser: any): Observable<any> {
+    return this.http.post<any>(`http://localhost:8080/user/saveCvUser/`, cvUser);
   }
-  postDetail(id:number):Observable<any>{
+
+  postDetail(id: number): Observable<any> {
     return this.http.get<any>(`http://localhost:8080/user/postDetail/${id}`);
   }
-  findCvByIdUser(id:number):Observable<any>{
+
+  findCvByIdUser(id: number): Observable<any> {
     return this.http.get<any>(`http://localhost:8080/user/findCvByIdUser/${id}`);
   }
-  saveApplyJob(userApplyJob:any){
-    return this.http.post<any>(`http://localhost:8080/user/saveApplyJob`,userApplyJob);
+
+  saveApplyJob(userApplyJob: any) {
+    return this.http.post<any>(`http://localhost:8080/user/saveApplyJob`, userApplyJob);
   }
-  findUserApplyByIdAppUserAndIdPost(idAppUser:number,idPost:number){
+
+  findUserApplyByIdAppUserAndIdPost(idAppUser: number, idPost: number) {
     return this.http.get<any>(`http://localhost:8080/user/findUserApplyByIdAppUserAndIdPost/${idAppUser}/${idPost}`);
   }
-  deletePostExpired():Observable<any>{
+
+  deletePostExpired(): Observable<any> {
     return this.http.get<any>(`http://localhost:8080/user/deletePostExpired`);
+  }
+
+  showListApply(id: number): Observable<any> {
+    return this.http.get<any>(`http://localhost:8080/user/listUserApplyByIdAppUser/${id}`);
   }
 }
