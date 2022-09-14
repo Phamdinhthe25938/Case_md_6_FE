@@ -41,7 +41,7 @@
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link active" (click)="toTurnoverComponet()">
+        <a class="nav-link active" (click)="toTurnoverComponet()" style="cursor: pointer">
           <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
             <i class="ni ni-calendar-grid-58 text-warning text-sm opacity-10"></i>
           </div>
@@ -329,6 +329,9 @@
                     <button class="btn btn-link text-secondary mb-0">
                       <i class="fa fa-ellipsis-v text-xs"></i>
                     </button>
+<!--                    Khóa tài khoản DN&ndash;&gt;-->
+                    <span data-toggle="modal"  data-target="#banEnterprise" ><i style="cursor:pointer; color: red" class="fa fa-ban"></i></span>
+<!--                 end khóa dn-->
                   </td>
                 </tr>
                 </tbody>
@@ -492,8 +495,31 @@
     </div>
 
   </div>
-
-
+<!--Modal content khóa DN -->
+  <div  class="modal"   id="banEnterprise">
+    <div class="modal-dialog">
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header" >
+          <div style="">
+            <h4 class="modal-title" style="font-size: inherit">Khóa tài khoản doanh nghiệp</h4>
+          </div>
+          <button type="button" class="close" style="border: none;background-color: #fff" data-dismiss="modal">X</button>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <textarea style="height: 200px;border: #2c3e50;outline: none" type="text" class="form-control" formControlName="banEnterprise" value="" placeholder="Nhập lý do khóa tài khoản">
+            </textarea>
+          </div>
+          <div>
+<!--            (click)=""-->
+            <button  type="submit"  class=" btn btn-default btn btn-info add-new" >Xác nhận</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div >
+<!--End Modal content khóa DN-->
 </main>
 
 
