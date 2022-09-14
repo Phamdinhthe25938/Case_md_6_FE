@@ -10,8 +10,8 @@ export class UserService {
 
   constructor(private http:HttpClient) { }
 
-  listPostByOderPriority():Observable<PostEnterprise[]>{
-    return this.http.get<any>(`http://localhost:8080/user/listPostByOderPriority`,);
+  listPostByOderPriority(id:number):Observable<PostEnterprise[]>{
+    return this.http.get<any>(`http://localhost:8080/user/listPostByOderPriority/${id}`,);
   }
   saveCv(cvUser:any):Observable<any>{
     return this.http.post<any>(`http://localhost:8080/user/saveCvUser/`,cvUser);

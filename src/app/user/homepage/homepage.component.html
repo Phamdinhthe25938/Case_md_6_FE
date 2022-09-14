@@ -73,7 +73,7 @@
                 </ul>
               </li>
               <li>
-                <a href="about.html">
+                <a (click)="deltalComponent()">
                   Pages <i class="fa fa-angle-down"></i>
                 </a>
                 <ul class="dropdown">
@@ -220,7 +220,7 @@
             </ul>
           </li>
           <li>
-            <a href="about.html">Pages</a>
+            <a (click)="deltalComponent()" >Pages</a>
             <ul>
               <li><a href="about.html">About</a></li>
               <li><a href="job-page.html">Job Page</a></li>
@@ -328,7 +328,7 @@
                     <div class="search-category-container">
                       <label class="styled-select" >
                         <select class="form-control" formControlName="idField" style="height: 55px;">
-<!--                          <option value="1">Công nghệ</option>-->
+                          <option value="">Lĩnh vực</option>
                           <option  *ngFor="let b of fields" value="{{b.idField}}">{{b.nameField}}</option>
                         </select>
                       </label>
