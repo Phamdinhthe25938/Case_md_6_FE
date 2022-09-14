@@ -11,6 +11,7 @@ import {Router} from "@angular/router";
 import {CvUser} from "../../model/CvUser";
 import {doc} from "@angular/fire/firestore";
 import {UserApply} from "../../model/UserApply";
+import {UserToken} from "../../model/UserToken";
 
 @Component({
   selector: 'app-homepage',
@@ -246,17 +247,17 @@ export class HomepageComponent implements OnInit {
   }
 
 
-  listPostByOderPriority(page:number) {
-    return this.userService.listPostByOderPriority(page).subscribe((data) => {
-      this.postEnterpriseOffer = data;
-      console.log("data")
-      console.log("data")
-      console.log( this.postEnterpriseOffer)
-      if ((this.postEnterpriseOffer.length % 5) != 0) {
-        this.totalPagination = (Math.round(this.postEnterpriseOffer.length / 5)) + 1;
-      }
-    })
-  }
+  // listPostByOderPriority(page:number) {
+  //   return this.userService.listPostByOderPriority(page).subscribe((data) => {
+  //     this.postEnterpriseOffer = data;
+  //     console.log("data")
+  //     console.log("data")
+  //     console.log( this.postEnterpriseOffer)
+  //     if ((this.postEnterpriseOffer.length % 5) != 0) {
+  //       this.totalPagination = (Math.round(this.postEnterpriseOffer.length / 5)) + 1;
+  //     }
+  //   })
+  // }
 
   findPaginnation() {
     this.userService.listPostByOderPriority((this.indexPagination * 5) - 5).subscribe((data) => {
