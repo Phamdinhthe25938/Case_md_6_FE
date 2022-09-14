@@ -6,10 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./deltal.component.css']
 })
 export class DeltalComponent implements OnInit {
-
   constructor() { }
-
   ngOnInit(): void {
   }
-
 }
