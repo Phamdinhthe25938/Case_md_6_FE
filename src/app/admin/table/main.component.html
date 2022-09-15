@@ -329,9 +329,13 @@
                     <button class="btn btn-link text-secondary mb-0">
                       <i class="fa fa-ellipsis-v text-xs"></i>
                     </button>
-<!--                    Khóa tài khoản DN&ndash;&gt;-->
-                    <span data-toggle="modal"  data-target="#banEnterprise" ><i style="cursor:pointer; color: red" class="fa fa-ban"></i></span>
+<!--                    Khóa tài khoản DN&ndash -->
+                    <span *ngIf="a.statusEnterprise" data-toggle="modal" (click)="getIdBanEnterprise(a.idEnterprise)" data-target="#banEnterprise" ><i style="cursor:pointer" class="fa fa-ban"></i></span>
 <!--                 end khóa dn-->
+<!--                    Khóa tài khoản DN&ndash-->
+                    <span *ngIf="!a.statusEnterprise" data-toggle="modal" (click)="getIdBanEnterprise(a.idEnterprise)" data-target="#unbanEnterprise" ><i style="cursor:pointer; color: red" class="fa fa-ban"></i></span>
+                    <!--                 end khóa dn-->
+
                   </td>
                 </tr>
                 </tbody>
@@ -496,6 +500,7 @@
 
   </div>
 <!--Modal content khóa DN -->
+  <form [formGroup]="formBanEnterprise">
   <div  class="modal"   id="banEnterprise">
     <div class="modal-dialog">
       <!-- Modal content-->
@@ -507,19 +512,46 @@
           <button type="button" class="close" style="border: none;background-color: #fff" data-dismiss="modal">X</button>
         </div>
         <div class="modal-body">
+
           <div class="form-group">
-            <textarea style="height: 200px;border: #2c3e50;outline: none" type="text" class="form-control" formControlName="banEnterprise" value="" placeholder="Nhập lý do khóa tài khoản">
+            <textarea style="height: 200px;border: #2c3e50;outline: none" type="text" class="form-control" formControlName="content"  placeholder="Nhập lý do khóa tài khoản">
             </textarea>
           </div>
           <div>
 <!--            (click)=""-->
-            <button  type="submit"  class=" btn btn-default btn btn-info add-new" >Xác nhận</button>
+            <span  type="submit" (click)=" confirmBan()" class=" btn btn-default btn btn-info add-new" >Xác nhận</span>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div >
+  </form>
+<!--End Modal content khóa DN-->
+  <!--Modal content Mở DN -->
+  <div  class="modal"   id="unbanEnterprise">
+    <div class="modal-dialog">
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header" >
+          <div style="">
+            <h4 class="modal-title" style="font-size: inherit">Mở khóa tài khoản doanh nghiệp</h4>
+          </div>
+          <button type="button" class="close" style="border: none;background-color: #fff" data-dismiss="modal">X</button>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            Bạn muốn mở khóa cho doanh nghiệp này?
+          </div>
+          <div>
+            <!--            (click)=""-->
+            <span  type="submit" (click)="confirmUnBan()" class=" btn btn-default btn btn-info add-new" >Xác nhận</span>
           </div>
         </div>
       </div>
     </div>
   </div >
-<!--End Modal content khóa DN-->
+  <!--End Modal content Mở DN-->
 </main>
 
 

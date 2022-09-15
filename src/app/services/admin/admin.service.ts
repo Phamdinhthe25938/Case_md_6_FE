@@ -64,4 +64,10 @@ export class AdminService {
     return this.http.get<any>(`http://localhost:8080/admin/totalMoneyTransDateNow`);
 
   }
+  banEnterprise(id:number,content:any):Observable<any> {
+    return this.http.post<any>(`http://localhost:8080/admin/banEnterprise/${id}`,content);
+  }
+  unbanEnterprise(id:number):Observable<any> {
+    return this.http.get<any>(`http://localhost:8080/admin/unbanEnterprise/${id}`);
+  }
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {AdminService} from "../../services/admin/admin.service";
 import {Enterprise} from "../../model/Enterprise";
 import {Router} from "@angular/router";
@@ -11,87 +11,120 @@ import {LoginService} from "../../services/login/login.service";
   templateUrl: './main.component.html',
   styleUrls: ['./main.component.css']
 })
-export class MainComponent implements OnInit{
+export class MainComponent implements OnInit {
   enterprisesNotConfirm !: Enterprise[];
   enterprisesConfirm!: Enterprise[];
   enterpriseDeltail!: Enterprise;
+  private idBan !: number;
 
-  constructor(private adminService:AdminService,private router:Router,private enterpriseService:EnterpriseService,private loginService:LoginService) {
+  constructor(private adminService: AdminService, private router: Router, private enterpriseService: EnterpriseService, private loginService: LoginService) {
 
   }
 
   ngOnInit(): void {
 
-    this.adminService.getAllEnterPriseNotConfirm().subscribe((data)=>{
-      this.enterprisesNotConfirm=data;
+    this.adminService.getAllEnterPriseNotConfirm().subscribe((data) => {
+      this.enterprisesNotConfirm = data;
     })
-    this.adminService.getAllEnterPriseConfirm().subscribe((data)=>{
-      this.enterprisesConfirm=data;
+    this.adminService.getAllEnterPriseConfirm().subscribe((data) => {
+      this.enterprisesConfirm = data;
     })
   }
-  logout(){
-      this.loginService.logout();
-      this.router.navigate(["/login"])
+
+  logout() {
+    this.loginService.logout();
+    this.router.navigate(["/login"])
   }
-  toTurnoverComponet(){
+
+  toTurnoverComponet() {
     this.router.navigate(["/turnover"]);
   }
-  reasonForm= new FormGroup({
+
+  reasonForm = new FormGroup({
     reasonRefusal: new FormControl("", Validators.required),
   })
-  getAllNotConfirm(){
-    this.adminService.getAllEnterPriseNotConfirm().subscribe((data)=>{
-      this.enterprisesNotConfirm=data;
+
+  getAllNotConfirm() {
+    this.adminService.getAllEnterPriseNotConfirm().subscribe((data) => {
+      this.enterprisesNotConfirm = data;
     })
   }
-  getAllConfirm(){
-    this.adminService.getAllEnterPriseConfirm().subscribe((data)=>{
-      this.enterprisesConfirm=data;
+
+  getAllConfirm() {
+    this.adminService.getAllEnterPriseConfirm().subscribe((data) => {
+      this.enterprisesConfirm = data;
     })
   }
-  confirm(id:number){
-      this.adminService.confirmEnterprise(id).subscribe(()=>{
-          alert("Xác thực thành công !");
-          this.getAllNotConfirm();
-          this.getAllConfirm();
-          this.router.navigate(["/admin/show"]);
-      })
+
+  confirm(id: number) {
+    this.adminService.confirmEnterprise(id).subscribe(() => {
+      alert("Xác thực thành công !");
+      this.getAllNotConfirm();
+      this.getAllConfirm();
+      this.router.navigate(["/admin/show"]);
+    })
   }
-  refuseInput(){
+
+  refuseInput() {
     // console.log(this.reasonRefusal);
-      // @ts-ignore
-    document.getElementById("refuseInput").style.display="block";
     // @ts-ignore
-    document.getElementById("btnConfirmRefusal").style.display="block";
+    document.getElementById("refuseInput").style.display = "block";
     // @ts-ignore
-    document.getElementById("btnRefusal").style.display="none";
+    document.getElementById("btnConfirmRefusal").style.display = "block";
     // @ts-ignore
-    document.getElementById("confirm").style.display="none";
+    document.getElementById("btnRefusal").style.display = "none";
+    // @ts-ignore
+    document.getElementById("confirm").style.display = "none";
   }
-  reset(){
-     this.reasonForm.value.reasonRefusal="";
+
+  reset() {
+    this.reasonForm.value.reasonRefusal = "";
     // @ts-ignore
-    document.getElementById("refuseInput").style.display="none";
+    document.getElementById("refuseInput").style.display = "none";
     // @ts-ignore
-    document.getElementById("btnConfirmRefusal").style.display="none";
+    document.getElementById("btnConfirmRefusal").style.display = "none";
     // @ts-ignore
-    document.getElementById("btnRefusal").style.display="block";
+    document.getElementById("btnRefusal").style.display = "block";
     // @ts-ignore
-    document.getElementById("confirm").style.display="block";
+    document.getElementById("confirm").style.display = "block";
   }
-  refuseConfirm(id:number){
+
+  refuseConfirm(id: number) {
     let string = this.reasonForm.value.reasonRefusal;
-   let string1 = String(string);
-    this.adminService.refuseConfirmEnterprise(id,string1).subscribe(()=>{
+    let string1 = String(string);
+    this.adminService.refuseConfirmEnterprise(id, string1).subscribe(() => {
       alert("ok ban oi")
       this.reset();
       this.getAllNotConfirm();
       this.getAllConfirm();
     })
   }
-  findById(id:number){
-    this.adminService.findById(id).subscribe((data)=>{
-      this.enterpriseDeltail=data;
+
+  findById(id: number) {
+    this.adminService.findById(id).subscribe((data) => {
+      this.enterpriseDeltail = data;
+    })
+  }
+
+  getIdBanEnterprise(id: number) {
+    this.idBan = id;
+  }
+  formBanEnterprise = new FormGroup({
+    content: new FormControl("", Validators.required),
+  })
+  confirmBan() {
+    let content = {
+      content: this.formBanEnterprise.value.content
+    }
+    this.adminService.banEnterprise(this.idBan,content).subscribe(() => {
+      location.reload();
+      alert("Khóa tài khoản thành công")
+    })
+  }
+  confirmUnBan(){
+    this.adminService.unbanEnterprise(this.idBan).subscribe(() => {
+      location.reload();
+      alert("Mở khóa tài khoản thành công")
     })
   }
 }
