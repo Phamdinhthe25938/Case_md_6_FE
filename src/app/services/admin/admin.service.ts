@@ -49,7 +49,7 @@ export class AdminService {
     return this.http.post<any>(`http://localhost:8080/admin/confirmTransWallet/${id}`,"");
   }
   getTransWalletById(id:number){
-    return this.http.get<any>(`http://localhost:8080/admin/getTransWalletById/${id}`,);
+    return this.http.get<any>(`http://localhost:8080/admin/getTransWalletById/${id}`);
   }
   walletAdmin(adminWallet:any):Observable<any>{
     return this.http.post<any>(`http://localhost:8080/admin/walletAdmin`,adminWallet);
@@ -63,5 +63,15 @@ export class AdminService {
   totalMoneyTransDateNow():Observable<any>{
     return this.http.get<any>(`http://localhost:8080/admin/totalMoneyTransDateNow`);
 
+  }
+  showAllPostVip(id:number){
+    return this.http.get<any>(`http://localhost:8080/enterprise/sumPostEnterPriseVip/${id}`);
+  }
+  showAllPostNormal(id:number){
+    return this.http.get<any>(`http://localhost:8080/enterprise/sumPostEnterPriseNormal/${id}`);
+  }
+
+  showAllPost(id:number){
+    return this.http.get<any>(`http://localhost:8080/enterprise/sumAllPostEnterprise/${id}`)
   }
 }
