@@ -35,7 +35,7 @@
 <section class="job-browse section">
   <div   class="container">
     <div class="row">
-      <div class="col-md-9 col-sm-8">
+      <div class="col-md-9 col-sm-8" style="height: 500px;position: relative">
         <div *ngFor="let l of lisApply" class="job-list" style="width: 100%">
           <div class="thumb">
             <a href="job-details.html"><img style="width: 100px" src="{{l.enterprise.imgEnterprise}}" alt=""></a>
@@ -133,15 +133,17 @@
 <!--          </div>-->
 <!--        </div>-->
         <!-- Start Pagination -->
-        <ul class="pagination">
-          <li class="active"><a href="#" class="btn btn-common" ><i class="ti-angle-left"></i> prev</a></li>
-          <li><a href="#">1</a></li>
-          <li><a href="#">2</a></li>
-          <li><a href="#">3</a></li>
-          <li><a href="#">4</a></li>
-          <li><a href="#">5</a></li>
-          <li class="active"><a href="#" class="btn btn-common">Next <i class="ti-angle-right"></i></a></li>
-        </ul>
+     <div style="position: absolute;bottom: 0">
+       <ul class="pagination">
+         <li class="active"><a (click)="preveBefore()"  class="btn btn-common" ><i class="ti-angle-left"></i> prev</a></li>
+         <li><a class="pageChange" style="cursor: pointer" (click)="pageChange(1)">1</a></li>
+         <li><a class="pageChange" style="cursor: pointer" (click)="pageChange(2)">2</a></li>
+         <li><a class="pageChange" style="cursor: pointer"(click)="pageChange(3)">3</a></li>
+         <li><a class="pageChange" style="cursor: pointer"(click)="pageChange(4)">4</a></li>
+         <li><a class="pageChange" style="cursor: pointer"(click)="pageChange(5)">5</a></li>
+         <li class="active"><a (click)="preveAfter()" class="btn btn-common">Next <i class="ti-angle-right"></i></a></li>
+       </ul>
+     </div>
         <!-- End Pagination -->
       </div>
       <div class="col-md-3 col-sm-4">
@@ -289,7 +291,7 @@
     <div class="container">
       <div class="row">
         <div class="col-md-12">
-          Shared by <i class="fa fa-love"></i><a href="https://bootstrapthemes.co">BootstrapThemes</a>
+          Shared by <i class="fa fa-love"></i><a href="https://www.facebook.com/vu.song.79462">Đỉnh Thế</a>
         </div>
       </div>
     </div>

@@ -264,11 +264,13 @@
                     <span class="text-secondary text-xs font-weight-bold">{{a.dateRegisterEnterprise}}</span>
                   </td>
                   <td class="align-middle">
-                   <div style="display: flex;align-items: center;justify-content: center">
-                     <button type="button"  (click)="findById(a.idEnterprise)" style="padding: 8px;margin-bottom: 0; color: thistle;background: green;border: none;" class="badge badge-sm bg-gradient-success" data-toggle="modal" data-target="#myModalEdit" >
-                       Chi tiết
-                     </button>
-                   </div>
+                    <div style="display: flex;align-items: center;justify-content: center">
+                      <button type="button" (click)="findById(a.idEnterprise)"
+                              style="padding: 8px;margin-bottom: 0; color: thistle;background: green;border: none;"
+                              class="badge badge-sm bg-gradient-success" data-toggle="modal" data-target="#myModalEdit">
+                        Chi tiết
+                      </button>
+                    </div>
                   </td>
                 </tr>
                 </tbody>
@@ -326,7 +328,7 @@
                     </div>
                   </td>
                   <td class="align-middle">
-                    <button class="btn btn-link text-secondary mb-0">
+                    <button  data-toggle="modal"  data-target="#modalShow"  (click)="showEnterprise(a.idEnterprise)" class="btn btn-link text-secondary mb-0">
                       <i class="fa fa-ellipsis-v text-xs"></i>
                     </button>
 <!--                    Khóa tài khoản DN&ndash -->
@@ -514,7 +516,7 @@
         <div class="modal-body">
 
           <div class="form-group">
-            <textarea style="height: 200px;border: #2c3e50;outline: none" type="text" class="form-control" formControlName="content"  placeholder="Nhập lý do khóa tài khoản">
+            <textarea style="height: 150px;;" type="text" class="form-control" formControlName="banEnterprise" value="" placeholder="Nhập lý do khóa tài khoản">
             </textarea>
           </div>
           <div>
@@ -528,6 +530,86 @@
   </div >
   </form>
 <!--End Modal content khóa DN-->
+
+
+  <!-- Trigger the modal with a button -->
+
+
+  <div class="modal" id="modalShow">
+    <div class="modal-dialog">
+      <div class="modal-content" style="padding: 20px; width: 1200px;right: 333px; background-color: #f96b73  ">
+        <!-- Modal Header -->
+        <div class="container bootstrap snippets bootdey" style="color: #FF4F57">
+          <div class="row ng-scope">
+
+            <!--            <div class="col-md-8">-->
+            <!--              <div class="panel panel-default">-->
+            <div class="panel-body">
+
+              <div class="h4 text-center" style="color: white; padding-bottom: 5px; margin-bottom: 10px">Thông tin doanh nghiệp</div>
+              <div class="row pv-lg">
+                <div class="col-lg-12">
+                  <section id="counter">
+                    <div class="container">
+                      <div class="row" style="display: flex; justify-content: center">
+                        <div class="col-md-3 col-sm-6 col-xs-12">
+                          <div class="counting">
+                            <div class="icon">
+                              <i class='fas fa-book-open' style='font-size:30px;color:white; margin-left: 50px'></i></div>
+                            <div class="desc">
+                              <h2 style="font-size:20px; color:white ">Tổng bài đăng</h2>
+                              <h1 class="counter" style=" color:white; margin-left: 50px">{{totalAllPost }} </h1>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-md-3 col-sm-6 col-xs-12">
+                          <div class="counting">
+                            <div class="icon">
+                              <i class='fas fa-book-open' style='font-size:30px;color:white; margin-left: 50px'></i>
+                            </div>
+                            <div class="desc">
+                              <h2 style="font-size:20px ; color: white">Bài đăng Vip</h2>
+                              <h1 class="counter" style="color: white; margin-left: 50px">{{totalPostVip}}</h1>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-md-3 col-sm-6 col-xs-12">
+                          <div class="counting">
+                            <div class="icon">
+                              <i class='fas fa-book-open' style='font-size:30px;color:white; margin-left: 50px'></i>
+                            </div>
+                            <div class="desc">
+                              <h2 style="font-size:20px ; color: white">Bài đăng thường</h2>
+                              <h1 class="counter" style="color: white; margin-left: 50px">{{totalPostNormal}}</h1>
+                            </div>
+                          </div>
+                        </div>
+                        <!--                            <div class="col-md-3 col-sm-6 col-xs-12">-->
+                        <!--                              <div class="counting">-->
+                        <!--                                <div class="icon">-->
+                        <!--                                  <i class="ti-heart"></i>-->
+                        <!--                                </div>-->
+                        <!--                                <div class="desc">-->
+                        <!--                                  <h2>Company</h2>-->
+                        <!--                                  <h1 class="counter">9050</h1>-->
+                        <!--                                </div>-->
+                        <!--                              </div>-->
+                        <!--                            </div>-->
+                      </div>
+                    </div>
+                  </section>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--    </div>-->
+
+  <!--  </div>-->
+
   <!--Modal content Mở DN -->
   <div  class="modal"   id="unbanEnterprise">
     <div class="modal-dialog">
