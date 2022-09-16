@@ -6165,7 +6165,7 @@ License: For each use you must have a valid license purchased only from above li
                               <option *ngFor="let a of listFormJob" value="{{a.idFormJob}}">{{a.nameFormJob}}</option>
                             </select>
                           </div>
-                          <p *ngIf="!createPostForm.get('idFormJob')?.valid && createPostForm.get('idFormJob')?.touched" style="color: red;margin: 0">Dữ liệu không liêu!</p>
+                          <p *ngIf="!createPostForm.get('idFormJob')?.valid && createPostForm.get('idFormJob')?.touched" style="color: red;margin: 0">Không để trống</p>
 
                         </div>
                       </div>
