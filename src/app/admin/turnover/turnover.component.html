@@ -29,7 +29,7 @@
           <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
             <i class="ni ni-tv-2 text-primary text-sm opacity-10"></i>
           </div>
-          <span class="nav-link-text ms-1">Bảng điều khiển</span>
+          <span class="nav-link-text ms-1">Tổng quan</span>
         </a>
       </li>
       <li class="nav-item">
@@ -101,9 +101,9 @@
       <nav aria-label="breadcrumb">
         <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
           <li class="breadcrumb-item text-sm"><a class="opacity-5 text-white" href="javascript:;">Admin</a></li>
-          <li class="breadcrumb-item text-sm text-white active" aria-current="page">Bảng điều khiển</li>
+          <li class="breadcrumb-item text-sm text-white active" aria-current="page">Tổng quan</li>
         </ol>
-        <h6 class="font-weight-bolder text-white mb-0">Bảng điều khiển</h6>
+        <h6 class="font-weight-bolder text-white mb-0">Tổng quan</h6>
       </nav>
       <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
         <div class="ms-md-auto pe-md-3 d-flex align-items-center">
@@ -221,7 +221,7 @@
                 <div class="numbers">
                   <p class="text-sm mb-0 text-uppercase font-weight-bold">Doanh thu Post</p>
                   <h5 class="font-weight-bolder">
-                      {{totalMoneyTransaction}} $
+                      {{totalMoneyTransaction}} .000 vnd
                   </h5>
 <!--                  <p class="mb-0">-->
 <!--                    <span class="text-success text-sm font-weight-bolder">+55%</span>-->
@@ -271,7 +271,7 @@
                 <div class="numbers">
                   <p class="text-sm mb-0 text-uppercase font-weight-bold">GD trong ngày</p>
                   <h5 class="font-weight-bolder">
-                         {{totalMoneyTransDateNow}} $
+                         {{totalMoneyTransDateNow}} .000 vnd
                   </h5>
                   <p class="mb-0">
 <!--                    <span class="text-danger text-sm font-weight-bolder">-2%</span>-->
@@ -296,7 +296,7 @@
                 <div class="numbers">
                   <p class="text-sm mb-0 text-uppercase font-weight-bold">Tài khoản </p>
                   <h5 class="font-weight-bolder" style="display: flex">
-                    <span>{{viAdmin?.numberMoneyVi}} $</span>
+                    <span>{{viAdmin?.numberMoneyVi}} .000 vnd</span>
                     <p style="margin-left: 10px" class="mb-0"  >
                       <i data-target="#transWalletHrS" (click)="getAllTransWalletHr()" data-toggle="modal" class="fa-solid fa-clock-rotate-left" style="padding: 5px;   background: aquamarine; border-radius: 50%;    cursor: pointer;"></i>
                     </p>
@@ -417,7 +417,7 @@
                 <td class="align-middle text-sm">
                   <div class="col text-center">
                     <p class="text-xs font-weight-bold mb-0">Số tiền GD</p>
-                    <h6 class="text-sm mb-0">{{a.moneyTransaction}} $</h6>
+                    <h6 class="text-sm mb-0">{{a.moneyTransaction}} .000 vnd</h6>
                   </div>
                 </td>
               </tr>
@@ -452,7 +452,7 @@
                 <td class="align-middle text-sm">
                   <div class="col text-center">
                     <p class="text-xs font-weight-bold mb-0">Số tiền GD</p>
-                    <h6 class="text-sm mb-0">{{a.moneyTransaction}} $</h6>
+                    <h6 class="text-sm mb-0">{{a.moneyTransaction}} .000 vnd</h6>
                   </div>
                 </td>
               </tr>
@@ -478,7 +478,7 @@
                   <div class="col-md-2" >
                     <img data-target="#imgOder" data-toggle="modal" (click)="getImgTransWallet(a.id)" src="{{a.imgTransaction}}" style="cursor: pointer;width: 35px;height: 35px;margin-right: 10px;border-radius: 5px" alt="">
                    </div>
-                  <div style="text-align: center;color: red;font-weight: 700" class="col-md-2">{{a.numberMoney}} $</div>
+                  <div style="text-align: center;color: red;font-weight: 700" class="col-md-2">{{a.numberMoney}} .000 vnd</div>
                   <div class="col-md-3" style="display:flex;flex-direction: column;font-size: 12px;justify-content: center">
                     <i style="text-align: center">{{a.timeTransaction}}</i>
                     <i style="text-align: center">{{a.dateTransaction}}</i>
@@ -655,7 +655,7 @@
         <div class="modal-header" >
           <div style="display: flex;flex-direction: column">
             <h4 class="modal-title" style="font-size: 18px">Nạp ví tiền</h4>
-            <h4 style="margin-top: 4px;font-size: 18px" class="modal-title">Số tiền : <span style="color: #e03d00;font-size: 16px">{{viAdmin?.numberMoneyVi}} $</span></h4>
+            <h4 style="margin-top: 4px;font-size: 18px" class="modal-title">Số tiền : <span style="color: #e03d00;font-size: 16px">{{viAdmin?.numberMoneyVi}} .000 vnd</span></h4>
           </div>
           <button type="button" class="close" style="border: none;background-color: #fff" data-dismiss="modal">X</button>
         </div>
@@ -670,7 +670,7 @@
           <div class="form-group">
             <label for="username2" class="text-info">Nhập số tiền :</label><br>
             <input type="number"  formControlName="numberMoney"  id="username2" class="form-control" >
-            <p *ngIf="!walletForm.get('numberMoney')?.valid && walletForm.get('numberMoney')?.touched " style="color: red">Số tiền nhỏ nhất nạp là 5$</p>
+            <p *ngIf="!walletForm.get('numberMoney')?.valid && walletForm.get('numberMoney')?.touched " style="color: red">Số tiền nhỏ nhất nạp là 5.000 vnd</p>
           </div>
           <div class="form-group" style="display: flex;align-items: center">
             <input style="margin-left:4px" type="checkbox" id="checkBOX" name="vehicle1" value="Bike"><p style="margin-left: 10px;margin-bottom: 0;color: red;font-size: small">Tôi đồng ý</p>
