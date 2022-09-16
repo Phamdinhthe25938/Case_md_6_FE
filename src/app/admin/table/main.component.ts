@@ -15,6 +15,7 @@ export class MainComponent implements OnInit{
   enterprisesNotConfirm !: Enterprise[];
   enterprisesConfirm!: Enterprise[];
   enterpriseDeltail!: Enterprise;
+  idBan!:number;
 
   constructor(private adminService:AdminService,private router:Router,private enterpriseService:EnterpriseService,private loginService:LoginService) {
 
@@ -94,4 +95,5 @@ export class MainComponent implements OnInit{
       this.enterpriseDeltail=data;
     })
   }
+
 }

@@ -14,9 +14,13 @@ export class DeltalComponent implements OnInit {
   lisApply!:PostEnterprise[];
   postEnterpriseDetail!:PostEnterprise;
   userApply!:UserApply;
+  page:number =1;
   constructor(private userService: UserService,private enterpriseService:EnterpriseService,private loginService: LoginService) { }
   ngOnInit(): void {
-    this.userService.showListApply(this.loginService.getUserToken().id).subscribe((data) => {
+      this.getListApply();
+  }
+  getListApply(){
+    this.userService.showListApply(this.loginService.getUserToken().id,this.page).subscribe((data) => {
       this.lisApply = data;
     })
   }
@@ -28,5 +32,47 @@ export class DeltalComponent implements OnInit {
       this.userApply = data;
 
     })
+  }
+  pageChange(page:number){
+    this.page =page;
+    let pageChange = document.getElementsByClassName("pageChange");
+    // @ts-ignore
+    pageChange[this.page-1].style.background="#FF4F57";
+    for(let i=0;i<pageChange.length;i++){
+      if(i!== this.page-1){
+        // @ts-ignore
+        pageChange[i].style.background="#fff";
+      }
+    }
+    this.getListApply();
+  }
+  preveAfter(){
+    let pageChange = document.getElementsByClassName("pageChange");
+    // @ts-ignore
+    pageChange[this.page].style.background="#FF4F57";
+    for(let i=0;i<pageChange.length;i++){
+      if(i!== this.page){
+        // @ts-ignore
+        pageChange[i].style.background="#fff";
+      }
+    }
+    this.page=this.page+1;
+    this.getListApply();
+    console.log(this.page)
+  }
+  preveBefore(){
+    console.log(this.page)
+    let pageChange = document.getElementsByClassName("pageChange");
+    // @ts-ignore
+    pageChange[this.page-2].style.background="#FF4F57";
+    for(let i=0;i<pageChange.length;i++){
+      if(i!== this.page-2){
+        // @ts-ignore
+        pageChange[i].style.background="#fff";
+      }
+    }
+    this.page=this.page-1;
+    this.getListApply();
+
   }
 }
