@@ -35,7 +35,10 @@ export class UserService {
     return this.http.get<any>(`http://localhost:8080/user/deletePostExpired`);
   }
 
-  showListApply(id: number): Observable<any> {
-    return this.http.get<any>(`http://localhost:8080/user/listUserApplyByIdAppUser/${id}`);
+  showListApply(id: number,page:number): Observable<any> {
+    return this.http.get<any>(`http://localhost:8080/user/listUserApplyByIdAppUser/${id}/${page}`);
+  }
+  findImgCvApply(idUser:number,idPost:number):Observable<any>{
+    return this.http.get<any>(`http://localhost:8080/user/findImgCvApply/${idUser}/${idPost}`)
   }
 }

@@ -20,7 +20,8 @@ import {UserToken} from "../../model/UserToken";
 })
 export class HomepageComponent implements OnInit {
   // fields!: Field[];
-
+  indexPagination: number = 1;
+  totalPagination!: number;
   title = "cloudsSorage";
   fb: string = "";
   downloadURL: Observable<string> | undefined;
@@ -123,6 +124,7 @@ export class HomepageComponent implements OnInit {
       this.postEnterpriseOffer = data;
     })
   }
+
 
   saveCvForm = new FormGroup({
     name: new FormControl("", [Validators.required, Validators.pattern("[A-Za-z]+")]),
@@ -287,6 +289,29 @@ export class HomepageComponent implements OnInit {
     this.userService.deletePostExpired().subscribe(()=>{
     })
   }
+
+
+  // listPostByOderPriority(page:number) {
+  //   return this.userService.listPostByOderPriority(page).subscribe((data) => {
+  //     this.postEnterpriseOffer = data;
+  //     console.log("data")
+  //     console.log("data")
+  //     console.log( this.postEnterpriseOffer)
+  //     if ((this.postEnterpriseOffer.length % 5) != 0) {
+  //       this.totalPagination = (Math.round(this.postEnterpriseOffer.length / 5)) + 1;
+  //     }
+  //   })
+  // }
+
+
+  indexPaginationChage(value: any) {
+    // this.indexPagination = value;
+    console.log("value")
+    console.log("value")
+    console.log(value)
+  }
+
+
 
 }
 

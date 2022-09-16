@@ -3,6 +3,8 @@ import {Field} from "../model/Field";
 import {finalize, Observable} from "rxjs";
 import {AngularFireStorage} from "@angular/fire/compat/storage";
 import * as url from "url";
+import {Enterprise} from "../model/Enterprise";
+import {HttpClient} from "@angular/common/http";
 
 @Injectable({
   providedIn: 'root'

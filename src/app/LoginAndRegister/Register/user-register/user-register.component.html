@@ -8,25 +8,25 @@
       <div id="login-column" class="col-md-6">
         <div id="login-box" class="col-md-12" style="height: 470px">
           <form id="login-form" class="form" [formGroup]="registerUserForm" (ngSubmit)="registerUser()">
-            <h3 class="text-center text-info" >Đăng ký người dùng </h3>
+            <h3 class="text-center text-info" >Đăng ký người tìm việc </h3>
             <div class="form-group">
-              <label for="username" class="text-info" >Username</label><br>
+              <label for="username" class="text-info" >Tên tài khoản</label><br>
               <input type="text" (change)="checkuser()"  id="username" class="form-control" formControlName="username">
             </div>
             <p *ngIf="!checkUsername" style="color: red">Tên tài khoản đã tồn tại</p>
             <p *ngIf="!registerUserForm.get('username')?.valid && registerUserForm.get('username')?.touched" style="color: red">Không được để trống</p>
             <div class="form-group">
-              <label for="password" class="text-info">Password</label><br>
+              <label for="password" class="text-info">Mật khẩu</label><br>
               <input type="text" name="password" id="password" class="form-control" formControlName="password">
             </div>
             <p *ngIf="!registerUserForm.get('password')?.valid && registerUserForm.get('password')?.touched" style="color: red;margin: 0">Không được để trống</p>
             <div class="form-group">
-              <label for="passwordAgain" class="text-info">Password again:</label><br>
+              <label for="passwordAgain" class="text-info">Nhập lại Mật khẩu</label><br>
               <input type="text" name="password" id="passwordAgain" class="form-control" formControlName="password">
             </div>
             <p *ngIf="!registerUserForm.get('password')?.valid && registerUserForm.get('password')?.touched" style="color: red">Không được để trống</p>
             <div class="form-group">
-              <label for="password" class="text-info">Email:</label><br>
+              <label for="password" class="text-info">Địa chỉ Email</label><br>
               <input type="text" name="password" id="email" class="form-control" (change)="checkEmailU()" formControlName="email">
             </div>
             <p *ngIf="!checkEmail" style="color: red">Email đã có người sử dụng</p>
