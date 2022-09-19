@@ -199,7 +199,7 @@ export class MainEnterpriseComponent implements OnInit {
         alert("Tài khoản của bạn không đủ tiền để đăng bài mới vui lòng nạp thêm !")
       }
       else {
-        if(this.validateExpirationDate() && this.validatesalaryBigPostEnterprise()){
+        if(this.validateExpirationDate()  && this.validatesalaryBigPostEnterprise()){
           this.createPost();
         }else {
           alert("Vui lòng kiểm tra lại form");
@@ -413,8 +413,8 @@ export class MainEnterpriseComponent implements OnInit {
     this.idConfirmNotifi = id;
   }
   confirmNotifi(){
-       this.enterpriseService.confirmNotifi(this.idConfirmNotifi).subscribe(()=>{
-         alert("Xác thực thành công !");
+    this.funcitonAleartConfirmUserCv();
+    this.enterpriseService.confirmNotifi(this.idConfirmNotifi).subscribe(()=>{
          this.notifiFromUserApply();
        })
   }
@@ -498,5 +498,21 @@ export class MainEnterpriseComponent implements OnInit {
     this.enterpriseService.editProfile(filedNew).subscribe(() => {
       alert("Lưu thay đổi thành công");
     })
+  }
+  funcitonAleartConfirmUserCv(){
+    // @ts-ignore
+    document.getElementById("modalConfirmUserCv").style.display="block";
+    setTimeout(function (){
+      // @ts-ignore
+      document.getElementById("modalConfirmUserCv").style.display="none";
+      // @ts-ignore
+      document.getElementById("modalConfirmCvUser").style.display="block";
+      setTimeout(function (){
+        // @ts-ignore
+        document.getElementById("modalConfirmCvUser").style.display="none";
+
+      },3000);
+    },3500)
+
   }
 }

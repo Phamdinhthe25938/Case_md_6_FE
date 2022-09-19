@@ -62,8 +62,8 @@ export class EnterpriseRegisterComponent implements OnInit {
 
   registerForm = new FormGroup({
     nameEnterprise: new FormControl("", Validators.required),
-    codeConfirmEnterprise: new FormControl("", Validators.required),
-    gmailEnterprise: new FormControl("", Validators.required),
+    codeConfirmEnterprise: new FormControl("", [Validators.required,Validators.pattern("[0-9]+")]),
+    gmailEnterprise: new FormControl("",[Validators.pattern("^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$"),Validators.required]),
     imgEnterprise: new FormControl(""),
     addressMainEnterprise: new FormControl("", Validators.required),
     idField: new FormControl(),
@@ -71,23 +71,25 @@ export class EnterpriseRegisterComponent implements OnInit {
   })
 
   register() {
-    this.registerForm.get("imgEnterprise")?.setValue(this.fb);
-    let filed = this.registerForm.value;
-    let filedNew = {
-      nameEnterprise: filed.nameEnterprise,
-      codeConfirmEnterprise: filed.codeConfirmEnterprise,
-      gmailEnterprise: filed.gmailEnterprise,
-      imgEnterprise: filed.imgEnterprise,
-      addressMainEnterprise: filed.addressMainEnterprise,
-      describeEnterprise: filed.describeEnterprise,
-      fieldEnterprise: {
-        idField: filed.idField
-      }
-    }
-    this.loginService.register(filedNew).subscribe(() => {
-      alert("Đăng ký thành công !");
-      this.router.navigate([""])
-    })
+     if(this.registerForm.valid){
+       this.funcionAleartRegisterSuccess();
+       this.registerForm.get("imgEnterprise")?.setValue(this.fb);
+       let filed = this.registerForm.value;
+       let filedNew = {
+         nameEnterprise: filed.nameEnterprise,
+         codeConfirmEnterprise: filed.codeConfirmEnterprise,
+         gmailEnterprise: filed.gmailEnterprise,
+         imgEnterprise: filed.imgEnterprise,
+         addressMainEnterprise: filed.addressMainEnterprise,
+         describeEnterprise: filed.describeEnterprise,
+         fieldEnterprise: {
+           idField: filed.idField
+         }
+       }
+       this.loginService.register(filedNew).subscribe(() => {
+         this.router.navigate([""])
+       })
+     }
   }
 
   checkEmailE() {
@@ -108,5 +110,14 @@ export class EnterpriseRegisterComponent implements OnInit {
       }
     }
     console.log(this.checkEmail)
+  }
+  funcionAleartRegisterSuccess(){
+     // @ts-ignore
+    document.getElementById("modalConfirmRegister").style.display="block";
+    setTimeout(function (){
+      // @ts-ignore
+
+      document.getElementById("modalConfirmRegister").style.display="none";
+    },3000)
   }
 }

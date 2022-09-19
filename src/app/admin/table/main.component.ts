@@ -54,8 +54,8 @@ export class MainComponent implements OnInit{
     })
   }
   confirm(id:number){
+    this.funcitonAleartConfirmRegister();
       this.adminService.confirmEnterprise(id).subscribe(()=>{
-          alert("Xác thực thành công !");
           this.getAllNotConfirm();
           this.getAllConfirm();
           this.router.navigate(["/admin/show"]);
@@ -137,5 +137,21 @@ export class MainComponent implements OnInit{
       location.reload();
       alert("Mở khóa tài khoản thành công")
     })
+  }
+  funcitonAleartConfirmRegister(){
+    // @ts-ignore
+    document.getElementById("modalConfirmRegister").style.display="block";
+    setTimeout(function (){
+      // @ts-ignore
+      document.getElementById("modalConfirmRegister").style.display="none";
+      // @ts-ignore
+      document.getElementById("modalConfirmRegisterEnterprise").style.display="block";
+      setTimeout(function (){
+        // @ts-ignore
+        document.getElementById("modalConfirmRegisterEnterprise").style.display="none";
+
+      },3000);
+    },3500)
+
   }
 }

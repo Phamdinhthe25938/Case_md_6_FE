@@ -4,7 +4,7 @@ import {PostEnterprise} from "../../model/PostEnterprise";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {AllService} from "../../services/all.service";
 import {LoginService} from "../../services/login/login.service";
-import {finalize, Observable} from "rxjs";
+import {async, finalize, Observable} from "rxjs";
 import {Field} from "../../model/Field";
 import {AngularFireStorage} from "@angular/fire/compat/storage";
 import {Router} from "@angular/router";
@@ -235,12 +235,27 @@ export class HomepageComponent implements OnInit {
          }
        }
        this.userService.saveApplyJob(jobApply).subscribe(()=>{
-           alert("apply công việc thành công ")
-         this.listPostByOderPriority();
+         this.funcitonAleartConfirmApply();
          // this.findCvByIdUser();
        })
   }
-  findUserApplyByIdAppUserAndIdPost(){
+  funcitonAleartConfirmApply(){
+    // @ts-ignore
+    document.getElementById("loading").style.display="block";
+    setTimeout(function (){
+      // @ts-ignore
+      document.getElementById("loading").style.display="none";
+      // @ts-ignore
+      document.getElementById("modalConfirmApply").style.display="block";
+      setTimeout(function (){
+        // @ts-ignore
+        document.getElementById("modalConfirmApply").style.display="none";
+
+      },5000);
+    },6000)
+
+  }
+  confirmSaveApplyJob(){
     let idPost = this.idJobApply;
     let idLogin = this.loginService.getUserToken().id;
     this.userService.findCvByIdUser(idLogin).subscribe((data)=>{
@@ -273,10 +288,24 @@ export class HomepageComponent implements OnInit {
     if (this.searchForm.value.idField==""){
       this.loginService.findPostByUserField(searchform).subscribe((data) => {
         this.postEnterpriseOffer = data;
+        if(this.postEnterpriseOffer.length===0){
+          // @ts-ignore
+          document.getElementById('NOData').style.display = "block";
+        }else {
+          // @ts-ignore
+          document.getElementById('NOData').style.display = "none";
+        }
       })
     }else {
       this.loginService.findPostByUser(searchform).subscribe((data) => {
         this.postEnterpriseOffer = data;
+        if(this.postEnterpriseOffer.length===0){
+          // @ts-ignore
+          document.getElementById('NOData').style.display = "block";
+        }else {
+          // @ts-ignore
+          document.getElementById('NOData').style.display = "none";
+        }
       })
     }
 

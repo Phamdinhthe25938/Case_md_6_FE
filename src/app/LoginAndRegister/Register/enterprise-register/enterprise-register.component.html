@@ -1,6 +1,7 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
 <section class="h-100 bg-dark">
   <div class="container py-5 h-100" style="padding: 40px;background: azure">
@@ -25,14 +26,14 @@
                         <label class="form-label" for="form3Example1m">Tên doanh nghiệp</label>
                         <input type="text" id="form3Example1m" formControlName="nameEnterprise" class="form-control " />
                       </div>
-                      <p *ngIf="!registerForm.get('nameEnterprise')?.valid && registerForm.get('nameEnterprise')?.touched" style="color: red">Không được để trống</p>
+                      <p *ngIf="!registerForm.get('nameEnterprise')?.valid && registerForm.get('nameEnterprise')?.touched" style="color: red">Dữ liệu không hợp lệ !</p>
                     </div>
                     <div class="col-md-6 mb-4">
                       <div class="form-outline">
                         <label class="form-label" for="form3Example1n">Mã doanh nghiệp</label>
                         <input type="text" id="form3Example1n"  formControlName="codeConfirmEnterprise" class="form-control form-control-lg" />
                       </div>
-                      <p *ngIf="!registerForm.get('codeConfirmEnterprise')?.valid && registerForm.get('codeConfirmEnterprise')?.touched" style="color: red">Không được để trống</p>
+                      <p *ngIf="!registerForm.get('codeConfirmEnterprise')?.valid && registerForm.get('codeConfirmEnterprise')?.touched" style="color: red">Dữ liệu không hợp lệ !</p>
                     </div>
                   </div>
                   <div class="row">
@@ -41,7 +42,7 @@
                         <label class="form-label"   for="form3Example1m12">Email doanh nghiệp</label>
                         <input type="text" formControlName="gmailEnterprise"id="form3Example1m12" class="form-control form-control-lg" />
                       </div>
-                      <p *ngIf="!registerForm.get('gmailEnterprise')?.valid && registerForm.get('gmailEnterprise')?.touched" style="color: red">Không được để trống</p>
+                      <p *ngIf="!registerForm.get('gmailEnterprise')?.valid && registerForm.get('gmailEnterprise')?.touched" style="color: red">Dữ liệu không hợp lệ !</p>
 
                     </div>
                     <div class="col-md-6 mb-4">
@@ -49,14 +50,14 @@
                         <label class="form-label" for="file">Ảnh đại diện</label>
                         <input type="file" id="file" #userPhoto (change)="onFileSelected({event : $event})" name="image" autocomplete="off"  class="form-control form-control-lg" />
                       </div>
-                      <p *ngIf="!registerForm.get('imgEnterprise')?.valid && registerForm.get('imgEnterprise')?.touched" style="color: red">Không được để trống</p>
+                      <p *ngIf="!registerForm.get('imgEnterprise')?.valid && registerForm.get('imgEnterprise')?.touched" style="color: red">Dữ liệu không hợp lệ !</p>
                     </div>
                     <div class="col-md-12 mb-4">
                        <div class="form-outline ">
                         <label class="form-label" for="form3Example1n1">Trụ sở chính</label>
                         <input type="text" id="form3Example1n1" formControlName="addressMainEnterprise" class="form-control form-control-lg" />
                        </div>
-                      <p *ngIf="!registerForm.get('addressMainEnterprise')?.valid && registerForm.get('addressMainEnterprise')?.touched" style="color: red">Không được để trống</p>
+                      <p *ngIf="!registerForm.get('addressMainEnterprise')?.valid && registerForm.get('addressMainEnterprise')?.touched" style="color: red">Dữ liệu không hợp lệ !</p>
                     </div>
                     <div class="col-md-12 mb-4">
                       <div class="form-outline mb-4">
@@ -65,14 +66,14 @@
                           <option  *ngFor="let b of fields" value="{{b.idField}}">{{b.nameField}}</option>
                         </select>
                       </div>
-                      <p *ngIf="!registerForm.get('describeEnterprise')?.valid && registerForm.get('describeEnterprise')?.touched" style="color: red">Không được để trống</p>
+                      <p *ngIf="!registerForm.get('describeEnterprise')?.valid && registerForm.get('describeEnterprise')?.touched" style="color: red">Dữ liệu không hợp lệ !</p>
                     </div>
                     <div class="col-md-12 mb-4">
                      <div class="form-outline mb-4">
                          <label class="form-label" for="form3Example97">Mô tả về doanh nghiệp</label>
                          <textarea type="text" id="form3Example97" formControlName="describeEnterprise" class="form-control form-control-lg"></textarea>
                      </div>
-                      <p *ngIf="!registerForm.get('describeEnterprise')?.valid && registerForm.get('describeEnterprise')?.touched" style="color: red">Không được để trống</p>
+                      <p *ngIf="!registerForm.get('describeEnterprise')?.valid && registerForm.get('describeEnterprise')?.touched" style="color: red">Dữ liệu không hợp lệ !</p>
                     </div>
                     </div>
                   <div class="d-flex justify-content-end pt-3">
@@ -88,4 +89,26 @@
       </div>
     </div>
   </div>
+  <div class="modalConfirm" style="display: none" id="modalConfirmRegister">
+    <div class="modal__layout"></div>
+    <div class="modal__body">
+      <!--    <div  class="modal fade">-->
+      <div class="modal-dialog modal-confirm" >
+        <div class="modal-content" style="background-color: #fff;height: 180px">
+          <div class="modal-header">
+            <div class="icon-box">
+              <i class="fa-solid fa-check" style="color: #fff"></i>
+            </div>
+          </div>
+          <div class="modal-body" style="padding: 10px">
+            <p class="text-center">Thực hiện đăng ký thành công vui lòng đợi mail để nhận thông báo  !</p>
+          </div>
+          <div class="modal-footer">
+          </div>
+        </div>
+        <!--      </div>-->
+      </div>
+    </div>
+  </div>
+
 </section>
