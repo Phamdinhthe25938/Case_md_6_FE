@@ -72,7 +72,6 @@ export class EnterpriseRegisterComponent implements OnInit {
 
   register() {
      if(this.registerForm.valid){
-       this.funcionAleartRegisterSuccess();
        this.registerForm.get("imgEnterprise")?.setValue(this.fb);
        let filed = this.registerForm.value;
        let filedNew = {
@@ -86,9 +85,9 @@ export class EnterpriseRegisterComponent implements OnInit {
            idField: filed.idField
          }
        }
-       this.loginService.register(filedNew).subscribe(() => {
-         this.router.navigate([""])
-       })
+       this.loginService.register(filedNew).subscribe(() =>{
+         this.funcionAleartRegisterSuccess();
+       },)
      }
   }
 
@@ -119,5 +118,6 @@ export class EnterpriseRegisterComponent implements OnInit {
 
       document.getElementById("modalConfirmRegister").style.display="none";
     },3000)
+    this.router.navigate([""])
   }
 }
