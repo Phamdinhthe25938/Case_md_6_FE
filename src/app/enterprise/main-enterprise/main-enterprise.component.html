@@ -3158,7 +3158,7 @@ License: For each use you must have a valid license purchased only from above li
                             </a>
                             <a  class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm">
                               <!--begin::Svg Icon | path: icons/duotune/general/gen027.svg-->
-                              <span (click)="editStatus(a.idPostEnterprise)" class="svg-icon svg-icon-3">
+                              <span title="khóa bài đăng" (click)="editStatus(a.idPostEnterprise)" class="svg-icon svg-icon-3">
                                    <div style="margin-top: 7px;margin-left: 4px;">
                                    <i class="fa-solid fa-key"></i>
                                    </div>
@@ -5999,7 +5999,7 @@ License: For each use you must have a valid license purchased only from above li
 
 <!--Modal-->
 <!--Nạp ví-->
-<div class="container">
+<div class="container" style="z-index: 100;">
   <!-- Trigger the modal with a button --><!-- Modal -->
   <div  class="modal" id="wallegt">
     <div class="modal-dialog">
@@ -6051,7 +6051,7 @@ License: For each use you must have a valid license purchased only from above li
 
 </div>
 <!--Đổi mã ví-->
-<div class="container" >
+<div class="container" style="z-index: 100">
   <!-- Trigger the modal with a button --><!-- Modal -->
   <div  class="modal" id="changePassVi">
     <div class="modal-dialog">
@@ -6096,7 +6096,7 @@ License: For each use you must have a valid license purchased only from above li
 </div>
 
 <!--Create bài đăng-->
-<div class="container" >
+<div class="container" style="z-index: 10" >
   <!-- Trigger the modal with a button --><!-- Modal -->
   <div  class="modal" id="create">
     <div class="modal-dialog">
@@ -6565,6 +6565,71 @@ License: For each use you must have a valid license purchased only from above li
   </div>
 </div>
 <!--      end modal-->
+<!--confirm doi ma vi -->
+<div class="modalConfirm" style="display: none;z-index: 10000" id="modalConfirmChangeCodeVi">
+  <div class="modal__layout"></div>
+  <div class="modal__body" style="background-color: rgb(0,0,0,0)">
+    <!--    <div  class="modal fade">-->
+    <div class="modal-dialog modal-confirm" >
+      <div class="modal-content" style="background-color: #fff;height: 180px">
+        <div class="modal-header" style="padding-bottom: 4px">
+          <div class="icon-box">
+            <i class="fa-solid fa-check" style="color: #fff"></i>
+          </div>
+          <h6 style="font-size: 16px;margin-top: 15px;color: greenyellow;text-align: center">Thực hiện đổi mã nạp ví thành công !</h6>
+        </div>
+        <div class="modal-body" style="padding: 10px">
+          <p class="text-center">Vui lòng nhớ mã ví cho những làn nạp sau !</p>
+        </div>
+
+      </div>
+      <!--      </div>-->
+    </div>
+  </div>
+</div>
+<!--COnfim nạp ví tiền -->
+<div class="modalConfirm" style="display: none;z-index: 10000" id="modalConfirmRechargeWallet">
+  <div class="modal__layout"></div>
+  <div class="modal__body" style="background-color: rgb(0,0,0,0)">
+    <!--    <div  class="modal fade">-->
+    <div class="modal-dialog modal-confirm" >
+      <div class="modal-content" style="background-color: #fff;height: 180px">
+        <div class="modal-header">
+          <div class="icon-box">
+            <i class="fa-solid fa-check" style="color: #fff"></i>
+          </div>
+          <h6 style="font-size: 16px;margin-top: 15px;color: greenyellow">Thực hiện nạp ví thành công !</h6>
+        </div>
+        <div class="modal-body" style="padding: 10px">
+          <p class="text-center">Vui lòng chờ đợi admin xác thực trước khi nhận được tiền  !</p>
+        </div>
+
+      </div>
+      <!--      </div>-->
+    </div>
+  </div>
+</div>
+<!--Confirm tạo bài đăng -->
+<div class="modalConfirm" style="display: none;z-index: 10000" id="modalConfirmCreatePost">
+  <div class="modal__layout" style="background-color: rgb(0,0,0,0.5)"></div>
+  <div class="modal__body">
+    <!--    <div  class="modal fade">-->
+    <div class="modal-dialog modal-confirm">
+      <div class="modal-content" style="background-color: #fff;margin-top: 40px">
+        <div class="modal-header">
+          <div class="icon-box">
+            <i class="fa-solid fa-check" style="color: #fff"></i>
+          </div>
+        </div>
+        <div class="modal-body">
+          <p class="text-center" style="color: greenyellow">Thực hiện tạo bài đăng thành công  !</p>
+        </div>
+      </div>
+      <!--      </div>-->
+    </div>
+  </div>
+</div>
+
 
 
 

@@ -371,7 +371,7 @@
       <div style="display: none;color: red" id="NOData" class="job-list">
         <p style="font-size: 25px;border: none">Không có dữ liệu !</p>
       </div>
-      <div class="col-md-12" style="position: absolute;bottom: 0">
+      <div class="col-md-12" style="position: absolute;bottom: -30px">
         <div class="showing pull-left">
         </div>
         <ul class="pagination pull-right">
@@ -884,7 +884,7 @@
   <i class="ti-arrow-up"></i>
 </a>
 
-<div class="container">
+<div class="container"  style="z-index: 100">
   <!-- Trigger the modal with a button --><!-- Modal -->
   <div class="modal" id="CreateCv">
     <div class="modal-dialog">
@@ -1007,6 +1007,52 @@
     </div>
   </div>
 </div>
+<div class="modalConfirm" style="display: none;z-index: 100000" id="modalConfirmSaveCV">
+  <div class="modal__layout" style="background-color: rgb(0,0,0,0)"></div>
+  <div class="modal__body">
+    <!--    <div  class="modal fade">-->
+    <div class="modal-dialog modal-confirm">
+      <div class="modal-content">
+        <div class="modal-header">
+          <div class="icon-box">
+            <i class="fa-solid fa-check"></i>
+          </div>
+          <h4 class="modal-title w-100" style="font-size: 22px;color: green;">Tạo CV thành công !</h4>
+        </div>
+        <div class="modal-body">
+          <p class="text-center">Bạn có thể apply công việc bạn muốn !</p>
+        </div>
+        <div class="modal-footer">
+        </div>
+      </div>
+      <!--      </div>-->
+    </div>
+  </div>
+</div>
+
+<div class="modalConfirm" style="display: none" id="modalConfirmNotifiNotCv">
+  <div class="modal__layout"></div>
+  <div class="modal__body">
+    <!--    <div  class="modal fade">-->
+    <div class="modal-dialog modal-confirm">
+      <div class="modal-content">
+        <div class="modal-header">
+          <div class="icon-box" style="background-color: aliceblue">
+            <i class="fa-solid fa-xmark" style="color: red"></i>
+          </div>
+          <h4 class="modal-title w-100" style="color: red">Lỗi rồi !</h4>
+        </div>
+        <div class="modal-body">
+          <p class="text-center">Vui lòng tạo CV trước khi Apply công việc bạn muốn !</p>
+        </div>
+        <div class="modal-footer">
+        </div>
+      </div>
+      <!--      </div>-->
+    </div>
+  </div>
+</div>
+
 
 
 <!-- Main JS  -->

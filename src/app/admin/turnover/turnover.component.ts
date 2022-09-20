@@ -9,6 +9,8 @@ import {TransactionWallet} from "../../model/TransactionWallet";
 import {ViAdmin} from "../../model/ViAdmin";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {TransWalletHr} from "../../model/TransWalletHr";
+import {set} from "@angular/fire/database";
+import {LoginService} from "../../services/login/login.service";
 
 @Component({
   selector: 'app-turnover',
@@ -17,7 +19,7 @@ import {TransWalletHr} from "../../model/TransWalletHr";
 })
 export class TurnoverComponent implements OnInit {
 
-  constructor(private router:Router,private adminService:AdminService,private enterpriseService:EnterpriseService) { }
+  constructor(private router:Router,private adminService:AdminService,private enterpriseService:EnterpriseService,private loginService:LoginService) { }
   transactionHistoryS !:TransactionHistory[];
   transactionHistoryNowS !:TransactionHistory[];
   postVipByEnterpriseS!:PostEnterprise[];
@@ -158,8 +160,8 @@ export class TurnoverComponent implements OnInit {
              this.transWalletById=data;
              if(this.viAdmin.numberMoneyVi>this.transWalletById.numberMoney){
                 if(check){
+                  this.funcitonAleartConfirmMoneyEnter();
                   this.adminService.confirmTransWallet(id).subscribe(()=>{
-                    alert("Xác nhận thành công !");
                     this.getViAdmin();
                     this.getTotalMoneyTransDateNow();
                     this.transWalletAll();
@@ -245,5 +247,17 @@ export class TurnoverComponent implements OnInit {
     this.adminService.totalMoneyTransDateNow().subscribe((data)=>{
       this.totalMoneyTransDateNow=data;
       })
+  }
+  funcitonAleartConfirmMoneyEnter(){
+     // @ts-ignore
+    document.getElementById("modalConfirmWallet").style.display="block";
+    setTimeout(function (){
+      // @ts-ignore
+      document.getElementById("modalConfirmWallet").style.display="none";
+    },3000)
+  }
+  logout(){
+    this.loginService.logout();
+    this.router.navigate(["/login"])
   }
 }

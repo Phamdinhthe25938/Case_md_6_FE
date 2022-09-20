@@ -151,6 +151,7 @@ export class MainEnterpriseComponent implements OnInit {
   }
   createPost() {
     if (this.createPostForm.valid) {
+      this.functionAleartCreatePost();
       let createPostForm = this.createPostForm.value;
       let postEnterprise = {
         namePostEnterprise: createPostForm.namePostEnterprise,
@@ -174,7 +175,6 @@ export class MainEnterpriseComponent implements OnInit {
         }
       }
       this.enterpriseService.savePost(postEnterprise).subscribe(() => {
-        alert("Tạo bài  thành công!")
         this.enterpriseLoginFunction();
         this.createPostForm = new FormGroup({
           namePostEnterprise: new FormControl("", Validators.required),
@@ -227,7 +227,7 @@ export class MainEnterpriseComponent implements OnInit {
             imgTransaction:transWalletValue.imgTransWallet
           }
           this.enterpriseService.saveTransWallet(transWalletOj).subscribe(() => {
-            alert("Thực hiện gửi yêu cầu thành công vui lòng đợi admin xác nhận !")
+            this.funcitonAleartRechangeWallet();
             this.walletForm = new FormGroup({
               codeVi: new FormControl("", Validators.required),
               viEnterprise: new FormControl(0, [Validators.required,Validators.pattern("^[0-9]+")]),
@@ -252,8 +252,12 @@ export class MainEnterpriseComponent implements OnInit {
         let id = this.enterpriseLogin.idEnterprise;
         if (this.changeCodeViForm.value.codeViNewAgain === this.changeCodeViForm.value.codeViNew && this.changeCodeViForm.value.codeViOld === this.enterpriseLogin.codeViEnterprise) {
           this.enterpriseService.changeCodeVi(id, String(this.changeCodeViForm.value.codeViNew)).subscribe(() => {
-            alert("Thay đổi mã ví thành công");
-            this.changeCodeViForm = new FormGroup({
+            // @ts-ignore
+            document.getElementById("codeVi4").style.display="none";
+            // @ts-ignore
+            document.getElementById("codeViNewAgain2").style.display="none";
+            this.funcitonAleartChangeCodeVi();
+             this.changeCodeViForm = new FormGroup({
               codeViOld: new FormControl("", Validators.required),
               codeViNew: new FormControl("", [Validators.required, Validators.minLength(4), Validators.pattern("(?=^.{8,}$)((?=.*\\d)|(?=.*\\W+))(?![.\\n])(?=.*[A-Z])(?=.*[a-z]).*$")]),
               codeViNewAgain: new FormControl("", [Validators.required, Validators.minLength(4), Validators.pattern("(?=^.{8,}$)((?=.*\\d)|(?=.*\\W+))(?![.\\n])(?=.*[A-Z])(?=.*[a-z]).*$")]),
@@ -513,6 +517,32 @@ export class MainEnterpriseComponent implements OnInit {
 
       },3000);
     },3500)
+  }
+  funcitonAleartChangeCodeVi(){
+    // @ts-ignore
+    document.getElementById("modalConfirmChangeCodeVi").style.display="block";
+    setTimeout(function (){
+      // @ts-ignore
+      document.getElementById("modalConfirmChangeCodeVi").style.display="none";
 
+    },3000);
+  }
+  funcitonAleartRechangeWallet(){
+    // @ts-ignore
+    document.getElementById("modalConfirmRechargeWallet").style.display="block";
+    setTimeout(function (){
+      // @ts-ignore
+      document.getElementById("modalConfirmRechargeWallet").style.display="none";
+
+    },3000);
+  }
+  functionAleartCreatePost(){
+    // @ts-ignore
+    document.getElementById("modalConfirmCreatePost").style.display="block";
+    setTimeout(function (){
+      // @ts-ignore
+      document.getElementById("modalConfirmCreatePost").style.display="none";
+
+    },3000);
   }
 }

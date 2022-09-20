@@ -70,7 +70,7 @@ export class EnterpriseRegisterComponent implements OnInit {
     describeEnterprise: new FormControl("", Validators.required),
   })
 
-  register() {
+   async register() {
      if(this.registerForm.valid){
        this.registerForm.get("imgEnterprise")?.setValue(this.fb);
        let filed = this.registerForm.value;
@@ -85,9 +85,18 @@ export class EnterpriseRegisterComponent implements OnInit {
            idField: filed.idField
          }
        }
-       this.loginService.register(filedNew).subscribe(() =>{
+      this.loginService.register(filedNew).subscribe(() =>{
          this.funcionAleartRegisterSuccess();
-       },)
+        this.registerForm = new FormGroup({
+          nameEnterprise: new FormControl("", Validators.required),
+          codeConfirmEnterprise: new FormControl("", [Validators.required,Validators.pattern("[0-9]+")]),
+          gmailEnterprise: new FormControl("",[Validators.pattern("^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$"),Validators.required]),
+          imgEnterprise: new FormControl(""),
+          addressMainEnterprise: new FormControl("", Validators.required),
+          idField: new FormControl(),
+          describeEnterprise: new FormControl("", Validators.required),
+        })
+       })
      }
   }
 
@@ -115,9 +124,11 @@ export class EnterpriseRegisterComponent implements OnInit {
     document.getElementById("modalConfirmRegister").style.display="block";
     setTimeout(function (){
       // @ts-ignore
-
       document.getElementById("modalConfirmRegister").style.display="none";
+
     },3000)
-    this.router.navigate([""])
+  }
+  routerLogin(){
+    this.router.navigate([""]);
   }
 }

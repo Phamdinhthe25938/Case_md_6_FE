@@ -146,6 +146,7 @@ export class HomepageComponent implements OnInit {
       }else {
         if(this.saveCvForm.valid){
           this.saveCvNew(idLogin);
+          this.functionAleartConfirmSaveCv();
         }
         else {
           alert("Lỗi form")
@@ -169,7 +170,6 @@ export class HomepageComponent implements OnInit {
         }
       }
       this.userService.saveCv(Cv).subscribe(() => {
-        alert("ok la");
         // @ts-ignore
         document.getElementById('saveChangeCV').style.display = "block";
         // @ts-ignore
@@ -194,8 +194,8 @@ export class HomepageComponent implements OnInit {
         }
       }
       this.userService.saveCv(Cv).subscribe(() => {
-        alert("Lưu thay đổi thành công");
-            this.findCvByIdUser();
+
+        this.findCvByIdUser();
       })
     }
   }
@@ -236,6 +236,7 @@ export class HomepageComponent implements OnInit {
        }
        this.userService.saveApplyJob(jobApply).subscribe(()=>{
          this.funcitonAleartConfirmApply();
+         this.listPostByOderPriority();
          // this.findCvByIdUser();
        })
   }
@@ -251,8 +252,8 @@ export class HomepageComponent implements OnInit {
         // @ts-ignore
         document.getElementById("modalConfirmApply").style.display="none";
 
-      },5000);
-    },6000)
+      },3500);
+    },4000)
 
   }
   confirmSaveApplyJob(){
@@ -269,7 +270,7 @@ export class HomepageComponent implements OnInit {
           }
         })
       }else {
-        alert("Vui lòng tạo CV trước khi aplly mọi job !")
+              this.functionAleatConfirmNotCV()
       }
     })
   }
@@ -318,29 +319,30 @@ export class HomepageComponent implements OnInit {
     this.userService.deletePostExpired().subscribe(()=>{
     })
   }
-
-
-  // listPostByOderPriority(page:number) {
-  //   return this.userService.listPostByOderPriority(page).subscribe((data) => {
-  //     this.postEnterpriseOffer = data;
-  //     console.log("data")
-  //     console.log("data")
-  //     console.log( this.postEnterpriseOffer)
-  //     if ((this.postEnterpriseOffer.length % 5) != 0) {
-  //       this.totalPagination = (Math.round(this.postEnterpriseOffer.length / 5)) + 1;
-  //     }
-  //   })
-  // }
-
-
   indexPaginationChage(value: any) {
     // this.indexPagination = value;
     console.log("value")
     console.log("value")
     console.log(value)
   }
-
-
+  functionAleartConfirmSaveCv(){
+    // @ts-ignore
+    document.getElementById("modalConfirmSaveCV").style.display="block";
+      setTimeout(function (){
+        // @ts-ignore
+        document.getElementById("modalConfirmSaveCV").style.display="none";
+        // @ts-ignore
+      },3000)
+  }
+  functionAleatConfirmNotCV(){
+    // @ts-ignore
+    document.getElementById("modalConfirmNotifiNotCv").style.display="block";
+    setTimeout(function (){
+      // @ts-ignore
+      document.getElementById("modalConfirmNotifiNotCv").style.display="none";
+      // @ts-ignore
+    },3000)
+  }
 
 }
 
