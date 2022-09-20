@@ -286,6 +286,9 @@ export class HomepageComponent implements OnInit {
       city: search.city,
       idField: search.idField,
       }
+      if(this.searchForm.value.city=="" && this.searchForm.value.idField=="" && this.searchForm.value.nameEnterprise==""){
+        location.reload();
+      }
     if (this.searchForm.value.idField==""){
       this.loginService.findPostByUserField(searchform).subscribe((data) => {
         this.postEnterpriseOffer = data;
