@@ -8,11 +8,6 @@ import { EnterpriseRegisterComponent } from './LoginAndRegister/Register/enterpr
 import { LoginComponent } from './LoginAndRegister/login/login.component';
 import {HttpClientModule} from "@angular/common/http";
 import {ReactiveFormsModule} from "@angular/forms";
-import {AngularFireStorageModule} from "@angular/fire/compat/storage";
-import {AngularFireModule} from "@angular/fire/compat";
-import {environment} from "../environments/environment";
-import { ForgotPasComponent } from './LoginAndRegister/forgot-pass/forgot-pas.component';
-import {DeltalComponent} from "./user/deltal/deltal.component";
 
 
 
@@ -22,7 +17,6 @@ import {DeltalComponent} from "./user/deltal/deltal.component";
     UserRegisterComponent,
     EnterpriseRegisterComponent,
     LoginComponent,
-    ForgotPasComponent,
 
   ],
   imports: [
@@ -30,8 +24,7 @@ import {DeltalComponent} from "./user/deltal/deltal.component";
     HttpClientModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    AngularFireStorageModule,
-    AngularFireModule.initializeApp(environment.firebaseConfig, "cloud")
+
   ],
   providers: [],
   bootstrap: [AppComponent]

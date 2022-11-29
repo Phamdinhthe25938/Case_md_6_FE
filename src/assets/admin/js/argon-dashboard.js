@@ -5,7 +5,7 @@
   if (isWindows) {
     // if we are on windows OS we activate the perfectScrollbar function
     if (document.getElementsByClassName('main-content')[0]) {
-      var mainpanel = document.querySelector('.table-content');
+      var mainpanel = document.querySelector('.mainEnterprise-content');
       var ps = new PerfectScrollbar(mainpanel);
     };
 
@@ -263,8 +263,8 @@ function navbarMinimize(el) {
 }
 
 function toggleNavLinksColor(type) {
-  let navLinks = document.querySelectorAll('.navbar-table .nav-link, .navbar-table .breadcrumb-item, .navbar-table .breadcrumb-item a, .navbar-table h6')
-  let navLinksToggler = document.querySelectorAll('.navbar-table .sidenav-toggler-line')
+  let navLinks = document.querySelectorAll('.navbar-mainEnterprise .nav-link, .navbar-mainEnterprise .breadcrumb-item, .navbar-mainEnterprise .breadcrumb-item a, .navbar-mainEnterprise h6')
+  let navLinksToggler = document.querySelectorAll('.navbar-mainEnterprise .sidenav-toggler-line')
 
   if (type === "blur") {
     navLinks.forEach(element => {
@@ -313,7 +313,7 @@ function navbarBlurOnScroll(id) {
   var isWindows = navigator.platform.indexOf('Win') > -1 ? true : false;
 
   if (isWindows) {
-    var content = document.querySelector('.table-content');
+    var content = document.querySelector('.mainEnterprise-content');
     if (navbarScrollActive == 'true') {
       content.addEventListener('ps-scroll-y', debounce(function() {
         if (content.scrollTop > scrollDistance) {
@@ -369,7 +369,7 @@ function debounce(func, wait, immediate) {
 // Toggle Sidenav
 const iconNavbarSidenav = document.getElementById('iconNavbarSidenav');
 const iconSidenav = document.getElementById('iconSidenav');
-const sidenav = document.getElementById('sidenav-table');
+const sidenav = document.getElementById('sidenav-mainEnterprise');
 let body = document.getElementsByTagName('body')[0];
 let className = 'g-sidenav-pinned';
 
@@ -581,7 +581,7 @@ function darkMode(el) {
   const svg = document.querySelectorAll('g');
   const navbarBrand = document.querySelector('.navbar-brand-img');
   const navbarBrandImg = navbarBrand.src;
-  const navLinks = document.querySelectorAll('.navbar-table .nav-link, .navbar-table .breadcrumb-item, .navbar-table .breadcrumb-item a, .navbar-table h6');
+  const navLinks = document.querySelectorAll('.navbar-mainEnterprise .nav-link, .navbar-mainEnterprise .breadcrumb-item, .navbar-mainEnterprise .breadcrumb-item a, .navbar-mainEnterprise h6');
   const cardNavLinksIcons = document.querySelectorAll('.card .nav .nav-link i');
   const cardNavSpan = document.querySelectorAll('.card .nav .nav-link span');
 
